@@ -11,8 +11,8 @@ add $cmd:
   @cobra-cli add ${cmd}
 
 # Run the application
-run:
-	@go run main
+run *args:
+	@go run main.go {{args}}
 
 # Test the application
 test:
