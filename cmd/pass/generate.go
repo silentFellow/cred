@@ -4,15 +4,13 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/atotto/clipboard"
 	"github.com/spf13/cobra"
 
 	"github.com/silentFellow/cred-store/config"
-	gpgcrypt "github.com/silentFellow/cred-store/internal/gpg-crypt"
 	"github.com/silentFellow/cred-store/internal/utils"
 )
 
-// pass/generateCmd represents the pass/generate command
+// GenerateCmd represents the pass/generate command
 var GenerateCmd = &cobra.Command{
 	Use:   "generate",
 	Short: "Generate a new password and store it securely",
@@ -34,8 +32,10 @@ Examples:
 		path := args[0]
 		fullPath := fmt.Sprintf("%v/%v.gpg", passStore, path)
 
+		generatedPassword := utils.GenerateRandom(length)
+
 		if !utils.CheckPathExists(fullPath) {
-			addToPath(fullPath, length)
+			addToPath(fullPath, generatedPassword, true)
 			return
 		}
 
@@ -48,36 +48,9 @@ Examples:
 				fmt.Println("Failed to remove the file: ", err)
 			}
 
-			addToPath(fullPath, length)
+			addToPath(fullPath, generatedPassword, true)
 		}
 	},
-}
-
-func addToPath(path string, length int) error {
-	generatedPassword := utils.GenerateRandom(length)
-
-	file, err := utils.CreatePath(path)
-	defer file.Close()
-
-	if err != nil {
-		return err
-	}
-
-	encrypted, err := gpgcrypt.Encrypt(generatedPassword)
-	if err != nil {
-		return err
-	}
-
-	if _, err := file.WriteString(encrypted); err != nil {
-		return err
-	}
-
-	if err := clipboard.WriteAll(generatedPassword); err != nil {
-		return err
-	}
-
-	fmt.Println("Password generated successfully, copied to clipboard")
-	return nil
 }
 
 func init() {
