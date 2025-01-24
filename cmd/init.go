@@ -37,7 +37,7 @@ and managing credentials securely. Note that you must provide a GPG key as an ar
 
 		// new store
 		if !utils.CheckPathExists(storePath) {
-			if err := makeStore(); err != nil {
+			if err := initStore(gpgKey); err != nil {
 				fmt.Println("Failed to initiate store, ", err)
 			}
 			return
@@ -56,7 +56,7 @@ and managing credentials securely. Note that you must provide a GPG key as an ar
 				fmt.Println("Failed to remove store, ", err)
 			}
 
-			if err := makeStore(); err != nil {
+			if err := initStore(gpgKey); err != nil {
 				fmt.Println("Failed to initiate store, ", err)
 			}
 		}
@@ -77,7 +77,7 @@ func checkKeyValidity(keyId string) bool {
 	return false
 }
 
-func makeStore() error {
+func initStore(gpgid string) error {
 	paths := []string{
 		config.Constants.StorePath,
 		config.Constants.PassPath,
@@ -88,6 +88,16 @@ func makeStore() error {
 		if err := os.MkdirAll(path, 0700); err != nil {
 			return err
 		}
+	}
+
+	// on success
+	file, err := os.Create(fmt.Sprintf("%v/.gpg-id", config.Constants.StorePath))
+	if err != nil {
+		return err
+	}
+
+	if _, err := file.WriteString(gpgid); err != nil {
+		return err
 	}
 
 	fmt.Println("Store initiated successfully.")
