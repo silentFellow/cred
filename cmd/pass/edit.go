@@ -37,6 +37,11 @@ Usage:
 			return
 		}
 
+		if utils.GetPathType(fullPath) != "file" {
+			fmt.Println("Invalid file format, only file is allowed")
+			return
+		}
+
 		originalContent, err := gpgcrypt.Decrypt(fullPath)
 		if err != nil {
 			fmt.Println("Error decrypting file")
