@@ -17,6 +17,17 @@ func CheckPathExists(path string) bool {
 	return true
 }
 
+func GetPathType(path string) string {
+	info, _ := os.Stat(path)
+
+	fileType := "file"
+	if info.IsDir() {
+		fileType = "directory"
+	}
+
+	return fileType
+}
+
 // PrintTree recursively prints the directory structure in a tree-like format
 func PrintTree(root string, prefix string, isLast bool) error {
 	info, err := os.Stat(root)
@@ -88,7 +99,7 @@ func CreatePath(path string) (*os.File, error) {
 	pathFields := strings.Split(path, "/")
 
 	var dir strings.Builder
-	for i:=0; i<len(pathFields)-1; i++ {
+	for i := 0; i < len(pathFields)-1; i++ {
 		dir.WriteString(pathFields[i])
 		dir.WriteString("/")
 	}
