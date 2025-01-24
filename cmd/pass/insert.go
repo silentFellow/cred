@@ -43,14 +43,14 @@ to quickly create a Cobra application.`,
 			}
 		}
 
-		fmt.Print("Enter password: ")
+		fmt.Print("Enter password (input will be hidden): ")
 		bytePassword, err := term.ReadPassword(int(syscall.Stdin))
 		if err != nil {
 			fmt.Println("Failed to read password: ", err)
 		}
 		fmt.Println()
 
-		fmt.Print("Enter confirm password: ")
+		fmt.Print("Enter confirm password (input will be hidden): ")
 		byteConfirmPassword, err := term.ReadPassword(int(syscall.Stdin))
 		if err != nil {
 			fmt.Println("Failed to read confirm password: ", err)
