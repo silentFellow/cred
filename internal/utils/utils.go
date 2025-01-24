@@ -2,9 +2,11 @@ package utils
 
 import (
 	"fmt"
+	"math/rand/v2"
 	"os"
 	"path/filepath"
 	"sort"
+	"strings"
 )
 
 func CheckPathExists(path string) bool {
@@ -58,4 +60,47 @@ func PrintTree(root string, prefix string, isLast bool) error {
 	}
 
 	return nil
+}
+
+func GenerateRandom(n int) string {
+	var random strings.Builder
+	specialChars := "!@#$%^&*()-_=+[]{}|;:,.<>?/`~"
+
+	for range n {
+		valType := rand.IntN(4)
+
+		switch valType {
+		case 0:
+			random.WriteByte(byte('a' + rand.IntN(26)))
+		case 1:
+			random.WriteByte(byte('A' + rand.IntN(26)))
+		case 2:
+			random.WriteByte(byte('0' + rand.IntN(10)))
+		case 3:
+			random.WriteByte(specialChars[rand.IntN(len(specialChars))])
+		}
+	}
+
+	return random.String()
+}
+
+func CreatePath(path string) (*os.File, error) {
+	pathFields := strings.Split(path, "/")
+
+	var dir strings.Builder
+	for i:=0; i<len(pathFields)-1; i++ {
+		dir.WriteString(pathFields[i])
+		dir.WriteString("/")
+	}
+
+	if err := os.MkdirAll(dir.String(), 0700); err != nil {
+		return nil, err
+	}
+
+	file, err := os.Create(path)
+	if err != nil {
+		return nil, err
+	}
+
+	return file, nil
 }
