@@ -12,6 +12,7 @@ type constants struct {
   StorePath string
   PassPath string
   EnvPath string
+  Editor string
 }
 
 var Constants constants = initConstants()
@@ -32,6 +33,7 @@ func initConstants() constants {
     StorePath: fmt.Sprintf("%v/.cred-store", home),
     PassPath: fmt.Sprintf("%v/.cred-store/pass", home),
     EnvPath: fmt.Sprintf("%v/.cred-store/env", home),
+    Editor: getEnv("EDITOR", "vi"),
   }
 }
 

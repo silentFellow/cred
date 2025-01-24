@@ -36,5 +36,6 @@ Examples:
 func init() {
 	passCmd.AddCommand(pass.InsertCmd)
 	passCmd.AddCommand(pass.GenerateCmd)
+	passCmd.AddCommand(pass.EditCmd)
 	rootCmd.AddCommand(passCmd)
 }
