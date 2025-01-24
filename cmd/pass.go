@@ -5,6 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/silentFellow/cred-store/cmd/pass"
 	"github.com/silentFellow/cred-store/config"
 	"github.com/silentFellow/cred-store/internal/utils"
 )
@@ -33,5 +34,6 @@ Examples:
 }
 
 func init() {
+	passCmd.AddCommand(pass.GenerateCmd)
 	rootCmd.AddCommand(passCmd)
 }
