@@ -92,6 +92,8 @@ func initStore(gpgid string) error {
 
 	// on success
 	file, err := os.Create(fmt.Sprintf("%v/.gpg-id", config.Constants.StorePath))
+	defer file.Close()
+
 	if err != nil {
 		return err
 	}
