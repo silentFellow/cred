@@ -9,6 +9,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/silentFellow/cred-store/config"
+	"github.com/silentFellow/cred-store/internal/utils"
 )
 
 // initCmd represents the init command
@@ -35,7 +36,7 @@ and managing credentials securely. Note that you must provide a GPG key as an ar
 		storePath := config.Constants.StorePath
 
 		// new store
-		if _, err := os.Stat(storePath); err != nil {
+		if !utils.CheckPathExists(storePath) {
 			if err := makeStore(); err != nil {
 				fmt.Println("Failed to initiate store, ", err)
 			}
