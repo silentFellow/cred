@@ -83,8 +83,8 @@ func EditLogic(
 	}
 
 	if err := utils.AddToPath(fullPath, updatedContent, true); err != nil {
-		fmt.Println("Failed to update password: ", err)
+		fmt.Println("Failed to update file: ", err)
 		return
 	}
-	fmt.Println("Password updated successfully")
+	fmt.Println("File updated successfully")
 }
