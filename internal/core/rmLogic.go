@@ -26,18 +26,19 @@ func RmLogic(
 		return
 	}
 
-	path := args[0]
-	fullPath := fmt.Sprintf("%v/%v", basePath, path)
+	for _, path := range args {
+		fullPath := fmt.Sprintf("%v/%v", basePath, path)
 
-	if !utils.CheckPathExists(fullPath) {
-		fmt.Println("Path not found")
-		return
+		if !utils.CheckPathExists(fullPath) {
+			fmt.Printf("%v not found\n", fullPath)
+			continue
+		}
+
+		if err := os.RemoveAll(fullPath); err != nil {
+			fmt.Printf("Error removing %v: %v\n", fullPath, err)
+			continue
+		}
+
+		fmt.Printf("Succesfully deleted %v\n", fullPath)
 	}
-
-  if err := os.RemoveAll(fullPath); err != nil {
-    fmt.Println("Error removing path")
-    return
-  }
-
-	fmt.Println("Succesfully deleted path")
 }
