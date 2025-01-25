@@ -9,6 +9,7 @@ import (
 
 	"github.com/silentFellow/cred-store/config"
 	"github.com/silentFellow/cred-store/internal/utils"
+	"github.com/silentFellow/cred-store/internal/utils/paths"
 )
 
 // GenerateCmd represents the {cred pass generate <filepath> [-l (length)]} command
@@ -35,7 +36,7 @@ Examples:
 
 		generatedPassword := utils.GenerateRandom(length)
 
-		if utils.CheckPathExists(fullPath) {
+		if paths.CheckPathExists(fullPath) {
 			var choice string
 			fmt.Print("The file already exists. Do you want to overwrite it? (y/n): ")
 			fmt.Scanln(&choice)
@@ -49,7 +50,7 @@ Examples:
 			}
 		}
 
-		if err := utils.AddToPath(fullPath, generatedPassword, true); err != nil {
+		if err := paths.AddToPath(fullPath, generatedPassword, true); err != nil {
 			fmt.Println("Failed to insert password: ", err)
 			return
 		}

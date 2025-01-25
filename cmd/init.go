@@ -8,7 +8,8 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/silentFellow/cred-store/config"
-	"github.com/silentFellow/cred-store/internal/utils"
+	gpgcrypt "github.com/silentFellow/cred-store/internal/gpg-crypt"
+	"github.com/silentFellow/cred-store/internal/utils/paths"
 )
 
 // initCmd represents the init command
@@ -27,7 +28,7 @@ and managing credentials securely. Note that you must provide a GPG key as an ar
 		}
 
 		gpgKey := args[0]
-		if !utils.CheckKeyValidity(gpgKey) {
+		if !gpgcrypt.CheckKeyValidity(gpgKey) {
 			fmt.Printf("Invalid GPG key, %v\n", usage)
 			return
 		}
@@ -35,7 +36,7 @@ and managing credentials securely. Note that you must provide a GPG key as an ar
 		storePath := config.Constants.StorePath
 
 		// new store
-		if !utils.CheckPathExists(storePath) {
+		if !paths.CheckPathExists(storePath) {
 			if err := initStore(gpgKey); err != nil {
 				fmt.Println("Failed to initiate store, ", err)
 			}

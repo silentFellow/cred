@@ -8,7 +8,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/silentFellow/cred-store/config"
-	"github.com/silentFellow/cred-store/internal/utils"
+	"github.com/silentFellow/cred-store/internal/utils/paths"
 )
 
 // GetCmd represents the {cred env get} command
@@ -56,7 +56,7 @@ You can specify the file containing the environment variables using the -f flag.
 		}
 
 		fullPath := fmt.Sprintf("%v/%v.gpg", config.Constants.EnvPath, filename)
-		exists := utils.CheckPathExists(fullPath) && utils.GetPathType(fullPath) == "file"
+		exists := paths.CheckPathExists(fullPath) && paths.GetPathType(fullPath) == "file"
 
 		if exists {
 			var choice string
@@ -72,7 +72,7 @@ You can specify the file containing the environment variables using the -f flag.
 			}
 		}
 
-		if err := utils.AddToPath(fullPath, fileContent, false); err != nil {
+		if err := paths.AddToPath(fullPath, fileContent, false); err != nil {
 			fmt.Printf("Failed to insert environment variables: %v\n", err)
 			return
 		}

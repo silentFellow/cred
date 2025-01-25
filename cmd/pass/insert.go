@@ -9,7 +9,7 @@ import (
 	"golang.org/x/term"
 
 	"github.com/silentFellow/cred-store/config"
-	"github.com/silentFellow/cred-store/internal/utils"
+	"github.com/silentFellow/cred-store/internal/utils/paths"
 )
 
 // InsertCmd represents the {cred pass insert <filepath>} command
@@ -33,7 +33,7 @@ Examples:
 		path := args[0]
 		fullPath := fmt.Sprintf("%v/%v.gpg", passStore, path)
 
-		if utils.CheckPathExists(fullPath) {
+		if paths.CheckPathExists(fullPath) {
 			var choice string
 			fmt.Print("The file already exists. Do you want to overwrite it? (y/n): ")
 			fmt.Scanln(&choice)
@@ -64,14 +64,14 @@ Examples:
 			return
 		}
 
-		if utils.CheckPathExists(fullPath) {
+		if paths.CheckPathExists(fullPath) {
 			if err := os.RemoveAll(fullPath); err != nil {
 				fmt.Println("Failed to remove the file: ", err)
 				return
 			}
 		}
 
-		if err := utils.AddToPath(fullPath, password, true); err != nil {
+		if err := paths.AddToPath(fullPath, password, true); err != nil {
 			fmt.Println("Failed to insert password: ", err)
 			return
 		}

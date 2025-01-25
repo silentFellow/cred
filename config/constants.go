@@ -8,6 +8,7 @@ import (
 type constants struct {
   GpgKey string
   Home string
+  Download string
   Config string
   StorePath string
   PassPath string
@@ -30,6 +31,7 @@ func initConstants() constants {
     GpgKey: gpgKey,
     Home: home,
     Config: getEnv("XDG_CONFIG_HOME", defaultConfig),
+    Download: fmt.Sprintf("%v/Downloads", home),
     StorePath: fmt.Sprintf("%v/.cred-store", home),
     PassPath: fmt.Sprintf("%v/.cred-store/pass", home),
     EnvPath: fmt.Sprintf("%v/.cred-store/env", home),

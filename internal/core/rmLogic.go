@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/silentFellow/cred-store/config"
-	"github.com/silentFellow/cred-store/internal/utils"
+	"github.com/silentFellow/cred-store/internal/utils/paths"
 )
 
 func RmLogic(
@@ -29,7 +29,7 @@ func RmLogic(
 	for _, path := range args {
 		fullPath := fmt.Sprintf("%v/%v", basePath, path)
 
-		if !utils.CheckPathExists(fullPath) {
+		if !paths.CheckPathExists(fullPath) {
 			fmt.Printf("%v not found\n", fullPath)
 			continue
 		}

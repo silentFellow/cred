@@ -9,7 +9,7 @@ import (
 
 	"github.com/silentFellow/cred-store/config"
 	gpgcrypt "github.com/silentFellow/cred-store/internal/gpg-crypt"
-	"github.com/silentFellow/cred-store/internal/utils"
+	"github.com/silentFellow/cred-store/internal/utils/paths"
 )
 
 // quickSetupCmd represents the quickSetup command
@@ -41,24 +41,29 @@ and usage of using your command. For example:
 
 		keyID, err := gpgcrypt.GetKeyFpr(uname)
 		if err != nil {
-			fmt.Println("Failed to get the key, ", err)
+			fmt.Println("Failed to get the key: ", err)
 			return
 		}
 
 		if err := gpgcrypt.AddSubKey(keyID); err != nil {
-			fmt.Println("Failed to add subkey, ", err)
+			fmt.Println("Failed to add subkey: ", err)
 			return
 		}
 
 		if err := gpgcrypt.ModifyTrust(keyID); err != nil {
-			fmt.Println("Failed to modify trust, ", err)
+			fmt.Println("Failed to modify trust: ", err)
+			return
+		}
+
+		if err := gpgcrypt.ExportKeys(keyID); err != nil {
+			fmt.Println("Failed to export keys: ", err)
 			return
 		}
 
 		storePath := config.Constants.StorePath
 
 		// new store
-		if !utils.CheckPathExists(storePath) {
+		if !paths.CheckPathExists(storePath) {
 			if err := initStore(keyID); err != nil {
 				fmt.Println("Failed to initiate store, ", err)
 			}

@@ -7,7 +7,7 @@ import (
 
 	"github.com/silentFellow/cred-store/config"
 	gpgcrypt "github.com/silentFellow/cred-store/internal/gpg-crypt"
-	"github.com/silentFellow/cred-store/internal/utils"
+	"github.com/silentFellow/cred-store/internal/utils/paths"
 )
 
 func EditLogic(
@@ -31,12 +31,12 @@ func EditLogic(
 	path := args[0]
 	fullPath := fmt.Sprintf("%v/%v", basePath, path)
 
-	if !utils.CheckPathExists(fullPath) {
+	if !paths.CheckPathExists(fullPath) {
 		fmt.Println("Path not found")
 		return
 	}
 
-	if utils.GetPathType(fullPath) != "file" {
+	if paths.GetPathType(fullPath) != "file" {
 		fmt.Println("Invalid file format, only file is allowed")
 		return
 	}
@@ -82,7 +82,7 @@ func EditLogic(
 		return
 	}
 
-	if err := utils.AddToPath(fullPath, updatedContent, true); err != nil {
+	if err := paths.AddToPath(fullPath, updatedContent, true); err != nil {
 		fmt.Println("Failed to update file: ", err)
 		return
 	}

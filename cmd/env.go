@@ -7,7 +7,9 @@ import (
 
 	"github.com/silentFellow/cred-store/cmd/env"
 	"github.com/silentFellow/cred-store/config"
+	gpgcrypt "github.com/silentFellow/cred-store/internal/gpg-crypt"
 	"github.com/silentFellow/cred-store/internal/utils"
+	"github.com/silentFellow/cred-store/internal/utils/paths"
 )
 
 // envCmd represents the env command
@@ -24,7 +26,7 @@ Examples:
 	Run: func(cmd *cobra.Command, args []string) {
 		envPath := config.Constants.EnvPath
 
-		if utils.CheckPathExists(envPath) {
+		if paths.CheckPathExists(envPath) {
 			err := utils.PrintTree(envPath, "", true)
 			if err != nil {
 				fmt.Printf("Failed to parse password store: %v\n", err)
@@ -35,12 +37,12 @@ Examples:
 
 func init() {
 	envCmd.PersistentPreRunE = func(cmd *cobra.Command, args []string) error {
-		if !utils.CheckKeyExists() {
+		if !gpgcrypt.CheckKeyExists() {
 			cmd.SilenceUsage = true
 			return fmt.Errorf("GPG key not found, try [cred init <gpg-key-id>]")
 		}
 
-		if !utils.CheckKeyValidity(config.Constants.GpgKey) {
+		if !gpgcrypt.CheckKeyValidity(config.Constants.GpgKey) {
 			cmd.SilenceUsage = true
 			return fmt.Errorf("Invalid GPG key, try [cred init <gpg-key-id>]")
 		}

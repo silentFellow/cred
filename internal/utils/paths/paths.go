@@ -1,10 +1,11 @@
-package utils
+package paths
 
 import (
 	"os"
 	"strings"
 
 	gpgcrypt "github.com/silentFellow/cred-store/internal/gpg-crypt"
+	"github.com/silentFellow/cred-store/internal/utils"
 )
 
 func CheckPathExists(path string) bool {
@@ -67,7 +68,7 @@ func AddToPath(path string, content string, copy bool) error {
 
 	if copy {
 		// true since it only applicable for generate password
-		if err := CopyToClipboard(content, true); err != nil {
+		if err := utils.CopyToClipboard(content, true); err != nil {
 			return err
 		}
 	}

@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/silentFellow/cred-store/config"
-	"github.com/silentFellow/cred-store/internal/utils"
+	"github.com/silentFellow/cred-store/internal/utils/copy"
 )
 
 func CpLogic(
@@ -31,7 +31,7 @@ func CpLogic(
 
 	for _, src := range sources {
 		srcPath := fmt.Sprintf("%v/%v", basePath, src)
-		if err := utils.Copy(srcPath, destination); err != nil {
+		if err := fscopy.Copy(srcPath, destination); err != nil {
 			fmt.Printf("Error copying %v: %v\n", srcPath, err)
 			continue
 		}

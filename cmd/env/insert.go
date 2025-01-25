@@ -9,7 +9,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/silentFellow/cred-store/config"
-	"github.com/silentFellow/cred-store/internal/utils"
+	"github.com/silentFellow/cred-store/internal/utils/paths"
 )
 
 // InsertCmd represents the {cred env insert <filepath>} command
@@ -35,7 +35,7 @@ Examples:
 		path := args[0]
 		fullPath := fmt.Sprintf("%v/%v", basePath, path)
 
-		if utils.CheckPathExists(fullPath) {
+		if paths.CheckPathExists(fullPath) {
 			var choice string
 			fmt.Print("The file already exists. Do you want to overwrite it? (y/n): ")
 			fmt.Scanln(&choice)
@@ -75,7 +75,7 @@ Examples:
 			return
 		}
 
-		if err := utils.AddToPath(fullPath, content, true); err != nil {
+		if err := paths.AddToPath(fullPath, content, true); err != nil {
 			fmt.Println("Failed to update env: ", err)
 			return
 		}
