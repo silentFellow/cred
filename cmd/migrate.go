@@ -16,13 +16,11 @@ import (
 // migrateCmd represents the migrate command
 var migrateCmd = &cobra.Command{
 	Use:   "migrate",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "Migrate the credential store to a new GPG key",
+	Long: `The migrate command allows you to re-encrypt your credential store with a new GPG key.
+This operation will create a backup of your current store and re-encrypt all files with the new key.
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Example Usage: cred migrate <new-gpg-key-id>`,
 	Run: func(cmd *cobra.Command, args []string) {
 		usage := "cred migrate <new-gpg-key-id>"
 
