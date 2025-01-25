@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand/v2"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"sort"
 	"strings"
@@ -28,6 +29,14 @@ func PrintTree(root string, prefix string, isLast bool) error {
 	info, err := os.Stat(root)
 	if err != nil {
 		return fmt.Errorf("error accessing %s: %w", root, err)
+	}
+
+	// check if tree command present if so just execute it
+	treeCmd := exec.Command("tree", root)
+	output, err := treeCmd.CombinedOutput()
+	if err == nil {
+		fmt.Println(string(output))
+		return nil
 	}
 
 	// Determine connector for the current item
