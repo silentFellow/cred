@@ -3,8 +3,6 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"os/exec"
-	"strings"
 
 	"github.com/spf13/cobra"
 
@@ -28,7 +26,7 @@ and managing credentials securely. Note that you must provide a GPG key as an ar
 		}
 
 		gpgKey := args[0]
-		if !checkKeyValidity(gpgKey) {
+		if !utils.CheckKeyValidity(gpgKey) {
 			fmt.Printf("Invalid GPG key, %v\n", usage)
 			return
 		}
@@ -61,20 +59,6 @@ and managing credentials securely. Note that you must provide a GPG key as an ar
 			}
 		}
 	},
-}
-
-func checkKeyValidity(keyId string) bool {
-	cmd := exec.Command("gpg", "--list-keys", keyId)
-	output, err := cmd.CombinedOutput()
-	if err != nil {
-		return false
-	}
-
-	if strings.Contains(string(output), keyId) {
-		return true
-	}
-
-	return false
 }
 
 func initStore(gpgid string) error {

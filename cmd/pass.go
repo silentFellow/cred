@@ -34,8 +34,22 @@ Examples:
 }
 
 func init() {
-	passCmd.AddCommand(pass.InsertCmd)
+	passCmd.PersistentPreRunE = func(cmd *cobra.Command, args []string) error {
+		if !utils.CheckKeyExists() {
+			cmd.SilenceUsage = true
+			return fmt.Errorf("GPG key not found, try [cred init <gpg-key-id>]")
+		}
+
+		if !utils.CheckKeyValidity(config.Constants.GpgKey) {
+			cmd.SilenceUsage = true
+			return fmt.Errorf("Invalid GPG key, try [cred init <gpg-key-id>]")
+		}
+
+		return nil
+	}
+
 	passCmd.AddCommand(pass.GenerateCmd)
+	passCmd.AddCommand(pass.InsertCmd)
 	passCmd.AddCommand(pass.ShowCmd)
 	passCmd.AddCommand(pass.CopyCmd)
 	passCmd.AddCommand(pass.EditCmd)
