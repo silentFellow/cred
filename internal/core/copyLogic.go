@@ -1,4 +1,4 @@
-package common
+package core
 
 import (
 	"fmt"
@@ -8,11 +8,11 @@ import (
 	"github.com/silentFellow/cred-store/internal/utils"
 )
 
-func ShowLogic(
+func CopyLogic(
 	cmdType string,
 	args []string,
 ) {
-	usage := fmt.Sprintf("cred %v show <filename>", cmdType)
+	usage := fmt.Sprintf("cred %v copy <filename>", cmdType)
 
 	var basePath string
 	if cmdType == "pass" {
@@ -25,6 +25,7 @@ func ShowLogic(
 		fmt.Printf("Invalid usage: %v\n", usage)
 		return
 	}
+
 	path := args[0]
 	fullPath := fmt.Sprintf("%v/%v", basePath, path)
 
@@ -44,5 +45,14 @@ func ShowLogic(
 		return
 	}
 
-	fmt.Println(decryped)
+	copyOnlyFirst := false
+	if cmdType == "pass" {
+		copyOnlyFirst = true
+	}
+	if err := utils.CopyToClipboard(decryped, copyOnlyFirst); err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	fmt.Println("Successfully copies to clipboard")
 }

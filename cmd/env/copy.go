@@ -1,19 +1,19 @@
 package env
 
 import (
-	"github.com/silentFellow/cred-store/cmd/common"
+	"github.com/silentFellow/cred-store/internal/core"
 	"github.com/spf13/cobra"
 )
 
-// CopyCmd represents the env/copy command
+// CopyCmd represents the {env copy filepath} command
 var CopyCmd = &cobra.Command{
 	Use:   "copy",
 	Short: "Copies the stored env to system clipboard",
-	Long: `The show command retrieves and copies the stored env for a given account.
+	Long: `The show command retrieves and copies the stored env for a given file.
 Usage examples:
 
-cred copy show <filename>`,
+cred env copy <filepath>`,
 	Run: func(cmd *cobra.Command, args []string) {
-		common.CopyLogic("env", args)
+		core.CopyLogic("env", args)
 	},
 }

@@ -1,11 +1,11 @@
 package env
 
 import (
-	"github.com/silentFellow/cred-store/cmd/common"
+	"github.com/silentFellow/cred-store/internal/core"
 	"github.com/spf13/cobra"
 )
 
-// EditCmd represents the env/edit command
+// EditCmd represents the {cred env edit <filepath>} command
 var EditCmd = &cobra.Command{
 	Use:   "edit",
 	Short: "Edit a env entry",
@@ -13,8 +13,8 @@ var EditCmd = &cobra.Command{
 
 This command allows you to edit an existing env entry in your env store.
 Usage:
-  env edit <filename>`,
+  cred env edit <filepath>`,
 	Run: func(cmd *cobra.Command, args []string) {
-		common.EditLogic("env", args)
+		core.EditLogic("env", args)
 	},
 }

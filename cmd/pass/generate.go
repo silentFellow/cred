@@ -10,7 +10,7 @@ import (
 	"github.com/silentFellow/cred-store/internal/utils"
 )
 
-// GenerateCmd represents the pass/generate command
+// GenerateCmd represents the {cred pass generate <filepath> [-l (length)]} command
 var GenerateCmd = &cobra.Command{
 	Use:   "generate",
 	Short: "Generate a new password and store it securely",
@@ -22,7 +22,7 @@ Examples:
   pass generate anotherpassword -l 24`,
 	Run: func(cmd *cobra.Command, args []string) {
 		length, _ := cmd.Flags().GetInt("length")
-		usage := "pass generate <filename> [flags: -l {length}]"
+		usage := "pass generate <filepath> [flags: -l {length}]"
 
 		passStore := config.Constants.PassPath
 		if len(args) < 1 {

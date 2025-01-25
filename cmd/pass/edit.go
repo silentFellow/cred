@@ -1,12 +1,11 @@
 package pass
 
 import (
+	"github.com/silentFellow/cred-store/internal/core"
 	"github.com/spf13/cobra"
-
-	"github.com/silentFellow/cred-store/cmd/common"
 )
 
-// EditCmd represents the pass/edit command
+// EditCmd represents the {cred pass edit <filepath>} command
 var EditCmd = &cobra.Command{
 	Use:   "edit",
 	Short: "Edit a password entry",
@@ -14,8 +13,8 @@ var EditCmd = &cobra.Command{
 
 This command allows you to edit an existing password entry in your password store.
 Usage:
-  pass edit <filename>`,
+  cred pass edit <filepath>`,
 	Run: func(cmd *cobra.Command, args []string) {
-		common.EditLogic("pass", args)
+		core.EditLogic("pass", args)
 	},
 }

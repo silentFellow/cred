@@ -3,18 +3,18 @@ package pass
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/silentFellow/cred-store/cmd/common"
+	"github.com/silentFellow/cred-store/internal/core"
 )
 
-// CopyCmd represents the pass/show command
+// CopyCmd represents the {cred pass copy <filepath>} command
 var CopyCmd = &cobra.Command{
 	Use:   "copy",
 	Short: "Copies the stored password to system clipboard",
-	Long: `The show command retrieves and copies the stored password for a given account.
+	Long: `The show command retrieves and copies the stored password for a given account,
 Usage examples:
 
-pass show <account_name>`,
+cred pass show <filepath>`,
 	Run: func(cmd *cobra.Command, args []string) {
-		common.CopyLogic("pass", args)
+		core.CopyLogic("pass", args)
 	},
 }

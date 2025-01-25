@@ -11,16 +11,16 @@ import (
 	"github.com/silentFellow/cred-store/internal/utils"
 )
 
-// InsertCmd represents the env/insert command
+// InsertCmd represents the {cred env insert <filepath>} command
 var InsertCmd = &cobra.Command{
 	Use:   "insert",
 	Short: "Insert a new env entry",
-	Long: `The insert command allows you to add a new env entry to the password store.
+	Long: `The insert command allows you to add a new env entry to the env store.
 You will be prompted to enter and confirm the env, which will be stored securely.
 If the entry already exists, you will be asked whether you want to overwrite it.
 
 Examples:
-  cred env insert <filename>`,
+  cred env insert <filepath>`,
 	Run: func(cmd *cobra.Command, args []string) {
 		usage := "cred env insert <filename>"
 

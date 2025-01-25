@@ -12,7 +12,7 @@ import (
 	"github.com/silentFellow/cred-store/internal/utils"
 )
 
-// InsertCmd represents the pass/insert command
+// InsertCmd represents the {cred pass insert <filepath>} command
 var InsertCmd = &cobra.Command{
 	Use:   "insert",
 	Short: "Insert a new password entry",
@@ -21,7 +21,7 @@ You will be prompted to enter and confirm the password, which will be stored sec
 If the entry already exists, you will be asked whether you want to overwrite it.
 
 Examples:
-  pass insert <filename>`,
+  pass insert <filepath>`,
 	Run: func(cmd *cobra.Command, args []string) {
 		usage := "pass insert <filename>"
 
