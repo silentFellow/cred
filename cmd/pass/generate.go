@@ -35,7 +35,11 @@ Examples:
 		generatedPassword := utils.GenerateRandom(length)
 
 		if !utils.CheckPathExists(fullPath) {
-			addToPath(fullPath, generatedPassword, true)
+			if err := utils.AddToPath(fullPath, generatedPassword, true); err != nil {
+				fmt.Println("Failed to insert password: ", err)
+				return
+			}
+			fmt.Println("Password inserted successfully, copied to clipboard")
 			return
 		}
 
@@ -48,7 +52,11 @@ Examples:
 				fmt.Println("Failed to remove the file: ", err)
 			}
 
-			addToPath(fullPath, generatedPassword, true)
+			if err := utils.AddToPath(fullPath, generatedPassword, true); err != nil {
+				fmt.Println("Failed to insert password: ", err)
+				return
+			}
+			fmt.Println("Password inserted successfully, copied to clipboard")
 		}
 	},
 }

@@ -7,25 +7,16 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+
+	"github.com/atotto/clipboard"
 )
 
-func CheckPathExists(path string) bool {
-	if _, err := os.Stat(path); err != nil {
-		return false
+func CopyToClipboard(text string) error {
+	if err := clipboard.WriteAll(text); err != nil {
+		return fmt.Errorf("Failed to copy to clipboard: %w", err)
 	}
 
-	return true
-}
-
-func GetPathType(path string) string {
-	info, _ := os.Stat(path)
-
-	fileType := "file"
-	if info.IsDir() {
-		fileType = "directory"
-	}
-
-	return fileType
+	return nil
 }
 
 // PrintTree recursively prints the directory structure in a tree-like format
@@ -93,25 +84,4 @@ func GenerateRandom(n int) string {
 	}
 
 	return random.String()
-}
-
-func CreatePath(path string) (*os.File, error) {
-	pathFields := strings.Split(path, "/")
-
-	var dir strings.Builder
-	for i := 0; i < len(pathFields)-1; i++ {
-		dir.WriteString(pathFields[i])
-		dir.WriteString("/")
-	}
-
-	if err := os.MkdirAll(dir.String(), 0700); err != nil {
-		return nil, err
-	}
-
-	file, err := os.Create(path)
-	if err != nil {
-		return nil, err
-	}
-
-	return file, nil
 }

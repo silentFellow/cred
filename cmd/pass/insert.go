@@ -70,6 +70,11 @@ Examples:
 				return
 			}
 		}
-		addToPath(fullPath, password, false)
+
+		if err := utils.AddToPath(fullPath, password, true); err != nil {
+			fmt.Println("Failed to insert password: ", err)
+			return
+		}
+		fmt.Println("Password inserted successfully, copied to clipboard")
 	},
 }

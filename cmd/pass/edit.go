@@ -83,6 +83,10 @@ Usage:
 			return
 		}
 
-		addToPath(fullPath, updatedContent, false)
+		if err := utils.AddToPath(fullPath, updatedContent, true); err != nil {
+			fmt.Println("Failed to update password: ", err)
+			return
+		}
+		fmt.Println("Password updated successfully")
 	},
 }
