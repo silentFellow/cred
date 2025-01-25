@@ -35,7 +35,7 @@ func PrintTree(root string, prefix string, isLast bool) error {
 	treeCmd := exec.Command("tree", root)
 	output, err := treeCmd.CombinedOutput()
 	if err == nil {
-		fmt.Println(string(output))
+		fmt.Print(string(output))
 		return nil
 	}
 
