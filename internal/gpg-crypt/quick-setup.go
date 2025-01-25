@@ -80,6 +80,7 @@ func ExportKeys(uname string) error {
 	if err != nil {
 		return fmt.Errorf("Failed to create keys-temp directory: %w", err)
 	}
+	defer os.RemoveAll(tempDir) // Cleanup temporary directory
 
 	publicKeyPath := fmt.Sprintf("%v/public_key.asc", tempDir)
 	publicKeyCmd := exec.Command("gpg", "--armor", "--export", uname)
