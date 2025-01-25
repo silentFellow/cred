@@ -34,3 +34,6 @@ main
 
 # logs
 logs/
+
+# scripts
+scripts/
