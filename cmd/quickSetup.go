@@ -1,6 +1,3 @@
-/*
-Copyright © 2025 NAME HERE <EMAIL ADDRESS>
-*/
 package cmd
 
 import (
@@ -18,13 +15,11 @@ import (
 // quickSetupCmd represents the quickSetup command
 var quickSetupCmd = &cobra.Command{
 	Use:   "quick-setup",
-	Short: "A brief description of your command",
+	Short: "Creates a GPG ID and initiates store usage credentials",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Usage: cred quick-setup`,
 	Run: func(cmd *cobra.Command, args []string) {
 		var uname, email string
 
