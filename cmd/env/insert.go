@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"strings"
 
 	"github.com/spf13/cobra"
 
@@ -39,7 +40,7 @@ Examples:
 			fmt.Print("The file already exists. Do you want to overwrite it? (y/n): ")
 			fmt.Scanln(&choice)
 
-			if choice != "y" && choice != "Y" {
+			if strings.ToLower(choice) != "y" {
 				return
 			}
 		}

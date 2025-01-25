@@ -73,7 +73,7 @@ and usage of using your command. For example:
 		)
 		fmt.Scanln(&choice)
 
-		if choice == "y" || choice == "Y" {
+		if strings.ToLower(choice) == "y" {
 			if err := os.RemoveAll(storePath); err != nil {
 				fmt.Println("Failed to remove store, ", err)
 			}

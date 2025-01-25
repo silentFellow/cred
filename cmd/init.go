@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/spf13/cobra"
 
@@ -49,7 +50,7 @@ and managing credentials securely. Note that you must provide a GPG key as an ar
 		)
 		fmt.Scanln(&choice)
 
-		if choice == "y" || choice == "Y" {
+		if strings.ToLower(choice) == "y" {
 			if err := os.RemoveAll(storePath); err != nil {
 				fmt.Println("Failed to remove store, ", err)
 			}

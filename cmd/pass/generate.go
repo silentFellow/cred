@@ -3,6 +3,7 @@ package pass
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/spf13/cobra"
 
@@ -34,30 +35,25 @@ Examples:
 
 		generatedPassword := utils.GenerateRandom(length)
 
-		if !utils.CheckPathExists(fullPath) {
-			if err := utils.AddToPath(fullPath, generatedPassword, true); err != nil {
-				fmt.Println("Failed to insert password: ", err)
+		if utils.CheckPathExists(fullPath) {
+			var choice string
+			fmt.Print("The file already exists. Do you want to overwrite it? (y/n): ")
+			fmt.Scanln(&choice)
+
+			if strings.ToLower(choice) != "y" {
 				return
 			}
-			fmt.Println("Password inserted successfully, copied to clipboard")
-			return
-		}
 
-		var choice string
-		fmt.Print("The file already exists. Do you want to overwrite it? (y/n): ")
-		fmt.Scanln(&choice)
-
-		if choice == "y" || choice == "Y" {
 			if err := os.RemoveAll(fullPath); err != nil {
 				fmt.Println("Failed to remove the file: ", err)
 			}
-
-			if err := utils.AddToPath(fullPath, generatedPassword, true); err != nil {
-				fmt.Println("Failed to insert password: ", err)
-				return
-			}
-			fmt.Println("Password inserted successfully, copied to clipboard")
 		}
+
+		if err := utils.AddToPath(fullPath, generatedPassword, true); err != nil {
+			fmt.Println("Failed to insert password: ", err)
+			return
+		}
+		fmt.Println("Password inserted successfully, copied to clipboard")
 	},
 }
 
