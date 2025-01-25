@@ -56,5 +56,6 @@ func init() {
 	envCmd.AddCommand(env.RmCmd)
 	envCmd.AddCommand(env.MkdirCmd)
 	envCmd.AddCommand(env.MvCmd)
+	envCmd.AddCommand(env.CpCmd)
 	rootCmd.AddCommand(envCmd)
 }
