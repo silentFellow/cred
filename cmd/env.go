@@ -5,6 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/silentFellow/cred-store/cmd/env"
 	"github.com/silentFellow/cred-store/config"
 	"github.com/silentFellow/cred-store/internal/utils"
 )
@@ -33,5 +34,9 @@ Examples:
 }
 
 func init() {
+	envCmd.AddCommand(env.InsertCmd)
+	envCmd.AddCommand(env.CopyCmd)
+	envCmd.AddCommand(env.ShowCmd)
+	envCmd.AddCommand(env.CopyCmd)
 	rootCmd.AddCommand(envCmd)
 }
