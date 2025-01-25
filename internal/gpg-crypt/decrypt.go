@@ -11,6 +11,7 @@ import (
 
 func Decrypt(filePath string) (string, error) {
 	key := config.Constants.GpgKey
+
 	if key == "" {
 		fmt.Println("Invalid GPG key")
 		return "", errors.New("Invalid GPG key")
@@ -22,6 +23,7 @@ func Decrypt(filePath string) (string, error) {
   cmd.Stdout = &outBuffer
 
   if err := cmd.Run(); err != nil {
+		fmt.Println(err)
     return "", err
   }
 

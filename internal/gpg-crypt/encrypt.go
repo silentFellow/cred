@@ -5,12 +5,9 @@ import (
 	"errors"
 	"fmt"
 	"os/exec"
-
-	"github.com/silentFellow/cred-store/config"
 )
 
-func Encrypt(v string) (string, error) {
-	key := config.Constants.GpgKey
+func Encrypt(v string, key string) (string, error) {
 	if key == "" {
 		fmt.Println("Invalid GPG key")
 		return "", errors.New("Invalid GPG key")

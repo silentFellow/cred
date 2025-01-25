@@ -4,6 +4,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/silentFellow/cred-store/config"
 	gpgcrypt "github.com/silentFellow/cred-store/internal/gpg-crypt"
 	"github.com/silentFellow/cred-store/internal/utils"
 )
@@ -57,7 +58,7 @@ func AddToPath(path string, content string, copy bool) error {
 		return err
 	}
 
-	encrypted, err := gpgcrypt.Encrypt(content)
+	encrypted, err := gpgcrypt.Encrypt(content, config.Constants.GpgKey)
 	if err != nil {
 		return err
 	}
