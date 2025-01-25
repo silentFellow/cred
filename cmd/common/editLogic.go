@@ -47,7 +47,7 @@ func EditLogic(
 		return
 	}
 
-	tempFile, err := os.CreateTemp("", "pass-edit-*.tmp")
+	tempFile, err := os.CreateTemp("", fmt.Sprintf("%v-edit-*.tmp", cmdType))
 	if err != nil {
 		fmt.Println("Error creating temp file")
 		return
