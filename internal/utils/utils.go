@@ -11,7 +11,11 @@ import (
 	"github.com/atotto/clipboard"
 )
 
-func CopyToClipboard(text string) error {
+func CopyToClipboard(text string, copyOnlyFirst bool) error {
+	if copyOnlyFirst {
+		text = strings.Split(text, "\n")[0]
+	}
+
 	if err := clipboard.WriteAll(text); err != nil {
 		return fmt.Errorf("Failed to copy to clipboard: %w", err)
 	}

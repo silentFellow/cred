@@ -66,7 +66,8 @@ func AddToPath(path string, content string, copy bool) error {
 	}
 
 	if copy {
-		if err := CopyToClipboard(content); err != nil {
+		// true since it only applicable for generate password
+		if err := CopyToClipboard(content, true); err != nil {
 			return err
 		}
 	}
