@@ -55,5 +55,6 @@ func init() {
 	passCmd.AddCommand(pass.EditCmd)
 	passCmd.AddCommand(pass.LsCmd)
 	passCmd.AddCommand(pass.RmCmd)
+	passCmd.AddCommand(pass.MkdirCmd)
 	rootCmd.AddCommand(passCmd)
 }
