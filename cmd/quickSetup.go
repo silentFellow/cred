@@ -71,14 +71,22 @@ and usage of using your command. For example:
 		}
 
 		// overwrite existing store
+		fmt.Printf("The store already exists at %s.\n", storePath)
+		fmt.Println("Choose an option:")
+		fmt.Println("1. Migrate the store")
+		fmt.Println("2. Overwrite the store")
+		fmt.Println("n. Do nothing and exit")
+
 		var choice string
-		fmt.Printf(
-			"The store already exists at %s. Do you want to overwrite it? (y/n): ",
-			storePath,
-		)
+		fmt.Print("Enter your choice (1/2/n): ")
 		fmt.Scanln(&choice)
 
-		if strings.ToLower(choice) == "y" {
+		switch strings.ToLower(choice) {
+		case "1":
+			// Migrate the store
+			migrateCmd.Run(cmd, []string{keyID})
+		case "2":
+			// Overwrite the store
 			if err := os.RemoveAll(storePath); err != nil {
 				fmt.Println("Failed to remove store, ", err)
 			}
@@ -86,6 +94,13 @@ and usage of using your command. For example:
 			if err := initStore(keyID); err != nil {
 				fmt.Println("Failed to initiate store, ", err)
 			}
+			fmt.Println("Store overwritten successfully.")
+		case "n":
+			// Exit without doing anything
+			fmt.Println("No changes made. Exiting.")
+		default:
+			// Invalid input
+			fmt.Println("Invalid choice. No changes made.")
 		}
 	},
 }
