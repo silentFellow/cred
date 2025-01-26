@@ -20,12 +20,6 @@ This command allows you to interact with git repositories, perform updates,
 and manage your version control workflow. For example:
 
 cred git <command> [arguments]`,
-	Run: func(cmd *cobra.Command, args []string) {
-		execCmd := exec.Command("git", args...)
-		execCmd.Dir = config.Constants.StorePath
-		output, _ := execCmd.CombinedOutput() // ignore the output else always status code throws
-		fmt.Print(string(output))
-	},
 }
 
 func init() {
@@ -54,6 +48,22 @@ func init() {
 		}
 
 		return nil
+	}
+
+	// Add subcommands for each Git command
+	for cmd, desc := range config.GitCommandMap {
+		subCmd := &cobra.Command{
+			Use:   cmd,
+			Short: desc,
+			Run: func(cmd *cobra.Command, args []string) {
+				execCmd := exec.Command("git", append([]string{cmd.Use}, args...)...)
+				execCmd.Dir = config.Constants.StorePath
+				output, _ := execCmd.CombinedOutput() // ignore the output else always status code throws
+				fmt.Print(string(output))
+			},
+		}
+
+		gitCmd.AddCommand(subCmd)
 	}
 
 	rootCmd.AddCommand(gitCmd)
