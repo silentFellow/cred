@@ -12,13 +12,12 @@ import (
 // gitCmd represents the git command
 var gitCmd = &cobra.Command{
 	Use:   "git",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "Manage git repositories and operations",
+	Long: `Manage git repositories and perform various git operations.
+This command allows you to interact with git repositories, perform updates,
+and manage your version control workflow. For example:
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+cred git <command> [arguments]`,
 	Run: func(cmd *cobra.Command, args []string) {
 		execCmd := exec.Command("git", args...)
 		execCmd.Dir = config.Constants.StorePath
