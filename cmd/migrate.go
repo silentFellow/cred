@@ -90,7 +90,11 @@ This operation will create a backup of your current store and re-encrypt all fil
 			if strings.HasPrefix(relPath, "pass") || strings.HasPrefix(relPath, "env") {
 				destPath := filepath.Join(tempDir, relPath)
 				if err := gpgcrypt.Recrypt(destPath, originalKey, newKey); err != nil {
-					return fmt.Errorf("Failed to recrypt data: %v", err)
+					fmt.Printf(
+						"Failed to recrypt file %s: %v\n",
+						destPath,
+						err,
+					) 
 				}
 			}
 
