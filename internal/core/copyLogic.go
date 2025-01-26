@@ -31,7 +31,7 @@ func CopyLogic(
 	fullPath := fmt.Sprintf("%v/%v", basePath, path)
 
 	if !paths.CheckPathExists(fullPath) {
-		fmt.Println("Path not found")
+		fmt.Printf("%v not found\n", path)
 		return
 	}
 
