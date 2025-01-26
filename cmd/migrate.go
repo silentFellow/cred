@@ -11,6 +11,7 @@ import (
 	"github.com/silentFellow/cred-store/config"
 	gpgcrypt "github.com/silentFellow/cred-store/internal/gpg-crypt"
 	fscopy "github.com/silentFellow/cred-store/internal/utils/copy"
+	"github.com/silentFellow/cred-store/internal/utils/git"
 )
 
 // migrateCmd represents the migrate command
@@ -131,6 +132,14 @@ func init() {
 		if !gpgcrypt.CheckKeyValidity(config.Constants.GpgKey) {
 			cmd.SilenceUsage = true
 			return fmt.Errorf("Invalid GPG key, try [cred init <gpg-key-id>]")
+		}
+
+		return nil
+	}
+
+	migrateCmd.PersistentPostRunE = func(cmd *cobra.Command, args []string) error {
+		if config.Constants.AutoGit {
+			return git.AutoGit(cmd)
 		}
 
 		return nil

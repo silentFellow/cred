@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"os"
+	"strings"
 )
 
 type constants struct {
@@ -14,6 +15,7 @@ type constants struct {
   PassPath string
   EnvPath string
   Editor string
+  AutoGit bool
 }
 
 var Constants constants = initConstants()
@@ -36,6 +38,7 @@ func initConstants() constants {
     PassPath: fmt.Sprintf("%v/.cred-store/pass", home),
     EnvPath: fmt.Sprintf("%v/.cred-store/env", home),
     Editor: getEnv("EDITOR", "vi"),
+    AutoGit: strings.ToLower(getEnv("CRED_STORE_AUTO_GIT", "false")) == "true",
   }
 }
 

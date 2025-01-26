@@ -9,6 +9,7 @@ import (
 
 	"github.com/silentFellow/cred-store/config"
 	gpgcrypt "github.com/silentFellow/cred-store/internal/gpg-crypt"
+	"github.com/silentFellow/cred-store/internal/utils/git"
 	"github.com/silentFellow/cred-store/internal/utils/paths"
 )
 
@@ -93,5 +94,13 @@ func initStore(gpgid string) error {
 }
 
 func init() {
+	initCmd.PersistentPostRunE = func(cmd *cobra.Command, args []string) error {
+		if config.Constants.AutoGit {
+			return git.AutoGit(cmd)
+		}
+
+		return nil
+	}
+
 	rootCmd.AddCommand(initCmd)
 }

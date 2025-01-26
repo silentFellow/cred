@@ -3,17 +3,19 @@ package cmd
 import (
 	"fmt"
 	"os/exec"
+	"strings"
 
 	"github.com/spf13/cobra"
 
 	"github.com/silentFellow/cred-store/config"
+	"github.com/silentFellow/cred-store/internal/utils/git"
 )
 
 // gitCmd represents the git command
 var gitCmd = &cobra.Command{
 	Use:   "git",
-	Short: "Manage git repositories and operations",
-	Long: `Manage git repositories and perform various git operations.
+	Short: "Manage cred-store git repository and operations",
+	Long: `Manage cred-store git repository and perform various git operations.
 This command allows you to interact with git repositories, perform updates,
 and manage your version control workflow. For example:
 
@@ -28,10 +30,27 @@ cred git <command> [arguments]`,
 
 func init() {
 	gitCmd.PersistentPreRunE = func(cmd *cobra.Command, args []string) error {
-		gitCmd := exec.Command("git", "--version")
-		if err := gitCmd.Run(); err != nil {
+		if !git.CheckGitExists() {
 			cmd.SilenceUsage = true
 			return fmt.Errorf("git is not installed")
+		}
+
+		if !git.IsValidGitPath(config.Constants.StorePath) {
+			var choice string
+			fmt.Print(
+				"github repository not found in the store path. Do you want to initialize a new repository? (y/n): ",
+			)
+			fmt.Scanln(&choice)
+
+			if strings.ToLower(choice) != "y" {
+				cmd.SilenceUsage = true
+				return fmt.Errorf("git repository not found")
+			}
+
+			if err := git.InitRepo(config.Constants.StorePath); err != nil {
+				cmd.SilenceUsage = true
+				return fmt.Errorf("failed to initialize git repository: %w", err)
+			}
 		}
 
 		return nil
