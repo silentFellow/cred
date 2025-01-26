@@ -86,7 +86,7 @@ This operation will create a backup of your current store and re-encrypt all fil
 				return fmt.Errorf("Failed to calculate relative path: %v", err)
 			}
 
-			if relPath != ".gpg-id" {
+			if strings.HasPrefix(relPath, "pass") || strings.HasPrefix(relPath, "env") {
 				destPath := filepath.Join(tempDir, relPath)
 				if err := gpgcrypt.Recrypt(destPath, originalKey, newKey); err != nil {
 					return fmt.Errorf("Failed to recrypt data: %v", err)
@@ -101,7 +101,7 @@ This operation will create a backup of your current store and re-encrypt all fil
 		}
 
 		// Backup original store
-		backupPath := storePath + ".backup"
+		backupPath := storePath + ".bkp"
 		if err := fscopy.Copy(storePath, backupPath); err != nil {
 			fmt.Printf("Failed to backup original store: %v\n", err)
 			return
