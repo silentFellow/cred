@@ -33,7 +33,7 @@ Examples:
 		}
 
 		path := args[0]
-		fullPath := fmt.Sprintf("%v/%v", basePath, path)
+		fullPath := fmt.Sprintf("%v/%v.gpg", basePath, path)
 
 		if paths.CheckPathExists(fullPath) {
 			var choice string
