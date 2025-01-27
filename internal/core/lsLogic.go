@@ -5,6 +5,7 @@ import (
 
 	"github.com/silentFellow/cred-store/config"
 	"github.com/silentFellow/cred-store/internal/utils"
+	"github.com/silentFellow/cred-store/internal/utils/paths"
 )
 
 func LsLogic(
@@ -26,7 +27,7 @@ func LsLogic(
 	}
 
 	path := args[0]
-	fullPath := fmt.Sprintf("%v/%v", basePath, path)
+	fullPath := paths.BuildPath(basePath, path)
 	if err := utils.PrintTree(fullPath, "", true); err != nil {
 		fmt.Println("Failed to list the files and directories, ", err)
 	}

@@ -108,7 +108,7 @@ and usage of using your command. For example:
 
 func init() {
 	quickSetupCmd.PersistentPostRunE = func(cmd *cobra.Command, args []string) error {
-		if config.Constants.AutoGit {
+		if config.Constants.Config.Values.AutoGit {
 			return git.AutoGit(cmd)
 		}
 

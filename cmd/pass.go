@@ -52,7 +52,7 @@ func init() {
 	}
 
 	passCmd.PersistentPostRunE = func(cmd *cobra.Command, args []string) error {
-		if config.Constants.AutoGit {
+		if config.Constants.Config.Values.AutoGit {
 			return git.AutoGit(cmd)
 		}
 

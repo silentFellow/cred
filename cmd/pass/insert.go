@@ -9,6 +9,7 @@ import (
 	"golang.org/x/term"
 
 	"github.com/silentFellow/cred-store/config"
+	gpgcrypt "github.com/silentFellow/cred-store/internal/gpg-crypt"
 	"github.com/silentFellow/cred-store/internal/utils/paths"
 )
 
@@ -30,8 +31,8 @@ Examples:
 			fmt.Printf("Invalid usage: %v\n", usage)
 			return
 		}
-		path := args[0]
-		fullPath := fmt.Sprintf("%v/%v.gpg", passStore, path)
+		path := args[0]+".gpg"
+		fullPath := paths.BuildPath(passStore, path)
 
 		if paths.CheckPathExists(fullPath) {
 			var choice string
@@ -71,7 +72,7 @@ Examples:
 			}
 		}
 
-		if err := paths.AddToPath(fullPath, password, true); err != nil {
+		if err := gpgcrypt.AddFile(fullPath, password, true); err != nil {
 			fmt.Println("Failed to insert password: ", err)
 			return
 		}

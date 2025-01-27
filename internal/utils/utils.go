@@ -10,6 +10,7 @@ import (
 	"strings"
 
 	"github.com/atotto/clipboard"
+	"github.com/silentFellow/cred-store/config"
 )
 
 func CopyToClipboard(text string, copyOnlyFirst bool) error {
@@ -107,19 +108,19 @@ type CmdIOConfig struct {
 	IsStderr bool
 }
 
-func SetCmd(filepath string, perm CmdIOConfig, args ...string) *exec.Cmd {
+func SetCmd(filepath string, IOConfig CmdIOConfig, args ...string) *exec.Cmd {
 	cmd := exec.Command(args[0], args[1:]...)
 	if strings.Trim(filepath, " ") != "" {
 		cmd.Dir = filepath
 	}
 
-	if perm.IsStdin {
+	if IOConfig.IsStdin {
 		cmd.Stdin = os.Stdin
 	}
-	if perm.IsStdout {
+	if !config.Constants.Config.Values.SuppressStdout && IOConfig.IsStdout {
 		cmd.Stdout = os.Stdout
 	}
-	if perm.IsStderr {
+	if !config.Constants.Config.Values.SuppressStdout && IOConfig.IsStderr {
 		cmd.Stderr = os.Stderr
 	}
 	return cmd

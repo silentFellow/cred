@@ -29,7 +29,7 @@ func EditLogic(
 	}
 
 	path := args[0]
-	fullPath := fmt.Sprintf("%v/%v", basePath, path)
+	fullPath := paths.BuildPath(basePath, path)
 
 	if !paths.CheckPathExists(fullPath) {
 		fmt.Printf("%v not found\n", path)
@@ -61,7 +61,7 @@ func EditLogic(
 
 	editorCmd := utils.SetCmd(
 		"",
-		utils.CmdIOConfig{IsStdin: true, IsStdout: true, IsStderr: true},
+		utils.CmdIOConfig{IsStdout: true, IsStderr: true},
 		config.Constants.Editor,
 		tempFile.Name(),
 	)
@@ -84,9 +84,9 @@ func EditLogic(
 		return
 	}
 
-	if err := paths.AddToPath(fullPath, updatedContent, true); err != nil {
+	if err := gpgcrypt.AddFile(fullPath, updatedContent, true); err != nil {
 		fmt.Println("Failed to update file: ", err)
 		return
 	}
-	fmt.Println("File updated successfully")
+	fmt.Printf("%v updated successfully\n", path)
 }

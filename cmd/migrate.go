@@ -39,6 +39,12 @@ This operation will create a backup of your current store and re-encrypt all fil
 			return
 		}
 
+		newKey, err := gpgcrypt.GetKeyFpr(newKey)
+		if err != nil {
+			fmt.Println("Failed to get the key: ", err)
+			return
+		}
+
 		var choice string
 		fmt.Print("WARNING: This operation will modify the store. Do you want to continue? (y/n): ")
 		fmt.Scanln(&choice)
@@ -135,7 +141,7 @@ func init() {
 	}
 
 	migrateCmd.PersistentPostRunE = func(cmd *cobra.Command, args []string) error {
-		if config.Constants.AutoGit {
+		if config.Constants.Config.Values.AutoGit {
 			return git.AutoGit(cmd)
 		}
 

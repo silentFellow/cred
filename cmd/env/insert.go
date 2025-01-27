@@ -8,6 +8,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/silentFellow/cred-store/config"
+	gpgcrypt "github.com/silentFellow/cred-store/internal/gpg-crypt"
 	"github.com/silentFellow/cred-store/internal/utils"
 	"github.com/silentFellow/cred-store/internal/utils/paths"
 )
@@ -32,8 +33,8 @@ Examples:
 			return
 		}
 
-		path := args[0]
-		fullPath := fmt.Sprintf("%v/%v.gpg", basePath, path)
+		path := args[0] + ".gpg"
+		fullPath := paths.BuildPath(basePath, path)
 
 		if paths.CheckPathExists(fullPath) {
 			var choice string
@@ -54,7 +55,7 @@ Examples:
 
 		editorCmd := utils.SetCmd(
 			"",
-			utils.CmdIOConfig{IsStdin: true, IsStdout: true, IsStderr: true},
+			utils.CmdIOConfig{IsStdout: true, IsStderr: true},
 			config.Constants.Editor,
 			tempFile.Name(),
 		)
@@ -77,10 +78,10 @@ Examples:
 			return
 		}
 
-		if err := paths.AddToPath(fullPath, content, true); err != nil {
+		if err := gpgcrypt.AddFile(fullPath, content, true); err != nil {
 			fmt.Println("Failed to update env: ", err)
 			return
 		}
-		fmt.Println("Env updated successfully")
+		fmt.Printf("%v inserted successfully\n", path)
 	},
 }

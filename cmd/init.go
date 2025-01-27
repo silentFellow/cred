@@ -34,6 +34,12 @@ and managing credentials securely. Note that you must provide a GPG key as an ar
 			return
 		}
 
+		gpgKey, err := gpgcrypt.GetKeyFpr(gpgKey)
+		if err != nil {
+			fmt.Println("Failed to get the key: ", err)
+			return
+		}
+
 		storePath := config.Constants.StorePath
 
 		// new store
@@ -65,20 +71,20 @@ and managing credentials securely. Note that you must provide a GPG key as an ar
 }
 
 func initStore(gpgid string) error {
-	paths := []string{
+	storeDirectoriesPaths := []string{
 		config.Constants.StorePath,
 		config.Constants.PassPath,
 		config.Constants.EnvPath,
 	}
 
-	for _, path := range paths {
+	for _, path := range storeDirectoriesPaths {
 		if err := os.MkdirAll(path, 0700); err != nil {
 			return err
 		}
 	}
 
 	// on success
-	file, err := os.Create(fmt.Sprintf("%v/.gpg-id", config.Constants.StorePath))
+	file, err := os.Create(paths.BuildPath(config.Constants.StorePath, ".gpg-id"))
 	defer file.Close()
 
 	if err != nil {
@@ -95,7 +101,7 @@ func initStore(gpgid string) error {
 
 func init() {
 	initCmd.PersistentPostRunE = func(cmd *cobra.Command, args []string) error {
-		if config.Constants.AutoGit {
+		if config.Constants.Config.Values.AutoGit {
 			return git.AutoGit(cmd)
 		}
 

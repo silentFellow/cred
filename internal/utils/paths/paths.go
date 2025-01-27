@@ -4,9 +4,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com/silentFellow/cred-store/config"
-	gpgcrypt "github.com/silentFellow/cred-store/internal/gpg-crypt"
-	"github.com/silentFellow/cred-store/internal/utils"
+	// "github.com/silentFellow/cred-store/config"
+	// gpgcrypt "github.com/silentFellow/cred-store/internal/gpg-crypt"
+	// "github.com/silentFellow/cred-store/internal/utils"
 )
 
 func CheckPathExists(path string) bool {
@@ -49,30 +49,16 @@ func CreatePath(path string) (*os.File, error) {
 	return file, nil
 }
 
+func BuildPath(pathSequence ...string) string {
+	var path strings.Builder
 
-func AddToPath(path string, content string, copy bool) error {
-	file, err := CreatePath(path)
-	defer file.Close()
+	for i, currentPath := range pathSequence {
+		path.WriteString(currentPath)
 
-	if err != nil {
-		return err
-	}
-
-	encrypted, err := gpgcrypt.Encrypt(content, config.Constants.GpgKey)
-	if err != nil {
-		return err
-	}
-
-	if _, err := file.WriteString(encrypted); err != nil {
-		return err
-	}
-
-	if copy {
-		// true since it only applicable for generate password
-		if err := utils.CopyToClipboard(content, true); err != nil {
-			return err
+		if i != len(pathSequence)-1 && !strings.HasSuffix(currentPath, "/") {
+			path.WriteString("/")
 		}
 	}
 
-	return nil
+	return path.String()
 }

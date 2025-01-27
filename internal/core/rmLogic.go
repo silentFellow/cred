@@ -27,7 +27,7 @@ func RmLogic(
 	}
 
 	for _, path := range args {
-		fullPath := fmt.Sprintf("%v/%v", basePath, path)
+		fullPath := paths.BuildPath(basePath, path)
 
 		if !paths.CheckPathExists(fullPath) {
 			fmt.Printf("%v not found\n", fullPath)
@@ -39,6 +39,6 @@ func RmLogic(
 			continue
 		}
 
-		fmt.Printf("Succesfully deleted %v\n", fullPath)
+		fmt.Printf("Succesfully deleted %v\n", path)
 	}
 }

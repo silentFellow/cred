@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 
 	"github.com/silentFellow/cred-store/config"
+	"github.com/silentFellow/cred-store/internal/utils/paths"
 )
 
 func MvLogic(
@@ -28,7 +29,7 @@ func MvLogic(
 
 	n := len(args)
 	sources := args[:n-1]
-	destination := fmt.Sprintf("%v/%v", basePath, args[n-1])
+	destination := paths.BuildPath(basePath, args[n-1])
 
 	destinationInfo, err := os.Stat(destination)
 	if err != nil && !os.IsNotExist(err) { // only errors not related to being not found
@@ -38,13 +39,13 @@ func MvLogic(
 
 	if destinationInfo != nil && destinationInfo.IsDir() { // if directory
 		for _, src := range sources {
-			srcPath := fmt.Sprintf("%v/%v", basePath, src)
+			srcPath := paths.BuildPath(basePath, src)
 			destPath := filepath.Join(destination, filepath.Base(src)) // append
 			move(srcPath, destPath)
 		}
 	} else { // if normal file
 		for _, src := range sources {
-			srcPath := fmt.Sprintf("%v/%v", basePath, src)
+			srcPath := paths.BuildPath(basePath, src)
 			move(srcPath, destination)
 		}
 	}

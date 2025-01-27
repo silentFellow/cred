@@ -26,7 +26,7 @@ func ShowLogic(
 		return
 	}
 	path := args[0]
-	fullPath := fmt.Sprintf("%v/%v", basePath, path)
+	fullPath := paths.BuildPath(basePath, path)
 
 	if !paths.CheckPathExists(fullPath) {
 		fmt.Printf("%v not found\n", path)

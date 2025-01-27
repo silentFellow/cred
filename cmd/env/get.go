@@ -8,6 +8,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/silentFellow/cred-store/config"
+	gpgcrypt "github.com/silentFellow/cred-store/internal/gpg-crypt"
 	"github.com/silentFellow/cred-store/internal/utils/paths"
 )
 
@@ -55,7 +56,8 @@ You can specify the file containing the environment variables using the -f flag.
 			return
 		}
 
-		fullPath := fmt.Sprintf("%v/%v.gpg", config.Constants.EnvPath, filename)
+		fullPath := paths.BuildPath(config.Constants.EnvPath, filename+".gpg")
+
 		exists := paths.CheckPathExists(fullPath) && paths.GetPathType(fullPath) == "file"
 
 		if exists {
@@ -72,7 +74,7 @@ You can specify the file containing the environment variables using the -f flag.
 			}
 		}
 
-		if err := paths.AddToPath(fullPath, fileContent, false); err != nil {
+		if err := gpgcrypt.AddFile(fullPath, fileContent, false); err != nil {
 			fmt.Printf("Failed to insert environment variables: %v\n", err)
 			return
 		}

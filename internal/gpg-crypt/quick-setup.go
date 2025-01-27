@@ -8,6 +8,7 @@ import (
 	"github.com/silentFellow/cred-store/config"
 	"github.com/silentFellow/cred-store/internal/utils"
 	"github.com/silentFellow/cred-store/internal/utils/copy"
+	"github.com/silentFellow/cred-store/internal/utils/paths"
 )
 
 func GenerateKey(uname, email string) error {
@@ -109,7 +110,7 @@ func ExportKeys(uname string) error {
 	}
 	defer os.RemoveAll(tempDir) // Cleanup temporary directory
 
-	publicKeyPath := fmt.Sprintf("%v/public_key.asc", tempDir)
+	publicKeyPath := paths.BuildPath(tempDir, "public_key.asc")
 	publicKeyCmd := utils.SetCmd(
 		"",
 		utils.CmdIOConfig{IsStdout: true},
@@ -129,7 +130,7 @@ func ExportKeys(uname string) error {
 		return fmt.Errorf("Failed to export public key: %w", err)
 	}
 
-	privateKeyPath := fmt.Sprintf("%v/private_key.asc", tempDir)
+	privateKeyPath := paths.BuildPath(tempDir, "private_key.asc")
 
 	privateKeyCmd := utils.SetCmd(
 		"",
@@ -151,7 +152,7 @@ func ExportKeys(uname string) error {
 	}
 
 	// Generate a usage file for importing the keys
-	usageFilePath := fmt.Sprintf("%v/import_instructions.txt", tempDir)
+	usageFilePath := paths.BuildPath(tempDir, "import_instructions.txt")
 	usageFileContent := `To import the keys on a new device:
 
 1. Import the public key:
@@ -179,7 +180,7 @@ func ExportKeys(uname string) error {
 		return fmt.Errorf("Failed to write content to import_usage file: %w", err)
 	}
 
-	downloadPath := fmt.Sprintf("%v/cred-store-keys", config.Constants.Download)
+	downloadPath := paths.BuildPath(config.Constants.Download, "cred-store-keys")
 	if err := fscopy.Copy(tempDir, downloadPath); err != nil {
 		return fmt.Errorf("Failed to move keys from temp to download directory: %w", err)
 	}

@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/silentFellow/cred-store/config"
+	"github.com/silentFellow/cred-store/internal/utils/paths"
 )
 
 func MkdirLogic(
@@ -26,13 +27,13 @@ func MkdirLogic(
 	}
 
 	for _, path := range args {
-		fullPath := fmt.Sprintf("%v/%v", basePath, path)
+		fullPath := paths.BuildPath(basePath, path)
 
 		if err := os.MkdirAll(fullPath, 0777); err != nil {
 			fmt.Printf("Error created %v: %v\n", fullPath, err)
 			continue
 		}
 
-		fmt.Printf("Succesfully created %v\n", fullPath)
+		fmt.Printf("Succesfully created %v\n", path)
 	}
 }

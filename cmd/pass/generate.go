@@ -8,6 +8,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/silentFellow/cred-store/config"
+	gpgcrypt "github.com/silentFellow/cred-store/internal/gpg-crypt"
 	"github.com/silentFellow/cred-store/internal/utils"
 	"github.com/silentFellow/cred-store/internal/utils/paths"
 )
@@ -30,8 +31,8 @@ Examples:
 			fmt.Printf("Invalid usage: %v\n", usage)
 			return
 		}
-		path := args[0]
-		fullPath := fmt.Sprintf("%v/%v.gpg", passStore, path)
+		filePath := args[0]+".gpg"
+		fullPath := paths.BuildPath(passStore, filePath)
 
 		length, _ := cmd.Flags().GetInt("length")
 		allowLower, _ := cmd.Flags().GetBool("allow-lower")
@@ -60,7 +61,7 @@ Examples:
 			}
 		}
 
-		if err := paths.AddToPath(fullPath, generatedPassword, true); err != nil {
+		if err := gpgcrypt.AddFile(fullPath, generatedPassword, true); err != nil {
 			fmt.Println("Failed to insert password: ", err)
 			return
 		}
