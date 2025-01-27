@@ -3,6 +3,7 @@ package git
 import (
 	"os"
 	"os/exec"
+	"strings"
 )
 
 func CheckGitExists() bool {
@@ -104,4 +105,32 @@ func PushRepo(filePath string) error {
 		return err
 	}
 	return nil
+}
+
+func GetStageable(filePath string) ([]string, error) {
+	// trackable files
+	cmd := exec.Command("git", "status", "--porcelain")
+	cmd.Dir = filePath
+
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		return nil, err
+	}
+
+	lines := strings.Split(string(output), "\n")
+
+	files := []string{}
+
+	for _, line := range lines {
+		fields := strings.Fields(line)
+
+		if len(fields) >= 2 {
+			status := strings.ToLower(fields[0])
+			if status != "d" && status != "am" {
+				files = append(files, fields[1])
+			}
+		}
+	}
+
+	return files, nil
 }

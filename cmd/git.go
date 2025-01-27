@@ -2,12 +2,14 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 	"os/exec"
 	"strings"
 
 	"github.com/spf13/cobra"
 
 	"github.com/silentFellow/cred-store/config"
+	"github.com/silentFellow/cred-store/internal/completions"
 	"github.com/silentFellow/cred-store/internal/utils/git"
 )
 
@@ -51,16 +53,24 @@ func init() {
 	}
 
 	// Add subcommands for each Git command
-	for cmd, desc := range config.GitCommandMap {
+	for cmd, desc := range completions.GitCommandMap {
 		subCmd := &cobra.Command{
-			Use:   cmd,
-			Short: desc,
+			Use:                cmd,
+			Short:              desc,
+			DisableFlagParsing: true, // to avoid parsing flags for git commands
 			Run: func(cmd *cobra.Command, args []string) {
 				execCmd := exec.Command("git", append([]string{cmd.Use}, args...)...)
 				execCmd.Dir = config.Constants.StorePath
-				output, _ := execCmd.CombinedOutput() // ignore the output else always status code throws
-				fmt.Print(string(output))
+				execCmd.Stdin = os.Stdin
+				execCmd.Stdout = os.Stdout
+				execCmd.Stderr = os.Stderr
+
+				if err := execCmd.Run(); err != nil {
+					fmt.Fprintf(os.Stderr, "Error running git command: %v\n", err)
+					os.Exit(1)
+				}
 			},
+			ValidArgsFunction: completions.GetGitFileCompletion,
 		}
 
 		gitCmd.AddCommand(subCmd)
