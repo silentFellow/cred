@@ -75,23 +75,27 @@ func PrintTree(root string, prefix string, isLast bool) error {
 	return nil
 }
 
-func GenerateRandom(n int) string {
+func GenerateRandom(n int, allowLower, allowUpper, allowDigit, allowSpecial bool) string {
+	var charsetBuilder strings.Builder
+
+	if allowLower {
+		charsetBuilder.WriteString("abcdefghijklmnopqrstuvwxyz")
+	}
+	if allowUpper {
+		charsetBuilder.WriteString("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+	}
+	if allowDigit {
+		charsetBuilder.WriteString("0123456789")
+	}
+	if allowSpecial {
+		charsetBuilder.WriteString("!@#$%^&*()-_=+[]{}|;:,.<>?/`~")
+	}
+
+	charset := charsetBuilder.String()
+
 	var random strings.Builder
-	specialChars := "!@#$%^&*()-_=+[]{}|;:,.<>?/`~"
-
 	for range n {
-		valType := rand.IntN(4)
-
-		switch valType {
-		case 0:
-			random.WriteByte(byte('a' + rand.IntN(26)))
-		case 1:
-			random.WriteByte(byte('A' + rand.IntN(26)))
-		case 2:
-			random.WriteByte(byte('0' + rand.IntN(10)))
-		case 3:
-			random.WriteByte(specialChars[rand.IntN(len(specialChars))])
-		}
+		random.WriteByte(charset[rand.IntN(len(charset))])
 	}
 
 	return random.String()
