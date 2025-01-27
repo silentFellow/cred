@@ -3,24 +3,24 @@ package gpgcrypt
 import (
 	"fmt"
 	"os"
-	"os/exec"
 	"strings"
 
 	"github.com/silentFellow/cred-store/config"
+	"github.com/silentFellow/cred-store/internal/utils"
 )
 
 func CheckKeyExists() bool {
-  gpgPath := fmt.Sprintf("%v/.gpg-id", config.Constants.StorePath)
+	gpgPath := fmt.Sprintf("%v/.gpg-id", config.Constants.StorePath)
 
-  if _, err := os.Stat(gpgPath); err != nil {
-    return false
-  }
+	if _, err := os.Stat(gpgPath); err != nil {
+		return false
+	}
 
-  return true
+	return true
 }
 
 func CheckKeyValidity(keyId string) bool {
-	cmd := exec.Command("gpg", "--list-keys", keyId)
+	cmd := utils.SetCmd("", utils.CmdIOConfig{}, "gpg", "--list-keys", keyId)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		return false

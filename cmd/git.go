@@ -3,13 +3,13 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"os/exec"
 	"strings"
 
 	"github.com/spf13/cobra"
 
 	"github.com/silentFellow/cred-store/config"
 	"github.com/silentFellow/cred-store/internal/completions"
+	"github.com/silentFellow/cred-store/internal/utils"
 	"github.com/silentFellow/cred-store/internal/utils/git"
 )
 
@@ -31,7 +31,7 @@ func init() {
 			return fmt.Errorf("git is not installed")
 		}
 
-		if !git.IsValidGitPath(config.Constants.StorePath) {
+		if !(strings.ToLower(cmd.Name()) == "init") && !git.IsValidGitPath(config.Constants.StorePath) {
 			var choice string
 			fmt.Print(
 				"github repository not found in the store path. Do you want to initialize a new repository? (y/n): ",
@@ -59,11 +59,12 @@ func init() {
 			Short:              desc,
 			DisableFlagParsing: true, // to avoid parsing flags for git commands
 			Run: func(cmd *cobra.Command, args []string) {
-				execCmd := exec.Command("git", append([]string{cmd.Use}, args...)...)
-				execCmd.Dir = config.Constants.StorePath
-				execCmd.Stdin = os.Stdin
-				execCmd.Stdout = os.Stdout
-				execCmd.Stderr = os.Stderr
+				cmdString := append([]string{"git", cmd.Use}, args...)
+				execCmd := utils.SetCmd(
+					config.Constants.StorePath,
+					utils.CmdIOConfig{IsStdin: true, IsStdout: true, IsStderr: true},
+					cmdString...,
+				)
 
 				if err := execCmd.Run(); err != nil {
 					fmt.Fprintf(os.Stderr, "Error running git command: %v\n", err)

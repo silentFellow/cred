@@ -4,7 +4,8 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"os/exec"
+
+	"github.com/silentFellow/cred-store/internal/utils"
 )
 
 func Encrypt(v string, key string) (string, error) {
@@ -13,7 +14,7 @@ func Encrypt(v string, key string) (string, error) {
 		return "", errors.New("Invalid GPG key")
 	}
 
-	cmd := exec.Command("gpg", "--armor", "--encrypt", "--recipient", key)
+	cmd := utils.SetCmd("", utils.CmdIOConfig{}, "gpg", "--armor", "--encrypt", "--recipient", key)
 
 	// create a pipeline for input
 	inPipe, err := cmd.StdinPipe()

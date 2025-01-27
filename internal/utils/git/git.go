@@ -2,12 +2,13 @@ package git
 
 import (
 	"os"
-	"os/exec"
 	"strings"
+
+	"github.com/silentFellow/cred-store/internal/utils"
 )
 
 func CheckGitExists() bool {
-	cmd := exec.Command("git", "--version")
+	cmd := utils.SetCmd("", utils.CmdIOConfig{}, "git", "--version")
 	if err := cmd.Run(); err != nil {
 		return false
 	}
@@ -20,8 +21,7 @@ func IsValidGitPath(filepath string) bool {
 		return false
 	}
 
-	cmd := exec.Command("git", "status")
-	cmd.Dir = filepath
+	cmd := utils.SetCmd(filepath, utils.CmdIOConfig{}, "git", "status")
 	if err := cmd.Run(); err != nil {
 		return false
 	}
@@ -30,8 +30,13 @@ func IsValidGitPath(filepath string) bool {
 }
 
 func HaveRemote(filepath string) bool {
-	cmd := exec.Command("git", "remote", "-v")
-	cmd.Dir = filepath
+	cmd := utils.SetCmd(
+		filepath,
+		utils.CmdIOConfig{},
+		"git",
+		"remote",
+		"-v",
+	)
 
 	output, err := cmd.CombinedOutput()
 	if string(output) == "" || err != nil {
@@ -41,8 +46,13 @@ func HaveRemote(filepath string) bool {
 }
 
 func HaveDiff(filePath string) bool {
-	cmdDiff := exec.Command("git", "diff", "--quiet")
-	cmdDiff.Dir = filePath
+	cmdDiff := utils.SetCmd(
+		filePath,
+		utils.CmdIOConfig{},
+		"git",
+		"diff",
+		"--quiet",
+	)
 
 	// Check if there are any modifications, deletions, or renames in tracked files
 	output, errDiff := cmdDiff.CombinedOutput()
@@ -51,8 +61,14 @@ func HaveDiff(filePath string) bool {
 	}
 
 	// Check for untracked files
-	cmdUntracked := exec.Command("git", "ls-files", "--others", "--exclude-standard")
-	cmdUntracked.Dir = filePath
+	cmdUntracked := utils.SetCmd(
+		filePath,
+		utils.CmdIOConfig{},
+		"git",
+		"ls-files",
+		"--others",
+		"--exclude-standard",
+	)
 
 	output, errUntracked := cmdUntracked.CombinedOutput()
 	if string(output) != "" || errUntracked != nil {
@@ -60,8 +76,7 @@ func HaveDiff(filePath string) bool {
 	}
 
 	// Check for deleted files (files that have been deleted but not staged)
-	cmdDeleted := exec.Command("git", "ls-files", "--deleted")
-	cmdDeleted.Dir = filePath
+	cmdDeleted := utils.SetCmd(filePath, utils.CmdIOConfig{}, "git", "ls-files", "--deleted")
 
 	output, errDeleted := cmdDeleted.CombinedOutput()
 	if string(output) != "" || errDeleted != nil {
@@ -72,8 +87,7 @@ func HaveDiff(filePath string) bool {
 }
 
 func InitRepo(filePath string) error {
-	cmd := exec.Command("git", "init")
-	cmd.Dir = filePath
+	cmd := utils.SetCmd(filePath, utils.CmdIOConfig{IsStdout: true, IsStderr: true}, "git", "init")
 	if err := cmd.Run(); err != nil {
 		return err
 	}
@@ -81,8 +95,7 @@ func InitRepo(filePath string) error {
 }
 
 func AddFiles(filePath string) error {
-	cmd := exec.Command("git", "add", ".")
-	cmd.Dir = filePath
+	cmd := utils.SetCmd(filePath, utils.CmdIOConfig{IsStderr: true}, "git", "add", ".")
 	if err := cmd.Run(); err != nil {
 		return err
 	}
@@ -90,8 +103,14 @@ func AddFiles(filePath string) error {
 }
 
 func CommitFiles(filePath, message string) error {
-	cmd := exec.Command("git", "commit", "-m", message)
-	cmd.Dir = filePath
+	cmd := utils.SetCmd(
+		filePath,
+		utils.CmdIOConfig{IsStdout: true, IsStderr: true},
+		"git",
+		"commit",
+		"-m",
+		message,
+	)
 	if err := cmd.Run(); err != nil {
 		return err
 	}
@@ -99,8 +118,7 @@ func CommitFiles(filePath, message string) error {
 }
 
 func PushRepo(filePath string) error {
-	cmd := exec.Command("git", "push")
-	cmd.Dir = filePath
+	cmd := utils.SetCmd(filePath, utils.CmdIOConfig{IsStdout: true, IsStderr: true}, "git", "push")
 	if err := cmd.Run(); err != nil {
 		return err
 	}
@@ -109,8 +127,7 @@ func PushRepo(filePath string) error {
 
 func GetStageable(filePath string) ([]string, error) {
 	// trackable files
-	cmd := exec.Command("git", "status", "--porcelain")
-	cmd.Dir = filePath
+	cmd := utils.SetCmd(filePath, utils.CmdIOConfig{}, "git", "status", "--porcelain")
 
 	output, err := cmd.CombinedOutput()
 	if err != nil {

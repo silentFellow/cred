@@ -94,7 +94,7 @@ This operation will create a backup of your current store and re-encrypt all fil
 						"Failed to recrypt file %s: %v\n",
 						destPath,
 						err,
-					) 
+					)
 				}
 			}
 
@@ -102,13 +102,6 @@ This operation will create a backup of your current store and re-encrypt all fil
 		})
 		if err != nil {
 			fmt.Printf("Failed to recrypt the store: %v\n", err)
-			return
-		}
-
-		// Backup original store
-		backupPath := storePath + ".bkp"
-		if err := fscopy.Copy(storePath, backupPath); err != nil {
-			fmt.Printf("Failed to backup original store: %v\n", err)
 			return
 		}
 

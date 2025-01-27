@@ -3,12 +3,12 @@ package env
 import (
 	"fmt"
 	"os"
-	"os/exec"
 	"strings"
 
 	"github.com/spf13/cobra"
 
 	"github.com/silentFellow/cred-store/config"
+	"github.com/silentFellow/cred-store/internal/utils"
 	"github.com/silentFellow/cred-store/internal/utils/paths"
 )
 
@@ -52,10 +52,12 @@ Examples:
 		}
 		defer os.Remove(tempFile.Name())
 
-		editorCmd := exec.Command(config.Constants.Editor, tempFile.Name())
-		editorCmd.Stdin = os.Stdin
-		editorCmd.Stdout = os.Stdout
-		editorCmd.Stderr = os.Stderr
+		editorCmd := utils.SetCmd(
+			"",
+			utils.CmdIOConfig{IsStdin: true, IsStdout: true, IsStderr: true},
+			config.Constants.Editor,
+			tempFile.Name(),
+		)
 
 		if err := editorCmd.Run(); err != nil {
 			fmt.Println("Error opening editor, ", err)

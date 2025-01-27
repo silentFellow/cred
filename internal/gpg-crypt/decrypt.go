@@ -4,9 +4,9 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"os/exec"
 
 	"github.com/silentFellow/cred-store/config"
+	"github.com/silentFellow/cred-store/internal/utils"
 )
 
 func Decrypt(filePath string) (string, error) {
@@ -17,15 +17,15 @@ func Decrypt(filePath string) (string, error) {
 		return "", errors.New("Invalid GPG key")
 	}
 
-  cmd := exec.Command("gpg", "--decrypt", filePath)
+	cmd := utils.SetCmd("", utils.CmdIOConfig{}, "gpg", "--decrypt", filePath)
 
-  var outBuffer bytes.Buffer
-  cmd.Stdout = &outBuffer
+	var outBuffer bytes.Buffer
+	cmd.Stdout = &outBuffer
 
-  if err := cmd.Run(); err != nil {
+	if err := cmd.Run(); err != nil {
 		fmt.Println(err)
-    return "", err
-  }
+		return "", err
+	}
 
-  return outBuffer.String(), nil
+	return outBuffer.String(), nil
 }

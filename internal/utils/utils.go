@@ -32,10 +32,8 @@ func PrintTree(root string, prefix string, isLast bool) error {
 	}
 
 	// check if tree command present if so just execute it
-	treeCmd := exec.Command("tree", root)
-	output, err := treeCmd.CombinedOutput()
-	if err == nil {
-		fmt.Print(string(output))
+	treeCmd := SetCmd("", CmdIOConfig{IsStdout: true}, "tree", root)
+	if err := treeCmd.Run(); err == nil {
 		return nil
 	}
 
@@ -97,4 +95,28 @@ func GenerateRandom(n int) string {
 	}
 
 	return random.String()
+}
+
+type CmdIOConfig struct {
+	IsStdin  bool
+	IsStdout bool
+	IsStderr bool
+}
+
+func SetCmd(filepath string, perm CmdIOConfig, args ...string) *exec.Cmd {
+	cmd := exec.Command(args[0], args[1:]...)
+	if strings.Trim(filepath, " ") != "" {
+		cmd.Dir = filepath
+	}
+
+	if perm.IsStdin {
+		cmd.Stdin = os.Stdin
+	}
+	if perm.IsStdout {
+		cmd.Stdout = os.Stdout
+	}
+	if perm.IsStderr {
+		cmd.Stderr = os.Stderr
+	}
+	return cmd
 }

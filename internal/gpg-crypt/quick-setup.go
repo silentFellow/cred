@@ -3,32 +3,39 @@ package gpgcrypt
 import (
 	"fmt"
 	"os"
-	"os/exec"
 	"strings"
 
 	"github.com/silentFellow/cred-store/config"
+	"github.com/silentFellow/cred-store/internal/utils"
 	"github.com/silentFellow/cred-store/internal/utils/copy"
 )
 
 func GenerateKey(uname, email string) error {
 	identity := fmt.Sprintf("%v <%v>", uname, email)
-	cmd := exec.Command("gpg", "--quick-generate-key", identity, "rsa4096", "default", "never")
 
-	output, err := cmd.CombinedOutput()
-	formattedOutput := strings.ToLower(string(output))
-	if err != nil &&
-		!strings.Contains(
-			formattedOutput,
-			"key already exists",
-		) { // TODO: key already exists throws an error
-		return err
+	cmd := utils.SetCmd(
+		"",
+		utils.CmdIOConfig{},
+		"gpg",
+		"--quick-generate-key",
+		identity,
+		"rsa4096",
+		"default",
+		"never",
+	)
+
+	if output, err := cmd.CombinedOutput(); err != nil {
+		if !strings.Contains(string(output), "already exists") {
+			fmt.Println("entered")
+			return err
+		}
 	}
 
 	return nil
 }
 
 func GetKeyFpr(uname string) (string, error) {
-	cmd := exec.Command("gpg", "--list-keys", "--with-colons", uname)
+	cmd := utils.SetCmd("", utils.CmdIOConfig{}, "gpg", "--list-keys", "--with-colons", uname)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		return "", err
@@ -48,7 +55,17 @@ func GetKeyFpr(uname string) (string, error) {
 }
 
 func AddSubKey(keyId string) error {
-	cmd := exec.Command("gpg", "--command-fd", "0", "--batch", "--yes", "--edit-key", keyId)
+	cmd := utils.SetCmd(
+		"",
+		utils.CmdIOConfig{IsStdin: true},
+		"gpg",
+		"--command-fd",
+		"0",
+		"--batch",
+		"--yes",
+		"--edit-key",
+		keyId,
+	)
 
 	// "addkey" -> Select subkey type (6 = RSA) -> Key size (4096) -> Usage (E = Encrypt) -> Save
 	cmd.Stdin = strings.NewReader("addkey\n6\n\n\ny\ny\nsave\n")
@@ -62,7 +79,17 @@ func AddSubKey(keyId string) error {
 }
 
 func ModifyTrust(keyId string) error {
-	cmd := exec.Command("gpg", "--command-fd", "0", "--batch", "--yes", "--edit-key", keyId)
+	cmd := utils.SetCmd(
+		"",
+		utils.CmdIOConfig{IsStdin: true},
+		"gpg",
+		"--command-fd",
+		"0",
+		"--batch",
+		"--yes",
+		"--edit-key",
+		keyId,
+	)
 
 	// "addkey" -> Select subkey type (6 = RSA) -> Key size (4096) -> Usage (E = Encrypt) -> Save
 	cmd.Stdin = strings.NewReader("trust\n5\ny\nsave\n")
@@ -83,7 +110,14 @@ func ExportKeys(uname string) error {
 	defer os.RemoveAll(tempDir) // Cleanup temporary directory
 
 	publicKeyPath := fmt.Sprintf("%v/public_key.asc", tempDir)
-	publicKeyCmd := exec.Command("gpg", "--armor", "--export", uname)
+	publicKeyCmd := utils.SetCmd(
+		"",
+		utils.CmdIOConfig{IsStdout: true},
+		"gpg",
+		"--armor",
+		"--export",
+		uname,
+	)
 	publicKeyFile, err := os.Create(publicKeyPath)
 	if err != nil {
 		return fmt.Errorf("Failed to create public key file: %w", err)
@@ -96,7 +130,15 @@ func ExportKeys(uname string) error {
 	}
 
 	privateKeyPath := fmt.Sprintf("%v/private_key.asc", tempDir)
-	privateKeyCmd := exec.Command("gpg", "--armor", "--export-secret-keys", uname)
+
+	privateKeyCmd := utils.SetCmd(
+		"",
+		utils.CmdIOConfig{IsStdout: true},
+		"gpg",
+		"--armor",
+		"--export",
+		uname,
+	)
 	privateKeyFile, err := os.Create(privateKeyPath)
 	if err != nil {
 		return fmt.Errorf("Failed to create private key file: %w", err)

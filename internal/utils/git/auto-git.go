@@ -35,9 +35,9 @@ func AutoGit(cmd *cobra.Command) error {
 		}
 	}
 
-  if !HaveDiff(config.Constants.StorePath) {
-    return nil
-  }
+	if !HaveDiff(config.Constants.StorePath) {
+		return nil
+	}
 
 	if err := AddFiles(config.Constants.StorePath); err != nil {
 		cmd.SilenceUsage = true
@@ -47,17 +47,12 @@ func AutoGit(cmd *cobra.Command) error {
 	commitMessage := fmt.Sprintf("Auto commit by %v command", cmdName)
 	if err := CommitFiles(config.Constants.StorePath, commitMessage); err != nil {
 		cmd.SilenceUsage = true
-		return fmt.Errorf("failed to commit files to git: %w", err)
-	}
-
-	if !HaveRemote(config.Constants.StorePath) {
-		cmd.SilenceUsage = true
-		return fmt.Errorf("remote not found, add remote url")
+		return fmt.Errorf("failed to commit files to git")
 	}
 
 	if err := PushRepo(config.Constants.StorePath); err != nil {
 		cmd.SilenceUsage = true
-		return fmt.Errorf("failed to push files to git: %w", err)
+		return fmt.Errorf("failed to push files to git")
 	}
 
 	return nil

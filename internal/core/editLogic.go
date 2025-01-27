@@ -3,10 +3,10 @@ package core
 import (
 	"fmt"
 	"os"
-	"os/exec"
 
 	"github.com/silentFellow/cred-store/config"
 	gpgcrypt "github.com/silentFellow/cred-store/internal/gpg-crypt"
+	"github.com/silentFellow/cred-store/internal/utils"
 	"github.com/silentFellow/cred-store/internal/utils/paths"
 )
 
@@ -59,10 +59,12 @@ func EditLogic(
 		return
 	}
 
-	editorCmd := exec.Command(config.Constants.Editor, tempFile.Name())
-	editorCmd.Stdin = os.Stdin
-	editorCmd.Stdout = os.Stdout
-	editorCmd.Stderr = os.Stderr
+	editorCmd := utils.SetCmd(
+		"",
+		utils.CmdIOConfig{IsStdin: true, IsStdout: true, IsStderr: true},
+		config.Constants.Editor,
+		tempFile.Name(),
+	)
 
 	if err := editorCmd.Run(); err != nil {
 		fmt.Println("Error opening editor, ", err)
