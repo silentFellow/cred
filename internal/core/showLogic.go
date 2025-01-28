@@ -44,5 +44,5 @@ func ShowLogic(
 		return
 	}
 
-	fmt.Println(decryped)
+	fmt.Print(decryped)
 }
