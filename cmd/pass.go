@@ -2,11 +2,13 @@ package cmd
 
 import (
 	"fmt"
+	"path/filepath"
 
 	"github.com/spf13/cobra"
 
 	"github.com/silentFellow/cred-store/cmd/pass"
 	"github.com/silentFellow/cred-store/config"
+	"github.com/silentFellow/cred-store/internal/completions"
 	gpgcrypt "github.com/silentFellow/cred-store/internal/gpg-crypt"
 	"github.com/silentFellow/cred-store/internal/utils"
 	"github.com/silentFellow/cred-store/internal/utils/git"
@@ -59,15 +61,29 @@ func init() {
 		return nil
 	}
 
-	passCmd.AddCommand(pass.GenerateCmd)
-	passCmd.AddCommand(pass.InsertCmd)
-	passCmd.AddCommand(pass.ShowCmd)
-	passCmd.AddCommand(pass.CopyCmd)
-	passCmd.AddCommand(pass.EditCmd)
-	passCmd.AddCommand(pass.LsCmd)
-	passCmd.AddCommand(pass.RmCmd)
-	passCmd.AddCommand(pass.MkdirCmd)
-	passCmd.AddCommand(pass.MvCmd)
-	passCmd.AddCommand(pass.CpCmd)
+	passCmds := []*cobra.Command{
+		pass.GenerateCmd,
+		pass.InsertCmd,
+		pass.ShowCmd,
+		pass.CopyCmd,
+		pass.EditCmd,
+		pass.LsCmd,
+		pass.RmCmd,
+		pass.MvCmd,
+		pass.CpCmd,
+	}
+
+	for _, cmd := range passCmds {
+		cmd.ValidArgsFunction = func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+			complete := filepath.Join(config.Constants.PassPath, toComplete)
+			return completions.GetFilePathSuggestions(
+				complete,
+				config.Constants.PassPath,
+			), cobra.ShellCompDirectiveDefault
+		}
+
+		passCmd.AddCommand(cmd)
+	}
+
 	rootCmd.AddCommand(passCmd)
 }

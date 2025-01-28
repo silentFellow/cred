@@ -2,11 +2,13 @@ package cmd
 
 import (
 	"fmt"
+	"path/filepath"
 
 	"github.com/spf13/cobra"
 
 	"github.com/silentFellow/cred-store/cmd/env"
 	"github.com/silentFellow/cred-store/config"
+	"github.com/silentFellow/cred-store/internal/completions"
 	gpgcrypt "github.com/silentFellow/cred-store/internal/gpg-crypt"
 	"github.com/silentFellow/cred-store/internal/utils"
 	"github.com/silentFellow/cred-store/internal/utils/git"
@@ -17,8 +19,8 @@ import (
 var envCmd = &cobra.Command{
 	Use:   "env",
 	Short: "A command to manage env-variables",
-	Long: `The pass command allows you to manage your env-variables efficiently.
-It provides functionalities to create, update, and delete passwords.
+	Long: `The env command allows you to manage your env-variables efficiently.
+It provides functionalities to create, update, and delete env-variables.
 
 Examples:
 - Create a new env: env {insert/generate}
@@ -30,7 +32,7 @@ Examples:
 		if paths.CheckPathExists(envPath) {
 			err := utils.PrintTree(envPath, "", true)
 			if err != nil {
-				fmt.Printf("Failed to parse password store: %v\n", err)
+				fmt.Printf("Failed to parse env store: %v\n", err)
 			}
 		}
 	},
@@ -59,15 +61,30 @@ func init() {
 		return nil
 	}
 
-	envCmd.AddCommand(env.InsertCmd)
-	envCmd.AddCommand(env.CopyCmd)
-	envCmd.AddCommand(env.ShowCmd)
-	envCmd.AddCommand(env.EditCmd)
-	envCmd.AddCommand(env.LsCmd)
-	envCmd.AddCommand(env.RmCmd)
-	envCmd.AddCommand(env.MkdirCmd)
-	envCmd.AddCommand(env.MvCmd)
-	envCmd.AddCommand(env.CpCmd)
+	envCmds := []*cobra.Command{
+		env.InsertCmd,
+		env.CopyCmd,
+		env.ShowCmd,
+		env.EditCmd,
+		env.LsCmd,
+		env.RmCmd,
+		env.MkdirCmd,
+		env.MvCmd,
+		env.CpCmd,
+	}
+
+	for _, cmd := range envCmds {
+		cmd.ValidArgsFunction = func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+			complete := filepath.Join(config.Constants.EnvPath, toComplete)
+			return completions.GetFilePathSuggestions(
+				complete,
+				config.Constants.EnvPath,
+			), cobra.ShellCompDirectiveDefault
+		}
+
+		envCmd.AddCommand(cmd)
+	}
+
 	envCmd.AddCommand(env.GetCmd)
 	rootCmd.AddCommand(envCmd)
 }
