@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 	"path/filepath"
 
 	"github.com/spf13/cobra"
@@ -48,6 +49,14 @@ func init() {
 		if !gpgcrypt.CheckKeyValidity(config.Constants.GpgKey) {
 			cmd.SilenceUsage = true
 			return fmt.Errorf("Invalid GPG key, try [cred init <gpg-key-id>]")
+		}
+
+		if !paths.CheckPathExists(config.Constants.EnvPath) {
+			err := os.MkdirAll(config.Constants.EnvPath, 0700)
+			if err != nil {
+				cmd.SilenceUsage = true
+				return fmt.Errorf("Failed to create env store: %v", err)
+			}
 		}
 
 		return nil
