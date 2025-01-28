@@ -85,10 +85,17 @@ func init() {
 	for _, cmd := range passCmds {
 		cmd.ValidArgsFunction = func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
 			complete := filepath.Join(config.Constants.PassPath, toComplete)
-			return completions.GetFilePathSuggestions(
+			suggestions := completions.GetFilePathSuggestions(
 				complete,
 				config.Constants.PassPath,
-			), cobra.ShellCompDirectiveDefault
+			)
+
+			// If no suggestions are found, return an empty slice
+			if len(suggestions) == 0 {
+				return []string{}, cobra.ShellCompDirectiveNoFileComp
+			}
+
+			return suggestions, cobra.ShellCompDirectiveDefault
 		}
 
 		passCmd.AddCommand(cmd)

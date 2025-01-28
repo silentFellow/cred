@@ -11,6 +11,10 @@ func GetFilePathSuggestions(path, basePath string) []string {
 		return nil
 	}
 
+	if len(files) == 0 {
+		return []string{}
+	}
+
 	suggestions := make([]string, 0)
 
 	// For each file/directory in the current path
