@@ -26,7 +26,7 @@ func initConfig() config {
 		AutoGit:        checkTrue(getConfigVal(configMap, "auto_git", "false")),
 		SuppressStdout: checkTrue(getConfigVal(configMap, "suppress_stdout", "false")),
 		SuppressStderr: checkTrue(getConfigVal(configMap, "suppress_stderr", "false")),
-		Editor:         getConfigVal(configMap, "editor", "nvim"),
+		Editor:         getConfigVal(configMap, "editor", "vi"),
 	}
 }
 
@@ -42,6 +42,10 @@ func parseConfig(filePath string) map[string]string {
 	formattedOutput := strings.ReplaceAll(output, " ", "")
 
 	for _, line := range strings.Split(formattedOutput, "\n") {
+		if strings.HasPrefix(line, "#") { // comments
+			continue
+		}
+
 		entry := strings.Split(line, "=")
 		if len(entry) == 2 {
 			configMap[entry[0]] = entry[1]
