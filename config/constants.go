@@ -2,6 +2,7 @@ package config
 
 import (
 	"os"
+	"runtime"
 	"strings"
 
 	"github.com/silentFellow/cred-store/internal/utils/paths"
@@ -14,12 +15,15 @@ type constants struct {
 	StorePath string
 	PassPath  string
 	EnvPath   string
+	Os        string
 }
 
 var Constants constants = initConstants()
 
 func initConstants() constants {
-	home := getEnv("HOME", "/home")
+	// error won't occur, checks at cmd initiation
+	// so program returns if err occurs
+	home, _ := os.UserHomeDir()
 
 	gpgKey := ""
 	if file, err := os.ReadFile(paths.BuildPath(home, ".cred-store", ".gpg-id")); err == nil {
@@ -33,6 +37,7 @@ func initConstants() constants {
 		StorePath: paths.BuildPath(home, ".cred-store"),
 		PassPath:  paths.BuildPath(home, ".cred-store", "pass"),
 		EnvPath:   paths.BuildPath(home, ".cred-store", "env"),
+		Os:        runtime.GOOS,
 	}
 }
 

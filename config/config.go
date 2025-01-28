@@ -16,7 +16,7 @@ type config struct {
 
 var (
 	Config     config = initConfig()
-	ConfigPath string = paths.BuildPath(getEnv("HOME", "/home"), ".cred-store", "config")
+	ConfigPath string = paths.BuildPath(Constants.Home, ".cred-store", "config")
 )
 
 func initConfig() config {
@@ -26,7 +26,7 @@ func initConfig() config {
 		AutoGit:        checkTrue(getConfigVal(configMap, "auto_git", "false")),
 		SuppressStdout: checkTrue(getConfigVal(configMap, "suppress_stdout", "false")),
 		SuppressStderr: checkTrue(getConfigVal(configMap, "suppress_stderr", "false")),
-		Editor:         getConfigVal(configMap, "editor", "vi"),
+		Editor:         getConfigVal(configMap, "editor", getDefaultEditor()),
 	}
 }
 
@@ -65,4 +65,12 @@ func getConfigVal(configMap map[string]string, key, fallback string) string {
 
 func checkTrue(v string) bool {
 	return strings.ToLower(strings.TrimSpace(v)) == "true"
+}
+
+func getDefaultEditor() string {
+	if Constants.Os == "windows" {
+		return "notepad"
+	}
+
+	return "vi"
 }
