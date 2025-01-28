@@ -44,5 +44,9 @@ func ShowLogic(
 		return
 	}
 
-	fmt.Printf("%v\n", decryped)
+	if cmdType == "pass" {
+		fmt.Printf("%v\n", decryped)
+	} else {
+		fmt.Print(decryped)
+	}
 }
