@@ -51,11 +51,11 @@ func init() {
 			return fmt.Errorf("Invalid GPG key, try [cred init <gpg-key-id>]")
 		}
 
-		if !paths.CheckPathExists(config.Constants.EnvPath) {
-			err := os.MkdirAll(config.Constants.EnvPath, 0700)
+		if !paths.CheckPathExists(config.Constants.PassPath) {
+			err := os.MkdirAll(config.Constants.PassPath, 0700)
 			if err != nil {
 				cmd.SilenceUsage = true
-				return fmt.Errorf("Failed to create env store: %v", err)
+				return fmt.Errorf("Failed to create pass store: %v", err)
 			}
 		}
 
