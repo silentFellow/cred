@@ -101,7 +101,7 @@ func initStore(gpgid string) error {
 
 func init() {
 	initCmd.PersistentPostRunE = func(cmd *cobra.Command, args []string) error {
-		if config.Constants.Config.Values.AutoGit {
+		if config.Config.AutoGit {
 			return git.AutoGit(cmd)
 		}
 

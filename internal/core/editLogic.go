@@ -61,8 +61,8 @@ func EditLogic(
 
 	editorCmd := utils.SetCmd(
 		"",
-		utils.CmdIOConfig{IsStdout: true, IsStderr: true},
-		config.Constants.Editor,
+		utils.CmdIOConfig{IsStdin: true, IsStdout: true, IsStderr: true},
+		config.Config.Editor,
 		tempFile.Name(),
 	)
 

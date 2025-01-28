@@ -10,6 +10,7 @@ import (
 	"strings"
 
 	"github.com/atotto/clipboard"
+
 	"github.com/silentFellow/cred-store/config"
 )
 
@@ -117,10 +118,10 @@ func SetCmd(filepath string, IOConfig CmdIOConfig, args ...string) *exec.Cmd {
 	if IOConfig.IsStdin {
 		cmd.Stdin = os.Stdin
 	}
-	if !config.Constants.Config.Values.SuppressStdout && IOConfig.IsStdout {
+	if !config.Config.SuppressStdout && IOConfig.IsStdout {
 		cmd.Stdout = os.Stdout
 	}
-	if !config.Constants.Config.Values.SuppressStdout && IOConfig.IsStderr {
+	if !config.Config.SuppressStderr && IOConfig.IsStderr {
 		cmd.Stderr = os.Stderr
 	}
 	return cmd
