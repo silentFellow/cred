@@ -3,7 +3,6 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"path/filepath"
 
 	"github.com/spf13/cobra"
 
@@ -76,6 +75,7 @@ func init() {
 		pass.ShowCmd,
 		pass.CopyCmd,
 		pass.EditCmd,
+		pass.MkdirCmd,
 		pass.LsCmd,
 		pass.RmCmd,
 		pass.MvCmd,
@@ -84,9 +84,7 @@ func init() {
 
 	for _, cmd := range passCmds {
 		cmd.ValidArgsFunction = func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
-			complete := filepath.Join(config.Constants.PassPath, toComplete)
 			suggestions := completions.GetFilePathSuggestions(
-				complete,
 				config.Constants.PassPath,
 			)
 
