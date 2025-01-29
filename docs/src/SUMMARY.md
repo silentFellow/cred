@@ -4,6 +4,7 @@
 - [Setup](cred_quick-setup.md)
   - [Quick Setup](cred_quick-setup.md)
   - [Manual Setup](cred_init.md)
+  - [Migration](cred_migrate.md)
 - [Configuration](config.md)
 - [CLI Reference](cred.md)
   - [Environment Variables (`cred env`)](cred_env.md)
@@ -23,10 +24,6 @@
     - [Move](cred_pass_mv.md)
     - [Remove](cred_pass_rm.md)
     - [Show](cred_pass_show.md)
-  - [Migration](cred_migrate.md)
-
-<!-- Hidden: Completion Scripts (Optional) -->
-<!-- Comment these out if you don’t want them in mdBook -->
 
 - [Shell Completions](cred_completion.md)
   - [Bash](cred_completion_bash.md)
