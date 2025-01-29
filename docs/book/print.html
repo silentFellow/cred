@@ -215,6 +215,22 @@ and managing credentials securely. Note that you must provide a GPG key as an ar
 <ul>
 <li><a href="cred.html">cred</a>	 - A password and environment variables manager</li>
 </ul>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="cred-migrate"><a class="header" href="#cred-migrate">cred migrate</a></h2>
+<p>Migrate the credential store to a new GPG key</p>
+<h3 id="synopsis-3"><a class="header" href="#synopsis-3">Synopsis</a></h3>
+<p>The migrate command allows you to re-encrypt your credential store with a new GPG key.
+This operation will create a backup of your current store and re-encrypt all files with the new key.</p>
+<pre><code>Example Usage: cred migrate &lt;new-gpg-key-id&gt;
+</code></pre>
+<pre><code>cred migrate [flags]
+</code></pre>
+<h3 id="options-3"><a class="header" href="#options-3">Options</a></h3>
+<pre><code>  -h, --help   help for migrate
+</code></pre>
+<h3 id="see-also-3"><a class="header" href="#see-also-3">SEE ALSO</a></h3>
+<ul>
+<li><a href="cred.html">cred</a>	 - A password and environment variables manager</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="example-configuration-file-for-your-go-cli"><a class="header" href="#example-configuration-file-for-your-go-cli">Example Configuration File for Your Go CLI</a></h1>
 <h2 id="location-cred-storeconfig"><a class="header" href="#location-cred-storeconfig">Location: <code>cred-store/config</code></a></h2>
 <h2 id="syntax-key--value"><a class="header" href="#syntax-key--value">Syntax: <code>key = value</code></a></h2>
@@ -243,7 +259,7 @@ editor = vim
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred"><a class="header" href="#cred">cred</a></h2>
 <p>A password and environment variables manager</p>
-<h3 id="synopsis-3"><a class="header" href="#synopsis-3">Synopsis</a></h3>
+<h3 id="synopsis-4"><a class="header" href="#synopsis-4">Synopsis</a></h3>
 <p>Cred is a powerful CLI tool built in Go for managing passwords and environment variables.
 It uses GPG encryption to securely store and manage sensitive information.</p>
 <p>Examples and usage:</p>
@@ -254,10 +270,10 @@ It uses GPG encryption to securely store and manage sensitive information.</p>
 <li>Retrieve a credentials: cred {pass/env} copy <file-name></li>
 <li>List all stored credentials: cred {pass/env} list</li>
 </ul>
-<h3 id="options-3"><a class="header" href="#options-3">Options</a></h3>
+<h3 id="options-4"><a class="header" href="#options-4">Options</a></h3>
 <pre><code>  -h, --help   help for cred
 </code></pre>
-<h3 id="see-also-3"><a class="header" href="#see-also-3">SEE ALSO</a></h3>
+<h3 id="see-also-4"><a class="header" href="#see-also-4">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_completion.html">cred completion</a>	 - Generate the autocompletion script for the specified shell</li>
 <li><a href="cred_env.html">cred env</a>	 - A command to manage env-variables</li>
@@ -268,7 +284,7 @@ It uses GPG encryption to securely store and manage sensitive information.</p>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-env"><a class="header" href="#cred-env">cred env</a></h2>
 <p>A command to manage env-variables</p>
-<h3 id="synopsis-4"><a class="header" href="#synopsis-4">Synopsis</a></h3>
+<h3 id="synopsis-5"><a class="header" href="#synopsis-5">Synopsis</a></h3>
 <p>The env command allows you to manage your env-variables efficiently.
 It provides functionalities to create, update, and delete env-variables.</p>
 <p>Examples:</p>
@@ -279,10 +295,10 @@ It provides functionalities to create, update, and delete env-variables.</p>
 </ul>
 <pre><code>cred env [flags]
 </code></pre>
-<h3 id="options-4"><a class="header" href="#options-4">Options</a></h3>
+<h3 id="options-5"><a class="header" href="#options-5">Options</a></h3>
 <pre><code>  -h, --help   help for env
 </code></pre>
-<h3 id="see-also-4"><a class="header" href="#see-also-4">SEE ALSO</a></h3>
+<h3 id="see-also-5"><a class="header" href="#see-also-5">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred.html">cred</a>	 - A password and environment variables manager</li>
 <li><a href="cred_env_copy.html">cred env copy</a>	 - Copies the stored env to system clipboard</li>
@@ -298,38 +314,38 @@ It provides functionalities to create, update, and delete env-variables.</p>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-env-copy"><a class="header" href="#cred-env-copy">cred env copy</a></h2>
 <p>Copies the stored env to system clipboard</p>
-<h3 id="synopsis-5"><a class="header" href="#synopsis-5">Synopsis</a></h3>
+<h3 id="synopsis-6"><a class="header" href="#synopsis-6">Synopsis</a></h3>
 <p>The show command retrieves and copies the stored env for a given file.
 Usage examples:</p>
 <p>cred env copy <filepath></p>
 <pre><code>cred env copy [flags]
 </code></pre>
-<h3 id="options-5"><a class="header" href="#options-5">Options</a></h3>
+<h3 id="options-6"><a class="header" href="#options-6">Options</a></h3>
 <pre><code>  -h, --help   help for copy
 </code></pre>
-<h3 id="see-also-5"><a class="header" href="#see-also-5">SEE ALSO</a></h3>
+<h3 id="see-also-6"><a class="header" href="#see-also-6">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_env.html">cred env</a>	 - A command to manage env-variables</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-env-edit"><a class="header" href="#cred-env-edit">cred env edit</a></h2>
 <p>Edit a env entry</p>
-<h3 id="synopsis-6"><a class="header" href="#synopsis-6">Synopsis</a></h3>
+<h3 id="synopsis-7"><a class="header" href="#synopsis-7">Synopsis</a></h3>
 <p>Edit a env entry in the env store.</p>
 <p>This command allows you to edit an existing env entry in your env store.
 Usage:
 cred env edit <filepath></p>
 <pre><code>cred env edit [flags]
 </code></pre>
-<h3 id="options-6"><a class="header" href="#options-6">Options</a></h3>
+<h3 id="options-7"><a class="header" href="#options-7">Options</a></h3>
 <pre><code>  -h, --help   help for edit
 </code></pre>
-<h3 id="see-also-6"><a class="header" href="#see-also-6">SEE ALSO</a></h3>
+<h3 id="see-also-7"><a class="header" href="#see-also-7">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_env.html">cred env</a>	 - A command to manage env-variables</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-env-insert"><a class="header" href="#cred-env-insert">cred env insert</a></h2>
 <p>Insert a new env entry</p>
-<h3 id="synopsis-7"><a class="header" href="#synopsis-7">Synopsis</a></h3>
+<h3 id="synopsis-8"><a class="header" href="#synopsis-8">Synopsis</a></h3>
 <p>The insert command allows you to add a new env entry to the env store.
 You will be prompted to enter and confirm the env, which will be stored securely.
 If the entry already exists, you will be asked whether you want to overwrite it.</p>
@@ -337,79 +353,79 @@ If the entry already exists, you will be asked whether you want to overwrite it.
 cred env insert <filepath></p>
 <pre><code>cred env insert [flags]
 </code></pre>
-<h3 id="options-7"><a class="header" href="#options-7">Options</a></h3>
+<h3 id="options-8"><a class="header" href="#options-8">Options</a></h3>
 <pre><code>  -h, --help   help for insert
 </code></pre>
-<h3 id="see-also-7"><a class="header" href="#see-also-7">SEE ALSO</a></h3>
+<h3 id="see-also-8"><a class="header" href="#see-also-8">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_env.html">cred env</a>	 - A command to manage env-variables</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-env-ls"><a class="header" href="#cred-env-ls">cred env ls</a></h2>
 <p>List files and directories</p>
-<h3 id="synopsis-8"><a class="header" href="#synopsis-8">Synopsis</a></h3>
+<h3 id="synopsis-9"><a class="header" href="#synopsis-9">Synopsis</a></h3>
 <p>The ls command allows you to list files and directories.
 It uses the 'ls' command to display the contents of the current directory.</p>
 <p>Examples:
 cred env ls <path></p>
 <pre><code>cred env ls [flags]
 </code></pre>
-<h3 id="options-8"><a class="header" href="#options-8">Options</a></h3>
+<h3 id="options-9"><a class="header" href="#options-9">Options</a></h3>
 <pre><code>  -h, --help   help for ls
 </code></pre>
-<h3 id="see-also-8"><a class="header" href="#see-also-8">SEE ALSO</a></h3>
+<h3 id="see-also-9"><a class="header" href="#see-also-9">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_env.html">cred env</a>	 - A command to manage env-variables</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-env-mv"><a class="header" href="#cred-env-mv">cred env mv</a></h2>
 <p>Move files and directories</p>
-<h3 id="synopsis-9"><a class="header" href="#synopsis-9">Synopsis</a></h3>
+<h3 id="synopsis-10"><a class="header" href="#synopsis-10">Synopsis</a></h3>
 <p>The mv command allows you to move files and directories.
 It uses the 'mv' command to move the specified file or directory to a new location.</p>
 <p>Examples:
 cred env mv <source> <destination></p>
 <pre><code>cred env mv [flags]
 </code></pre>
-<h3 id="options-9"><a class="header" href="#options-9">Options</a></h3>
+<h3 id="options-10"><a class="header" href="#options-10">Options</a></h3>
 <pre><code>  -h, --help   help for mv
 </code></pre>
-<h3 id="see-also-9"><a class="header" href="#see-also-9">SEE ALSO</a></h3>
+<h3 id="see-also-10"><a class="header" href="#see-also-10">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_env.html">cred env</a>	 - A command to manage env-variables</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-env-rm"><a class="header" href="#cred-env-rm">cred env rm</a></h2>
 <p>Remove files and directories</p>
-<h3 id="synopsis-10"><a class="header" href="#synopsis-10">Synopsis</a></h3>
+<h3 id="synopsis-11"><a class="header" href="#synopsis-11">Synopsis</a></h3>
 <p>The rm command allows you to remove files and directories recursively.
 It uses the 'rm' command to delete the specified path.</p>
 <p>Examples:
 cred env rm <path></p>
 <pre><code>cred env rm [flags]
 </code></pre>
-<h3 id="options-10"><a class="header" href="#options-10">Options</a></h3>
-<pre><code>  -h, --help   help for rm
-</code></pre>
-<h3 id="see-also-10"><a class="header" href="#see-also-10">SEE ALSO</a></h3>
-<ul>
-<li><a href="cred_env.html">cred env</a>	 - A command to manage env-variables</li>
-</ul>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="cred-env-show"><a class="header" href="#cred-env-show">cred env show</a></h2>
-<p>Displays the stored env</p>
-<h3 id="synopsis-11"><a class="header" href="#synopsis-11">Synopsis</a></h3>
-<p>The show command retrieves and displays the stored env for a given file.
-Usage examples:</p>
-<p>cred env show <filename></p>
-<pre><code>cred env show [flags]
-</code></pre>
 <h3 id="options-11"><a class="header" href="#options-11">Options</a></h3>
-<pre><code>  -h, --help   help for show
+<pre><code>  -h, --help   help for rm
 </code></pre>
 <h3 id="see-also-11"><a class="header" href="#see-also-11">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_env.html">cred env</a>	 - A command to manage env-variables</li>
 </ul>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="cred-env-show"><a class="header" href="#cred-env-show">cred env show</a></h2>
+<p>Displays the stored env</p>
+<h3 id="synopsis-12"><a class="header" href="#synopsis-12">Synopsis</a></h3>
+<p>The show command retrieves and displays the stored env for a given file.
+Usage examples:</p>
+<p>cred env show <filename></p>
+<pre><code>cred env show [flags]
+</code></pre>
+<h3 id="options-12"><a class="header" href="#options-12">Options</a></h3>
+<pre><code>  -h, --help   help for show
+</code></pre>
+<h3 id="see-also-12"><a class="header" href="#see-also-12">SEE ALSO</a></h3>
+<ul>
+<li><a href="cred_env.html">cred env</a>	 - A command to manage env-variables</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-pass"><a class="header" href="#cred-pass">cred pass</a></h2>
 <p>A command to manage passwords</p>
-<h3 id="synopsis-12"><a class="header" href="#synopsis-12">Synopsis</a></h3>
+<h3 id="synopsis-13"><a class="header" href="#synopsis-13">Synopsis</a></h3>
 <p>The pass command allows you to manage your passwords efficiently.
 It provides functionalities to create, update, and delete passwords.</p>
 <p>Examples:</p>
@@ -420,10 +436,10 @@ It provides functionalities to create, update, and delete passwords.</p>
 </ul>
 <pre><code>cred pass [flags]
 </code></pre>
-<h3 id="options-12"><a class="header" href="#options-12">Options</a></h3>
+<h3 id="options-13"><a class="header" href="#options-13">Options</a></h3>
 <pre><code>  -h, --help   help for pass
 </code></pre>
-<h3 id="see-also-12"><a class="header" href="#see-also-12">SEE ALSO</a></h3>
+<h3 id="see-also-13"><a class="header" href="#see-also-13">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred.html">cred</a>	 - A password and environment variables manager</li>
 <li><a href="cred_pass_copy.html">cred pass copy</a>	 - Copies the stored password to system clipboard</li>
@@ -438,38 +454,38 @@ It provides functionalities to create, update, and delete passwords.</p>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-pass-copy"><a class="header" href="#cred-pass-copy">cred pass copy</a></h2>
 <p>Copies the stored password to system clipboard</p>
-<h3 id="synopsis-13"><a class="header" href="#synopsis-13">Synopsis</a></h3>
+<h3 id="synopsis-14"><a class="header" href="#synopsis-14">Synopsis</a></h3>
 <p>The show command retrieves and copies the stored password for a given account,
 Usage examples:</p>
 <p>cred pass show <filepath></p>
 <pre><code>cred pass copy [flags]
 </code></pre>
-<h3 id="options-13"><a class="header" href="#options-13">Options</a></h3>
+<h3 id="options-14"><a class="header" href="#options-14">Options</a></h3>
 <pre><code>  -h, --help   help for copy
 </code></pre>
-<h3 id="see-also-13"><a class="header" href="#see-also-13">SEE ALSO</a></h3>
+<h3 id="see-also-14"><a class="header" href="#see-also-14">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_pass.html">cred pass</a>	 - A command to manage passwords</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-pass-edit"><a class="header" href="#cred-pass-edit">cred pass edit</a></h2>
 <p>Edit a password entry</p>
-<h3 id="synopsis-14"><a class="header" href="#synopsis-14">Synopsis</a></h3>
+<h3 id="synopsis-15"><a class="header" href="#synopsis-15">Synopsis</a></h3>
 <p>Edit a password entry in the password store.</p>
 <p>This command allows you to edit an existing password entry in your password store.
 Usage:
 cred pass edit <filepath></p>
 <pre><code>cred pass edit [flags]
 </code></pre>
-<h3 id="options-14"><a class="header" href="#options-14">Options</a></h3>
+<h3 id="options-15"><a class="header" href="#options-15">Options</a></h3>
 <pre><code>  -h, --help   help for edit
 </code></pre>
-<h3 id="see-also-14"><a class="header" href="#see-also-14">SEE ALSO</a></h3>
+<h3 id="see-also-15"><a class="header" href="#see-also-15">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_pass.html">cred pass</a>	 - A command to manage passwords</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-pass-generate"><a class="header" href="#cred-pass-generate">cred pass generate</a></h2>
 <p>Generate a new password and store it securely</p>
-<h3 id="synopsis-15"><a class="header" href="#synopsis-15">Synopsis</a></h3>
+<h3 id="synopsis-16"><a class="header" href="#synopsis-16">Synopsis</a></h3>
 <p>The generate command creates a new password of specified length and stores it securely in the password store.
 You can specify the length of the password using the -l flag. If the file already exists, you will be prompted to overwrite it.</p>
 <p>Examples:
@@ -477,7 +493,7 @@ pass generate mypassword -l 16
 pass generate anotherpassword -l 24</p>
 <pre><code>cred pass generate [flags]
 </code></pre>
-<h3 id="options-15"><a class="header" href="#options-15">Options</a></h3>
+<h3 id="options-16"><a class="header" href="#options-16">Options</a></h3>
 <pre><code>      --allow-digit     should allow digits in the password (default true)
       --allow-lower     should allow lower-case characters in the password (default true)
       --allow-special   should allow special characters in the password (default true)
@@ -485,13 +501,13 @@ pass generate anotherpassword -l 24</p>
   -h, --help            help for generate
   -l, --length int      length of the generated password (default 12)
 </code></pre>
-<h3 id="see-also-15"><a class="header" href="#see-also-15">SEE ALSO</a></h3>
+<h3 id="see-also-16"><a class="header" href="#see-also-16">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_pass.html">cred pass</a>	 - A command to manage passwords</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-pass-insert"><a class="header" href="#cred-pass-insert">cred pass insert</a></h2>
 <p>Insert a new password entry</p>
-<h3 id="synopsis-16"><a class="header" href="#synopsis-16">Synopsis</a></h3>
+<h3 id="synopsis-17"><a class="header" href="#synopsis-17">Synopsis</a></h3>
 <p>The insert command allows you to add a new password entry to the password store.
 You will be prompted to enter and confirm the password, which will be stored securely.
 If the entry already exists, you will be asked whether you want to overwrite it.</p>
@@ -499,91 +515,75 @@ If the entry already exists, you will be asked whether you want to overwrite it.
 pass insert <filepath></p>
 <pre><code>cred pass insert [flags]
 </code></pre>
-<h3 id="options-16"><a class="header" href="#options-16">Options</a></h3>
+<h3 id="options-17"><a class="header" href="#options-17">Options</a></h3>
 <pre><code>  -h, --help   help for insert
 </code></pre>
-<h3 id="see-also-16"><a class="header" href="#see-also-16">SEE ALSO</a></h3>
+<h3 id="see-also-17"><a class="header" href="#see-also-17">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_pass.html">cred pass</a>	 - A command to manage passwords</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-pass-ls"><a class="header" href="#cred-pass-ls">cred pass ls</a></h2>
 <p>List files and directories</p>
-<h3 id="synopsis-17"><a class="header" href="#synopsis-17">Synopsis</a></h3>
+<h3 id="synopsis-18"><a class="header" href="#synopsis-18">Synopsis</a></h3>
 <p>The ls command allows you to list files and directories.
 It uses the 'ls' command to display the contents of the current directory.</p>
 <p>Examples:
 cred pass ls <path></p>
 <pre><code>cred pass ls [flags]
 </code></pre>
-<h3 id="options-17"><a class="header" href="#options-17">Options</a></h3>
+<h3 id="options-18"><a class="header" href="#options-18">Options</a></h3>
 <pre><code>  -h, --help   help for ls
 </code></pre>
-<h3 id="see-also-17"><a class="header" href="#see-also-17">SEE ALSO</a></h3>
+<h3 id="see-also-18"><a class="header" href="#see-also-18">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_pass.html">cred pass</a>	 - A command to manage passwords</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-pass-mv"><a class="header" href="#cred-pass-mv">cred pass mv</a></h2>
 <p>Move files and directories</p>
-<h3 id="synopsis-18"><a class="header" href="#synopsis-18">Synopsis</a></h3>
+<h3 id="synopsis-19"><a class="header" href="#synopsis-19">Synopsis</a></h3>
 <p>The mv command allows you to move files and directories.
 It uses the 'mv' command to move the specified file or directory to a new location.</p>
 <p>Examples:
 cred pass mv <source> <destination></p>
 <pre><code>cred pass mv [flags]
 </code></pre>
-<h3 id="options-18"><a class="header" href="#options-18">Options</a></h3>
+<h3 id="options-19"><a class="header" href="#options-19">Options</a></h3>
 <pre><code>  -h, --help   help for mv
 </code></pre>
-<h3 id="see-also-18"><a class="header" href="#see-also-18">SEE ALSO</a></h3>
+<h3 id="see-also-19"><a class="header" href="#see-also-19">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_pass.html">cred pass</a>	 - A command to manage passwords</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-pass-rm"><a class="header" href="#cred-pass-rm">cred pass rm</a></h2>
 <p>Remove files and directories</p>
-<h3 id="synopsis-19"><a class="header" href="#synopsis-19">Synopsis</a></h3>
+<h3 id="synopsis-20"><a class="header" href="#synopsis-20">Synopsis</a></h3>
 <p>The rm command allows you to remove files and directories recursively.
 It uses the 'rm' command to delete the specified path.</p>
 <p>Examples:
 cred pass rm <path></p>
 <pre><code>cred pass rm [flags]
 </code></pre>
-<h3 id="options-19"><a class="header" href="#options-19">Options</a></h3>
-<pre><code>  -h, --help   help for rm
-</code></pre>
-<h3 id="see-also-19"><a class="header" href="#see-also-19">SEE ALSO</a></h3>
-<ul>
-<li><a href="cred_pass.html">cred pass</a>	 - A command to manage passwords</li>
-</ul>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="cred-pass-show"><a class="header" href="#cred-pass-show">cred pass show</a></h2>
-<p>Displays the stored password</p>
-<h3 id="synopsis-20"><a class="header" href="#synopsis-20">Synopsis</a></h3>
-<p>The show command retrieves and displays the stored password for a given account.
-Usage examples:</p>
-<p>cred pass show &lt;account_path&gt;</p>
-<pre><code>cred pass show [flags]
-</code></pre>
 <h3 id="options-20"><a class="header" href="#options-20">Options</a></h3>
-<pre><code>  -h, --help   help for show
+<pre><code>  -h, --help   help for rm
 </code></pre>
 <h3 id="see-also-20"><a class="header" href="#see-also-20">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_pass.html">cred pass</a>	 - A command to manage passwords</li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="cred-migrate"><a class="header" href="#cred-migrate">cred migrate</a></h2>
-<p>Migrate the credential store to a new GPG key</p>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="cred-pass-show"><a class="header" href="#cred-pass-show">cred pass show</a></h2>
+<p>Displays the stored password</p>
 <h3 id="synopsis-21"><a class="header" href="#synopsis-21">Synopsis</a></h3>
-<p>The migrate command allows you to re-encrypt your credential store with a new GPG key.
-This operation will create a backup of your current store and re-encrypt all files with the new key.</p>
-<pre><code>Example Usage: cred migrate &lt;new-gpg-key-id&gt;
-</code></pre>
-<pre><code>cred migrate [flags]
+<p>The show command retrieves and displays the stored password for a given account.
+Usage examples:</p>
+<p>cred pass show &lt;account_path&gt;</p>
+<pre><code>cred pass show [flags]
 </code></pre>
 <h3 id="options-21"><a class="header" href="#options-21">Options</a></h3>
-<pre><code>  -h, --help   help for migrate
+<pre><code>  -h, --help   help for show
 </code></pre>
 <h3 id="see-also-21"><a class="header" href="#see-also-21">SEE ALSO</a></h3>
 <ul>
-<li><a href="cred.html">cred</a>	 - A password and environment variables manager</li>
+<li><a href="cred_pass.html">cred pass</a>	 - A command to manage passwords</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-completion"><a class="header" href="#cred-completion">cred completion</a></h2>
 <p>Generate the autocompletion script for the specified shell</p>
