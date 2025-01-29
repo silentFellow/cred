@@ -5,37 +5,36 @@ import (
 	"path/filepath"
 )
 
-func GetFilePathSuggestions(path, basePath string) []string {
-	files, err := os.ReadDir(path)
-	if err != nil {
-		return nil
-	}
+// GetFilePathSuggestions retrieves all file paths and directories for autocompletion
+func GetFilePathSuggestions(basePath string) []string {
+	var suggestions []string
 
-	if len(files) == 0 {
-		return []string{}
-	}
+	// Walk through all files and directories under basePath
+	err := filepath.Walk(basePath, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return nil
+		}
 
-	suggestions := make([]string, 0)
+		// Convert full path to relative path
+		relativePath, _ := filepath.Rel(basePath, path)
 
-	// For each file/directory in the current path
-	for _, file := range files {
-		// Construct the full relative path (e.g., "hi/email.gpg")
-		fullPath := filepath.Join(path, file.Name())
+		// Skip the base path itself
+		if relativePath == "." {
+			return nil
+		}
 
-		// If it's a directory, append it with '/' at the end
-		if file.IsDir() {
-			// Recursively get suggestions from the subdirectory
-			subSuggestions := GetFilePathSuggestions(fullPath, basePath)
-
-			// Append the subdirectory paths, using full path
-			for _, subSuggestion := range subSuggestions {
-				suggestions = append(suggestions, subSuggestion)
-			}
+		// Append directories with a trailing slash
+		if info.IsDir() {
+			suggestions = append(suggestions, relativePath+"/")
 		} else {
-			// If it's a file, add the full relative path to the suggestions
-			relativePath, _ := filepath.Rel(basePath, fullPath)
 			suggestions = append(suggestions, relativePath)
 		}
+
+		return nil
+	})
+	// If an error occurs during traversal, return an empty slice
+	if err != nil {
+		return nil
 	}
 
 	return suggestions

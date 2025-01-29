@@ -3,7 +3,6 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"path/filepath"
 
 	"github.com/spf13/cobra"
 
@@ -84,9 +83,7 @@ func init() {
 
 	for _, cmd := range envCmds {
 		cmd.ValidArgsFunction = func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
-			complete := filepath.Join(config.Constants.EnvPath, toComplete)
 			suggestions := completions.GetFilePathSuggestions(
-				complete,
 				config.Constants.EnvPath,
 			)
 
