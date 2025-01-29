@@ -33,7 +33,7 @@ Examples:
 		if paths.CheckPathExists(passPath) {
 			err := utils.PrintTree(passPath, "", true)
 			if err != nil {
-				fmt.Printf("Failed to parse password store: %v\n", err)
+				fmt.Println("failed to parse password store: ", err)
 			}
 		}
 	},
@@ -48,14 +48,14 @@ func init() {
 
 		if !gpgcrypt.CheckKeyValidity(config.Constants.GpgKey) {
 			cmd.SilenceUsage = true
-			return fmt.Errorf("Invalid GPG key, try [cred init <gpg-key-id>]")
+			return fmt.Errorf("invalid GPG key, try [cred init <gpg-key-id>]")
 		}
 
 		if !paths.CheckPathExists(config.Constants.PassPath) {
 			err := os.MkdirAll(config.Constants.PassPath, 0700)
 			if err != nil {
 				cmd.SilenceUsage = true
-				return fmt.Errorf("Failed to create pass store: %v", err)
+				return fmt.Errorf("failed to create pass store: %v", err)
 			}
 		}
 

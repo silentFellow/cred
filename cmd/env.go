@@ -33,7 +33,7 @@ Examples:
 		if paths.CheckPathExists(envPath) {
 			err := utils.PrintTree(envPath, "", true)
 			if err != nil {
-				fmt.Printf("Failed to parse env store: %v\n", err)
+				fmt.Printf("failed to parse env store: %v\n", err)
 			}
 		}
 	},
@@ -43,19 +43,19 @@ func init() {
 	envCmd.PersistentPreRunE = func(cmd *cobra.Command, args []string) error {
 		if !gpgcrypt.CheckKeyExists() {
 			cmd.SilenceUsage = true
-			return fmt.Errorf("GPG key not found, try [cred init <gpg-key-id>]")
+			return fmt.Errorf("gpg key not found, try [cred init <gpg-key-id>]")
 		}
 
 		if !gpgcrypt.CheckKeyValidity(config.Constants.GpgKey) {
 			cmd.SilenceUsage = true
-			return fmt.Errorf("Invalid GPG key, try [cred init <gpg-key-id>]")
+			return fmt.Errorf("invalid gpg key, try [cred init <gpg-key-id>]")
 		}
 
 		if !paths.CheckPathExists(config.Constants.EnvPath) {
 			err := os.MkdirAll(config.Constants.EnvPath, 0700)
 			if err != nil {
 				cmd.SilenceUsage = true
-				return fmt.Errorf("Failed to create env store: %v", err)
+				return fmt.Errorf("failed to create env store: %v", err)
 			}
 		}
 

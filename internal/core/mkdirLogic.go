@@ -22,7 +22,7 @@ func MkdirLogic(
 	}
 
 	if len(args) < 1 {
-		fmt.Printf("Invalid usage: %v\n", usage)
+		fmt.Println("invalid usage, expected: ", usage)
 		return
 	}
 
@@ -30,10 +30,10 @@ func MkdirLogic(
 		fullPath := paths.BuildPath(basePath, path)
 
 		if err := os.MkdirAll(fullPath, 0777); err != nil {
-			fmt.Printf("Error created %v: %v\n", fullPath, err)
+			fmt.Printf("failed to create directory %v: %v\n", fullPath, err)
 			continue
 		}
 
-		fmt.Printf("Succesfully created %v\n", path)
+		fmt.Printf("%v created successfully\n", path)
 	}
 }

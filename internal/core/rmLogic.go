@@ -22,7 +22,7 @@ func RmLogic(
 	}
 
 	if len(args) < 1 {
-		fmt.Printf("Invalid usage: %v\n", usage)
+		fmt.Println("invalid usage, expected: ", usage)
 		return
 	}
 
@@ -35,10 +35,10 @@ func RmLogic(
 		}
 
 		if err := os.RemoveAll(fullPath); err != nil {
-			fmt.Printf("Error removing %v: %v\n", fullPath, err)
+			fmt.Printf("failed to remove %v: %v\n", fullPath, err)
 			continue
 		}
 
-		fmt.Printf("Succesfully deleted %v\n", path)
+		fmt.Printf("%v deleted successfully\n", path)
 	}
 }

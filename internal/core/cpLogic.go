@@ -22,7 +22,7 @@ func CpLogic(
 	}
 
 	if len(args) < 2 {
-		fmt.Printf("Invalid usage: %v\n", usage)
+		fmt.Println("invalid usage, expected: ", usage)
 		return
 	}
 
@@ -33,10 +33,10 @@ func CpLogic(
 	for _, src := range sources {
 		srcPath := paths.BuildPath(basePath, src)
 		if err := fscopy.Copy(srcPath, destination); err != nil {
-			fmt.Printf("Error copying %v: %v\n", srcPath, err)
+			fmt.Printf("copying %v failed: %v\n", srcPath, err)
 			continue
 		}
 
-		fmt.Printf("Succesfully copied from %v to %v\n", srcPath, destination)
+		fmt.Printf("file copied from %v to %v\n", src, destination)
 	}
 }

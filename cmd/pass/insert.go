@@ -28,10 +28,10 @@ Examples:
 
 		passStore := config.Constants.PassPath
 		if len(args) < 1 {
-			fmt.Printf("Invalid usage: %v\n", usage)
+			fmt.Println("invalid usage, expected: ", usage)
 			return
 		}
-		path := args[0]+".gpg"
+		path := args[0] + ".gpg"
 		fullPath := paths.BuildPath(passStore, path)
 
 		if paths.CheckPathExists(fullPath) {
@@ -47,35 +47,35 @@ Examples:
 		fmt.Print("Enter password (input will be hidden): ")
 		bytePassword, err := term.ReadPassword(int(syscall.Stdin))
 		if err != nil {
-			fmt.Println("Failed to read password: ", err)
+			fmt.Println("failed to read password: ", err)
 		}
 		fmt.Println()
 
-		fmt.Print("Enter confirm password (input will be hidden): ")
+		fmt.Print("enter confirm password (input will be hidden): ")
 		byteConfirmPassword, err := term.ReadPassword(int(syscall.Stdin))
 		if err != nil {
-			fmt.Println("Failed to read confirm password: ", err)
+			fmt.Println("failed to read confirm password: ", err)
 		}
 		fmt.Println()
 
 		password, confirmPassword := string(bytePassword), string(byteConfirmPassword)
 
 		if password == "" || (password != confirmPassword) {
-			fmt.Println("Password don't match (or) Invalid password")
+			fmt.Println("passwords do not match or invalid input")
 			return
 		}
 
 		if paths.CheckPathExists(fullPath) {
 			if err := os.RemoveAll(fullPath); err != nil {
-				fmt.Println("Failed to remove the file: ", err)
+				fmt.Println("failed to remove the file: ", err)
 				return
 			}
 		}
 
 		if err := gpgcrypt.AddFile(fullPath, password, true); err != nil {
-			fmt.Println("Failed to insert password: ", err)
+			fmt.Println("failed to insert password: ", err)
 			return
 		}
-		fmt.Println("Password inserted successfully, copied to clipboard")
+		fmt.Println("password inserted successfully")
 	},
 }

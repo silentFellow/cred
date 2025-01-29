@@ -33,7 +33,7 @@ func Execute() {
 	rootCmd.DisableAutoGenTag = true
 	if buildDocs {
 		if err := doc.GenMarkdownTree(rootCmd, "./docs/src"); err != nil {
-			log.Fatal("Failed to generate docs", err)
+			log.Fatalln("failed to generate docs: ", err)
 		}
 		log.Println("Documentation generated at ./docs/src")
 	}

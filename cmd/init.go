@@ -24,19 +24,19 @@ and managing credentials securely. Note that you must provide a GPG key as an ar
 		usage := "cred init <gpg-key-id>"
 
 		if len(args) < 1 {
-			fmt.Printf("Invalid usage: %v\n", usage)
+			fmt.Printf("invalid usage: %v\n", usage)
 			return
 		}
 
 		gpgKey := args[0]
 		if !gpgcrypt.CheckKeyValidity(gpgKey) {
-			fmt.Printf("Invalid GPG key, %v\n", usage)
+			fmt.Printf("invalid GPG key, %v\n", usage)
 			return
 		}
 
 		gpgKey, err := gpgcrypt.GetKeyFpr(gpgKey)
 		if err != nil {
-			fmt.Println("Failed to get the key: ", err)
+			fmt.Println("failed to get the key:", err)
 			return
 		}
 
@@ -45,7 +45,7 @@ and managing credentials securely. Note that you must provide a GPG key as an ar
 		// new store
 		if !paths.CheckPathExists(storePath) {
 			if err := initStore(gpgKey); err != nil {
-				fmt.Println("Failed to initiate store, ", err)
+				fmt.Println("failed to initiate store:", err)
 			}
 			return
 		}
@@ -60,11 +60,11 @@ and managing credentials securely. Note that you must provide a GPG key as an ar
 
 		if strings.ToLower(choice) == "y" {
 			if err := os.RemoveAll(storePath); err != nil {
-				fmt.Println("Failed to remove store, ", err)
+				fmt.Println("failed to remove store:", err)
 			}
 
 			if err := initStore(gpgKey); err != nil {
-				fmt.Println("Failed to initiate store, ", err)
+				fmt.Println("failed to initiate store:", err)
 			}
 		}
 	},

@@ -31,7 +31,8 @@ func init() {
 			return fmt.Errorf("git is not installed")
 		}
 
-		if !(strings.ToLower(cmd.Name()) == "init") && !git.IsValidGitPath(config.Constants.StorePath) {
+		if !(strings.ToLower(cmd.Name()) == "init") &&
+			!git.IsValidGitPath(config.Constants.StorePath) {
 			var choice string
 			fmt.Print(
 				"github repository not found in the store path. Do you want to initialize a new repository? (y/n): ",
@@ -58,7 +59,7 @@ func init() {
 			Use:                cmd,
 			Short:              desc,
 			DisableFlagParsing: true, // to avoid parsing flags for git commands
-			Hidden: true,
+			Hidden:             true,
 			Run: func(cmd *cobra.Command, args []string) {
 				cmdString := append([]string{"git", cmd.Use}, args...)
 				execCmd := utils.SetCmd(
@@ -68,7 +69,7 @@ func init() {
 				)
 
 				if err := execCmd.Run(); err != nil {
-					fmt.Fprintf(os.Stderr, "Error running git command: %v\n", err)
+					fmt.Fprintf(os.Stderr, "running git command failed: %v\n", err)
 					os.Exit(1)
 				}
 			},

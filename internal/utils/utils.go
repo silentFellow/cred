@@ -20,7 +20,7 @@ func CopyToClipboard(text string, copyOnlyFirst bool) error {
 	}
 
 	if err := clipboard.WriteAll(text); err != nil {
-		return fmt.Errorf("Failed to copy to clipboard: %w", err)
+		return err
 	}
 
 	return nil
@@ -30,7 +30,7 @@ func CopyToClipboard(text string, copyOnlyFirst bool) error {
 func PrintTree(root string, prefix string, isLast bool) error {
 	info, err := os.Stat(root)
 	if err != nil {
-		return fmt.Errorf("error accessing %s: %w", root, err)
+		return err
 	}
 
 	// check if tree command present if so just execute it
@@ -50,7 +50,7 @@ func PrintTree(root string, prefix string, isLast bool) error {
 	if info.IsDir() {
 		entries, err := os.ReadDir(root)
 		if err != nil {
-			return fmt.Errorf("error reading directory %s: %w", root, err)
+			return err
 		}
 
 		// Sort entries alphabetically to maintain consistent output

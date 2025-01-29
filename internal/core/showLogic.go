@@ -22,7 +22,7 @@ func ShowLogic(
 	}
 
 	if len(args) < 1 {
-		fmt.Printf("Invalid usage: %v\n", usage)
+		fmt.Println("invalid usage, expected: ", usage)
 		return
 	}
 	path := args[0]
@@ -34,13 +34,13 @@ func ShowLogic(
 	}
 
 	if paths.GetPathType(fullPath) != "file" {
-		fmt.Println("Invalid file format, only file is allowed")
+		fmt.Println("invalid file format, only files are allowed")
 		return
 	}
 
 	decryped, err := gpgcrypt.Decrypt(fullPath)
 	if err != nil {
-		fmt.Println("Error decrypting file")
+		fmt.Println("failed to decrypt file: ", err)
 		return
 	}
 

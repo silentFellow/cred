@@ -28,10 +28,10 @@ Examples:
 
 		passStore := config.Constants.PassPath
 		if len(args) < 1 {
-			fmt.Printf("Invalid usage: %v\n", usage)
+			fmt.Println("invalid usage, expected: ", usage)
 			return
 		}
-		filePath := args[0]+".gpg"
+		filePath := args[0] + ".gpg"
 		fullPath := paths.BuildPath(passStore, filePath)
 
 		length, _ := cmd.Flags().GetInt("length")
@@ -57,15 +57,15 @@ Examples:
 			}
 
 			if err := os.RemoveAll(fullPath); err != nil {
-				fmt.Println("Failed to remove the file: ", err)
+				fmt.Println("failed to remove the file: ", err)
 			}
 		}
 
 		if err := gpgcrypt.AddFile(fullPath, generatedPassword, true); err != nil {
-			fmt.Println("Failed to insert password: ", err)
+			fmt.Println("failed to insert password: ", err)
 			return
 		}
-		fmt.Println("Password inserted successfully, copied to clipboard")
+		fmt.Println("password inserted successfully and copied to clipboard")
 	},
 }
 

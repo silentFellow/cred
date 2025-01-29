@@ -31,7 +31,7 @@ func AutoGit(cmd *cobra.Command) error {
 
 		if err := InitRepo(config.Constants.StorePath); err != nil {
 			cmd.SilenceUsage = true
-			return fmt.Errorf("failed to initialize git repository: %w", err)
+			return err
 		}
 	}
 
@@ -41,18 +41,18 @@ func AutoGit(cmd *cobra.Command) error {
 
 	if err := AddFiles(config.Constants.StorePath); err != nil {
 		cmd.SilenceUsage = true
-		return fmt.Errorf("failed to add files to git: %w", err)
+		return err
 	}
 
 	commitMessage := fmt.Sprintf("Auto commit by %v command", cmdName)
 	if err := CommitFiles(config.Constants.StorePath, commitMessage); err != nil {
 		cmd.SilenceUsage = true
-		return fmt.Errorf("failed to commit files to git")
+		return err
 	}
 
 	if err := PushRepo(config.Constants.StorePath); err != nil {
 		cmd.SilenceUsage = true
-		return fmt.Errorf("failed to push files to git")
+		return err
 	}
 
 	return nil

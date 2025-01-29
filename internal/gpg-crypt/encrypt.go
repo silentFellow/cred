@@ -3,14 +3,12 @@ package gpgcrypt
 import (
 	"bytes"
 	"errors"
-	"fmt"
 
 	"github.com/silentFellow/cred-store/internal/utils"
 )
 
 func Encrypt(v string, key string) (string, error) {
 	if key == "" {
-		fmt.Println("Invalid GPG key")
 		return "", errors.New("Invalid GPG key")
 	}
 

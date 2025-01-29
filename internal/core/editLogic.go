@@ -24,7 +24,7 @@ func EditLogic(
 	}
 
 	if len(args) < 1 {
-		fmt.Printf("Invalid usage: %v\n", usage)
+		fmt.Println("invalid usage, expected: ", usage)
 		return
 	}
 
@@ -37,25 +37,25 @@ func EditLogic(
 	}
 
 	if paths.GetPathType(fullPath) != "file" {
-		fmt.Println("Invalid file format, only file is allowed")
+		fmt.Println("invalid file format, only files are allowed")
 		return
 	}
 
 	originalContent, err := gpgcrypt.Decrypt(fullPath)
 	if err != nil {
-		fmt.Println("Error decrypting file")
+		fmt.Println("invalid file format, only files are allowed")
 		return
 	}
 
 	tempFile, err := os.CreateTemp("", fmt.Sprintf("%v-edit-*.tmp", cmdType))
 	if err != nil {
-		fmt.Println("Error creating temp file")
+		fmt.Println("creating temp file failed: ", err)
 		return
 	}
 	defer os.Remove(tempFile.Name())
 
 	if _, err := tempFile.WriteString(originalContent); err != nil {
-		fmt.Println("Error writing to temp file")
+		fmt.Println("writing to temp file failed: ", err)
 		return
 	}
 
@@ -67,26 +67,27 @@ func EditLogic(
 	)
 
 	if err := editorCmd.Run(); err != nil {
-		fmt.Println("Error opening editor, ", err)
+		fmt.Println("opening editor failed: ", err)
 		return
 	}
 
 	updatedContentBytes, err := os.ReadFile(tempFile.Name())
 	if err != nil {
-		fmt.Println("Failed to read the updated contents")
+		fmt.Println("reading updated contents failed: ", err)
 		return
 	}
 
 	updatedContent := string(updatedContentBytes)
 
 	if updatedContent == originalContent {
-		fmt.Println("No changes detected")
+		fmt.Println("no changes detected")
 		return
 	}
 
 	if err := gpgcrypt.AddFile(fullPath, updatedContent, true); err != nil {
-		fmt.Println("Failed to update file: ", err)
+		fmt.Println("updating file failed: ", err)
 		return
 	}
+
 	fmt.Printf("%v updated successfully\n", path)
 }

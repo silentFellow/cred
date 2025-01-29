@@ -23,7 +23,7 @@ func CopyLogic(
 	}
 
 	if len(args) < 1 {
-		fmt.Printf("Invalid usage: %v\n", usage)
+		fmt.Println("invalid usage, expected: ", usage)
 		return
 	}
 
@@ -36,13 +36,13 @@ func CopyLogic(
 	}
 
 	if paths.GetPathType(fullPath) != "file" {
-		fmt.Println("Invalid file format, only file is allowed")
+		fmt.Println("invalid file format, only file is allowed")
 		return
 	}
 
 	decryped, err := gpgcrypt.Decrypt(fullPath)
 	if err != nil {
-		fmt.Println("Error decrypting file")
+		fmt.Printf("decrypting file %v failed: %v\n", fullPath, err)
 		return
 	}
 
@@ -51,9 +51,9 @@ func CopyLogic(
 		copyOnlyFirst = true
 	}
 	if err := utils.CopyToClipboard(decryped, copyOnlyFirst); err != nil {
-		fmt.Println(err)
+		fmt.Println("copying to clipboard failed: ", err)
 		return
 	}
 
-	fmt.Println("Successfully copies to clipboard")
+	fmt.Println("successfully copies to clipboard")
 }

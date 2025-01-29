@@ -24,10 +24,10 @@ and usage of using your command. For example:
 	Run: func(cmd *cobra.Command, args []string) {
 		var uname, email string
 
-		fmt.Print("Enter your username: ")
+		fmt.Print("enter your username: ")
 		fmt.Scanln(&uname)
 
-		fmt.Print("Enter your email: ")
+		fmt.Print("enter your email: ")
 		fmt.Scanln(&email)
 
 		if strings.Trim(uname, " ") == "" || strings.Trim(email, " ") == "" {
@@ -36,28 +36,28 @@ and usage of using your command. For example:
 		}
 
 		if err := gpgcrypt.GenerateKey(uname, email); err != nil {
-			fmt.Println("Failed to generate key, ", err)
+			fmt.Println("failed to generate key, ", err)
 			return
 		}
 
 		keyID, err := gpgcrypt.GetKeyFpr(uname)
 		if err != nil {
-			fmt.Println("Failed to get the key: ", err)
+			fmt.Println("failed to retrieve GPG key ID: ", err)
 			return
 		}
 
 		if err := gpgcrypt.AddSubKey(keyID); err != nil {
-			fmt.Println("Failed to add subkey: ", err)
+			fmt.Println("failed to add subkey: ", err)
 			return
 		}
 
 		if err := gpgcrypt.ModifyTrust(keyID); err != nil {
-			fmt.Println("Failed to modify trust: ", err)
+			fmt.Println("failed to modify trust for key: ", err)
 			return
 		}
 
 		if err := gpgcrypt.ExportKeys(keyID); err != nil {
-			fmt.Println("Failed to export keys: ", err)
+			fmt.Println("failed to export keys: ", err)
 			return
 		}
 
@@ -66,12 +66,13 @@ and usage of using your command. For example:
 		// new store
 		if !paths.CheckPathExists(storePath) {
 			if err := initStore(keyID); err != nil {
-				fmt.Println("Failed to initiate store, ", err)
+				fmt.Println("failed to initiate the store, ", err)
 			}
 			return
 		}
 
 		// overwrite existing store
+		fmt.Println()
 		fmt.Printf("The store already exists at %s.\n", storePath)
 		fmt.Println("Choose an option:")
 		fmt.Println("1. Migrate the store")
@@ -79,29 +80,30 @@ and usage of using your command. For example:
 		fmt.Println("n. Do nothing and exit")
 
 		var choice string
-		fmt.Print("Enter your choice (1/2/n): ")
+		fmt.Print("enter your choice (1/2/n): ")
 		fmt.Scanln(&choice)
 
 		switch strings.ToLower(choice) {
 		case "1":
 			// Migrate the store
+			fmt.Println("migrating the store...")
 			migrateCmd.Run(cmd, []string{keyID})
 		case "2":
 			// Overwrite the store
 			if err := os.RemoveAll(storePath); err != nil {
-				fmt.Println("Failed to remove store, ", err)
+				fmt.Println("failed to remove the existing store: ", err)
 			}
 
 			if err := initStore(keyID); err != nil {
-				fmt.Println("Failed to initiate store, ", err)
+				fmt.Println("failed to initiate the store: ", err)
 			}
 			fmt.Println("Store overwritten successfully.")
 		case "n":
 			// Exit without doing anything
-			fmt.Println("No changes made. Exiting.")
+			fmt.Println("no changes made")
 		default:
 			// Invalid input
-			fmt.Println("Invalid choice. No changes made.")
+			fmt.Println("invalid choice")
 		}
 	},
 }

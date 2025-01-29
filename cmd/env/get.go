@@ -35,13 +35,13 @@ You can specify the file containing the environment variables using the -f flag.
 		foundFile := getEnvFile(flagFile, checkFiles)
 
 		if foundFile == "" {
-			fmt.Printf("No .env file found (checked %v)\n", checkFiles)
+			fmt.Printf("no .env file found (checked: %v)\n", checkFiles)
 			return
 		}
 
 		file, err := os.ReadFile(foundFile)
 		if err != nil {
-			fmt.Printf("Failed to read %v file\n", foundFile)
+			fmt.Println("failed to read file: ", foundFile)
 			return
 		}
 
@@ -52,7 +52,7 @@ You can specify the file containing the environment variables using the -f flag.
 		fmt.Scanln(&filename)
 
 		if strings.Trim(filename, " ") == "" {
-			fmt.Println("Invalid path")
+			fmt.Println("invalid path")
 			return
 		}
 
@@ -70,16 +70,16 @@ You can specify the file containing the environment variables using the -f flag.
 			}
 
 			if err := os.RemoveAll(fullPath); err != nil {
-				fmt.Println("Failed to remove the file: ", err)
+				fmt.Println("failed to remove the existing file: ", err)
 			}
 		}
 
 		if err := gpgcrypt.AddFile(fullPath, fileContent, false); err != nil {
-			fmt.Printf("Failed to insert environment variables: %v\n", err)
+			fmt.Println("failed to insert environment variables: ", err)
 			return
 		}
 
-		fmt.Println("Env inserted successfully")
+		fmt.Println("environment variables stored successfully")
 	},
 }
 

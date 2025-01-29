@@ -3,10 +3,6 @@ package paths
 import (
 	"os"
 	"strings"
-
-	// "github.com/silentFellow/cred-store/config"
-	// gpgcrypt "github.com/silentFellow/cred-store/internal/gpg-crypt"
-	// "github.com/silentFellow/cred-store/internal/utils"
 )
 
 func CheckPathExists(path string) bool {

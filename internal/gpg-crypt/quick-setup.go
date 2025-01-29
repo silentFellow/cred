@@ -1,6 +1,7 @@
 package gpgcrypt
 
 import (
+	"errors"
 	"fmt"
 	"os"
 	"strings"
@@ -25,11 +26,9 @@ func GenerateKey(uname, email string) error {
 		"never",
 	)
 
-	if output, err := cmd.CombinedOutput(); err != nil {
-		if !strings.Contains(string(output), "already exists") {
-			fmt.Println("entered")
-			return err
-		}
+	if output, err := cmd.CombinedOutput(); err != nil &&
+		!strings.Contains(string(output), "already exists") {
+		return err
 	}
 
 	return nil
@@ -46,7 +45,7 @@ func GetKeyFpr(uname string) (string, error) {
 		fields := strings.Split(line, ":")
 		if fields[0] == "fpr" {
 			if len(fields) < 11 {
-				return "", fmt.Errorf("Invalid key format")
+				return "", errors.New("Invalid key format")
 			}
 			return fields[9], nil
 		}
@@ -106,7 +105,7 @@ func ModifyTrust(keyId string) error {
 func ExportKeys(uname string) error {
 	tempDir, err := os.MkdirTemp("", "cred-store-keys-")
 	if err != nil {
-		return fmt.Errorf("Failed to create keys-temp directory: %w", err)
+		return err
 	}
 	defer os.RemoveAll(tempDir) // Cleanup temporary directory
 
@@ -121,13 +120,13 @@ func ExportKeys(uname string) error {
 	)
 	publicKeyFile, err := os.Create(publicKeyPath)
 	if err != nil {
-		return fmt.Errorf("Failed to create public key file: %w", err)
+		return err
 	}
 	defer publicKeyFile.Close()
 
 	publicKeyCmd.Stdout = publicKeyFile
 	if err := publicKeyCmd.Run(); err != nil {
-		return fmt.Errorf("Failed to export public key: %w", err)
+		return err
 	}
 
 	privateKeyPath := paths.BuildPath(tempDir, "private_key.asc")
@@ -142,13 +141,13 @@ func ExportKeys(uname string) error {
 	)
 	privateKeyFile, err := os.Create(privateKeyPath)
 	if err != nil {
-		return fmt.Errorf("Failed to create private key file: %w", err)
+		return err
 	}
 	defer privateKeyFile.Close()
 
 	privateKeyCmd.Stdout = privateKeyFile
 	if err := privateKeyCmd.Run(); err != nil {
-		return fmt.Errorf("Failed to export private key: %w", err)
+		return err
 	}
 
 	// Generate a usage file for importing the keys
@@ -172,17 +171,17 @@ func ExportKeys(uname string) error {
 
 	usageFile, err := os.Create(usageFilePath)
 	if err != nil {
-		return fmt.Errorf("Failed to create import_usage file: %w", err)
+		return err
 	}
 	defer usageFile.Close()
 
 	if _, err := usageFile.WriteString(usageFileContent); err != nil {
-		return fmt.Errorf("Failed to write content to import_usage file: %w", err)
+		return err
 	}
 
 	downloadPath := paths.BuildPath(config.Constants.Download, "cred-store-keys")
 	if err := fscopy.Copy(tempDir, downloadPath); err != nil {
-		return fmt.Errorf("Failed to move keys from temp to download directory: %w", err)
+		return err
 	}
 
 	return nil

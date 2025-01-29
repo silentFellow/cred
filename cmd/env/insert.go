@@ -29,7 +29,7 @@ Examples:
 		basePath := config.Constants.EnvPath
 
 		if len(args) < 1 {
-			fmt.Printf("Invalid usage: %v\n", usage)
+			fmt.Println("invalid usage, expected: ", usage)
 			return
 		}
 
@@ -48,7 +48,7 @@ Examples:
 
 		tempFile, err := os.CreateTemp("", "env-insert-*.tmp")
 		if err != nil {
-			fmt.Println("Error creating temp file")
+			fmt.Println("error creating temporary file: ", err)
 			return
 		}
 		defer os.Remove(tempFile.Name())
@@ -61,27 +61,28 @@ Examples:
 		)
 
 		if err := editorCmd.Run(); err != nil {
-			fmt.Println("Error opening editor, ", err)
+			fmt.Println("opening editor failed: ", err)
 			return
 		}
 
 		contentBytes, err := os.ReadFile(tempFile.Name())
 		if err != nil {
-			fmt.Println("Failed to read the contents")
+			fmt.Println("Failed to read the contents: ", err)
 			return
 		}
 
 		content := string(contentBytes)
 
 		if content == "" {
-			fmt.Println("Invalid content")
+			fmt.Println("invalid content")
 			return
 		}
 
 		if err := gpgcrypt.AddFile(fullPath, content, true); err != nil {
-			fmt.Println("Failed to update env: ", err)
+			fmt.Println("failed to update env: ", err)
 			return
 		}
+
 		fmt.Printf("%v inserted successfully\n", path)
 	},
 }

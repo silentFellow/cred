@@ -23,7 +23,7 @@ func MvLogic(
 	}
 
 	if len(args) < 2 {
-		fmt.Printf("Invalid usage: %v\n", usage)
+		fmt.Println("invalid usage, expected: ", usage)
 		return
 	}
 
@@ -33,7 +33,7 @@ func MvLogic(
 
 	destinationInfo, err := os.Stat(destination)
 	if err != nil && !os.IsNotExist(err) { // only errors not related to being not found
-		fmt.Println("Failed to check destination, ", err)
+		fmt.Printf("failed to check destination %v: %v\n", destination, err)
 		return
 	}
 
@@ -53,9 +53,9 @@ func MvLogic(
 
 func move(source, destination string) {
 	if err := os.Rename(source, destination); err != nil {
-		fmt.Printf("Error moving %v: %v\n", source, err)
+		fmt.Printf("failed to move %v to %v: %v\n", source, destination, err)
 		return
 	}
 
-	fmt.Printf("Succesfully moved from %v to %v\n", source, destination)
+	fmt.Printf("successfully moved from %v to %v\n", source, destination)
 }

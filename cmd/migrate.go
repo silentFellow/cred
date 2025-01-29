@@ -26,7 +26,7 @@ This operation will create a backup of your current store and re-encrypt all fil
 		usage := "cred migrate <new-gpg-key-id>"
 
 		if len(args) < 1 {
-			fmt.Printf("Invalid usage: %v\n", usage)
+			fmt.Println("invalid usage: ", usage)
 			return
 		}
 
@@ -35,13 +35,13 @@ This operation will create a backup of your current store and re-encrypt all fil
 		newKey := args[0]
 
 		if !gpgcrypt.CheckKeyValidity(newKey) {
-			fmt.Println("Invalid key")
+			fmt.Println("invalid key")
 			return
 		}
 
 		newKey, err := gpgcrypt.GetKeyFpr(newKey)
 		if err != nil {
-			fmt.Println("Failed to get the key: ", err)
+			fmt.Println("failed to get the key:", err)
 			return
 		}
 
@@ -55,32 +55,32 @@ This operation will create a backup of your current store and re-encrypt all fil
 
 		tempDir, err := os.MkdirTemp("", "cred-store-migrate-")
 		if err != nil {
-			fmt.Println("Failed to create temporary directory: ", err)
+			fmt.Println("failed to create temporary directory: ", err)
 			return
 		}
 		defer os.RemoveAll(tempDir) // Cleanup temporary directory
 
 		if err := fscopy.Copy(storePath, tempDir); err != nil {
-			fmt.Println("Failed to copy store: ", err)
+			fmt.Println("failed to copy store: ", err)
 			return
 		}
 
 		gpgFile, err := os.Create(filepath.Join(tempDir, ".gpg-id"))
 		if err != nil {
-			fmt.Printf("Failed to create the .gpg-id file in temporary directory: %v\n", err)
+			fmt.Printf("failed to create the .gpg-id file in temporary directory: %v\n", err)
 			return
 		}
 		defer gpgFile.Close()
 
 		if _, err := gpgFile.WriteString(newKey); err != nil {
-			fmt.Printf("Failed to write the new GPG key to the .gpg-id file: %v\n", err)
+			fmt.Printf("failed to write the new GPG key to the .gpg-id file: %v\n", err)
 			return
 		}
 
 		// recrypt the store
 		err = filepath.Walk(tempDir, func(path string, info os.FileInfo, err error) error {
 			if err != nil {
-				return fmt.Errorf("Failed to walk through the directory: %v", err)
+				return fmt.Errorf("failed to walk through the directory: %v", err)
 			}
 
 			// skip directories
@@ -90,38 +90,34 @@ This operation will create a backup of your current store and re-encrypt all fil
 
 			relPath, err := filepath.Rel(tempDir, path)
 			if err != nil {
-				return fmt.Errorf("Failed to calculate relative path: %v", err)
+				return fmt.Errorf("failed to calculate relative path: %v", err)
 			}
 
 			if strings.HasPrefix(relPath, "pass") || strings.HasPrefix(relPath, "env") {
 				destPath := filepath.Join(tempDir, relPath)
 				if err := gpgcrypt.Recrypt(destPath, originalKey, newKey); err != nil {
-					fmt.Printf(
-						"Failed to recrypt file %s: %v\n",
-						destPath,
-						err,
-					)
+					fmt.Printf("failed to recrypt file %s: %v\n", destPath, err)
 				}
 			}
 
 			return nil
 		})
 		if err != nil {
-			fmt.Printf("Failed to recrypt the store: %v\n", err)
+			fmt.Printf("failed to recrypt the store: %v\n", err)
 			return
 		}
 
 		if err := os.RemoveAll(storePath); err != nil {
-			fmt.Println("Failed to remove store: ", err)
+			fmt.Println("failed to remove store: ", err)
 			return
 		}
 
 		if err := fscopy.Copy(tempDir, storePath); err != nil {
-			fmt.Println("Failed to copy store: ", err)
+			fmt.Println("failed to copy store: ", err)
 			return
 		}
 
-		fmt.Println("Store migrated successfully")
+		fmt.Println("store migrated successfully")
 	},
 }
 
@@ -134,7 +130,7 @@ func init() {
 
 		if !gpgcrypt.CheckKeyValidity(config.Constants.GpgKey) {
 			cmd.SilenceUsage = true
-			return fmt.Errorf("Invalid GPG key, try [cred init <gpg-key-id>]")
+			return fmt.Errorf("invalid GPG key, try [cred init <gpg-key-id>]")
 		}
 
 		return nil
