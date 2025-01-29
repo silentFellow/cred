@@ -1,0 +1,6 @@
+[book]
+authors = ["silentFellow"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Cred: A Simple and Secure CLI Tool for Managing Passwords and Environment Variables"

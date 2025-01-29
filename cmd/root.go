@@ -1,9 +1,11 @@
 package cmd
 
 import (
+	"log"
 	"os"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/cobra/doc"
 )
 
 var rootCmd = &cobra.Command{
@@ -24,5 +26,11 @@ func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
 		os.Exit(1)
+	}
+
+	rootCmd.DisableAutoGenTag = true
+	err = doc.GenMarkdownTree(rootCmd, "./docs/src")
+	if err != nil {
+		log.Fatal(err)
 	}
 }
