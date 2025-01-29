@@ -59,7 +59,6 @@ func init() {
 			Use:                cmd,
 			Short:              desc,
 			DisableFlagParsing: true, // to avoid parsing flags for git commands
-			Hidden:             true,
 			Run: func(cmd *cobra.Command, args []string) {
 				cmdString := append([]string{"git", cmd.Use}, args...)
 				execCmd := utils.SetCmd(
