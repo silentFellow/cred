@@ -8,6 +8,8 @@ import (
 	"github.com/spf13/cobra/doc"
 )
 
+var buildDocs bool
+
 var rootCmd = &cobra.Command{
 	Use:   "cred",
 	Short: "A password and environment variables manager",
@@ -29,8 +31,15 @@ func Execute() {
 	}
 
 	rootCmd.DisableAutoGenTag = true
-	err = doc.GenMarkdownTree(rootCmd, "./docs/src")
-	if err != nil {
-		log.Fatal(err)
+	if buildDocs {
+		if err := doc.GenMarkdownTree(rootCmd, "./docs/src"); err != nil {
+			log.Fatal("Failed to generate docs", err)
+		}
+		log.Println("Documentation generated at ./docs/src")
 	}
+}
+
+func init() {
+	rootCmd.Flags().
+		BoolVar(&buildDocs, "generate-docs", false, "Creates markdown documentation for the CLI")
 }

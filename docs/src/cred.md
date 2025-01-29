@@ -17,7 +17,8 @@ Examples and usage:
 ### Options
 
 ```
-  -h, --help   help for cred
+      --generate-docs   Creates markdown documentation for the CLI
+  -h, --help            help for cred
 ```
 
 ### SEE ALSO
