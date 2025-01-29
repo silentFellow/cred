@@ -52,6 +52,9 @@ func GetGitFileCompletion(
 	args []string,
 	toComplete string,
 ) ([]string, cobra.ShellCompDirective) {
-	stageables, _ := git.GetStageable(config.Constants.StorePath)
+	stageables, err := git.GetStageable(config.Constants.StorePath)
+	if err != nil {
+		return []string{}, cobra.ShellCompDirectiveNoFileComp
+	}
 	return stageables, cobra.ShellCompDirectiveDefault
 }

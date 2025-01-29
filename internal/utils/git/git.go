@@ -143,7 +143,7 @@ func GetStageable(filePath string) ([]string, error) {
 
 		if len(fields) >= 2 {
 			status := strings.ToLower(fields[0])
-			if status != "d" && status != "am" {
+			if status != "d" && status != "am" && status != "a" {
 				files = append(files, fields[1])
 			}
 		}
