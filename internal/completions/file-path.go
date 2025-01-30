@@ -25,7 +25,7 @@ func GetFilePathSuggestions(basePath string) []string {
 
 		// Append directories with a trailing slash
 		if info.IsDir() {
-			suggestions = append(suggestions, relativePath+"/")
+			suggestions = append(suggestions, relativePath)
 		} else {
 			suggestions = append(suggestions, relativePath)
 		}
