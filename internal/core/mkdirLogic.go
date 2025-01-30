@@ -30,7 +30,7 @@ func MkdirLogic(
 		fullPath := paths.BuildPath(basePath, path)
 
 		if err := os.MkdirAll(fullPath, 0777); err != nil {
-			fmt.Printf("failed to create directory %v: %v\n", fullPath, err)
+			fmt.Printf("failed to create directory %v: %v\n", path, err)
 			continue
 		}
 

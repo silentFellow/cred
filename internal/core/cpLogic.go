@@ -28,12 +28,13 @@ func CpLogic(
 
 	n := len(args)
 	sources := args[:n-1]
-	destination := paths.BuildPath(basePath, args[n-1])
+	destination := args[n-1]
+	destinationPath := paths.BuildPath(basePath, args[n-1])
 
 	for _, src := range sources {
 		srcPath := paths.BuildPath(basePath, src)
-		if err := fscopy.Copy(srcPath, destination); err != nil {
-			fmt.Printf("copying %v failed: %v\n", srcPath, err)
+		if err := fscopy.Copy(srcPath, destinationPath); err != nil {
+			fmt.Printf("copying %v failed: %v\n", src, err)
 			continue
 		}
 

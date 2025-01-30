@@ -2,6 +2,7 @@ package core
 
 import (
 	"fmt"
+	"path/filepath"
 
 	"github.com/silentFellow/cred/config"
 	"github.com/silentFellow/cred/internal/utils"
@@ -21,7 +22,7 @@ func LsLogic(
 
 	if len(args) < 1 {
 		if err := utils.PrintTree(basePath, "", true); err != nil {
-			fmt.Printf("listing files and directories in %v failed: %v\n", basePath, err)
+			fmt.Printf("listing files and directories in %v failed: %v\n", filepath.Base(basePath), err)
 		}
 		return
 	}
@@ -29,6 +30,6 @@ func LsLogic(
 	path := args[0]
 	fullPath := paths.BuildPath(basePath, path)
 	if err := utils.PrintTree(fullPath, "", true); err != nil {
-		fmt.Printf("listing files and directories in %v failed: %v\n", fullPath, err)
+		fmt.Printf("listing files and directories in %v failed: %v\n", path, err)
 	}
 }

@@ -1,6 +1,7 @@
 package fscopy
 
 import (
+	"fmt"
 	"io"
 	"os"
 	"path/filepath"
@@ -50,6 +51,11 @@ func CopyDirectory(src, dest string) error {
 }
 
 func CopyFile(src, dest string) error {
+	// Check if src or dest is empty
+	if src == "" || dest == "" {
+		return fmt.Errorf("source or destination path is empty")
+	}
+
 	srcFile, err := os.Open(src)
 	if err != nil {
 		return err
@@ -58,9 +64,9 @@ func CopyFile(src, dest string) error {
 
 	// Check if `dest` is a directory and adjust the destination path
 	destInfo, err := os.Stat(dest)
-	if err != nil {
+	if err != nil && !os.IsNotExist(err) {
 		return err
-	} else if destInfo.IsDir() {
+	} else if err == nil && destInfo.IsDir() {
 		dest = filepath.Join(dest, filepath.Base(src)) // Append filename
 	}
 

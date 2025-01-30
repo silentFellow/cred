@@ -29,9 +29,10 @@ func MvLogic(
 
 	n := len(args)
 	sources := args[:n-1]
-	destination := paths.BuildPath(basePath, args[n-1])
+	destination := args[n-1]
+	destinationPath := paths.BuildPath(basePath, args[n-1])
 
-	destinationInfo, err := os.Stat(destination)
+	destinationInfo, err := os.Stat(destinationPath)
 	if err != nil && !os.IsNotExist(err) { // only errors not related to being not found
 		fmt.Printf("failed to check destination %v: %v\n", destination, err)
 		return
@@ -40,22 +41,33 @@ func MvLogic(
 	if destinationInfo != nil && destinationInfo.IsDir() { // if directory
 		for _, src := range sources {
 			srcPath := paths.BuildPath(basePath, src)
-			destPath := filepath.Join(destination, filepath.Base(src)) // append
-			move(srcPath, destPath)
+			destPath := filepath.Join(destinationPath, filepath.Base(src)) // append
+			move(srcPath, destPath, basePath)
 		}
 	} else { // if normal file
 		for _, src := range sources {
 			srcPath := paths.BuildPath(basePath, src)
-			move(srcPath, destination)
+			move(srcPath, destinationPath, basePath)
 		}
 	}
 }
 
-func move(source, destination string) {
+func move(source, destination, basePath string) {
+	// for better success/error messages
+	soruceRelativePath, srcRelErr := filepath.Rel(basePath, source)
+	destRelativePath, destRelErr := filepath.Rel(basePath, destination)
+
 	if err := os.Rename(source, destination); err != nil {
-		fmt.Printf("failed to move %v to %v: %v\n", source, destination, err)
+		if srcRelErr != nil || destRelErr != nil {
+			fmt.Println("failed to move file: ", err)
+		}
+		fmt.Printf("failed to move %v to %v: %v\n", soruceRelativePath, destRelativePath, err)
 		return
 	}
 
-	fmt.Printf("successfully moved from %v to %v\n", source, destination)
+	if srcRelErr != nil || destRelErr != nil {
+		fmt.Println("successfully moved file")
+		return
+	}
+	fmt.Printf("successfully moved from %v to %v\n", soruceRelativePath, destRelativePath)
 }

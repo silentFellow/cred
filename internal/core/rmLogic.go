@@ -30,12 +30,12 @@ func RmLogic(
 		fullPath := paths.BuildPath(basePath, path)
 
 		if !paths.CheckPathExists(fullPath) {
-			fmt.Printf("%v not found\n", fullPath)
+			fmt.Printf("%v not found\n", path)
 			continue
 		}
 
 		if err := os.RemoveAll(fullPath); err != nil {
-			fmt.Printf("failed to remove %v: %v\n", fullPath, err)
+			fmt.Printf("failed to remove %v: %v\n", path, err)
 			continue
 		}
 

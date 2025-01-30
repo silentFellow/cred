@@ -42,7 +42,7 @@ func CopyLogic(
 
 	decryped, err := gpgcrypt.Decrypt(fullPath)
 	if err != nil {
-		fmt.Printf("decrypting file %v failed: %v\n", fullPath, err)
+		fmt.Printf("decrypting file %v failed: %v\n", path, err)
 		return
 	}
 

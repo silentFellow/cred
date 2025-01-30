@@ -48,7 +48,7 @@ You can specify the file containing the environment variables using the -f flag.
 		fileContent := string(file)
 
 		var filename string
-		fmt.Print("Enter path to store: ")
+		fmt.Print("enter file name: ")
 		fmt.Scanln(&filename)
 
 		if strings.Trim(filename, " ") == "" {
