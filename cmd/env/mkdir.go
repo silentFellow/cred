@@ -3,7 +3,7 @@ package env
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/silentFellow/cred-store/internal/core"
+	"github.com/silentFellow/cred/internal/core"
 )
 
 // RmCmd represents the {cred env rm <path>} command

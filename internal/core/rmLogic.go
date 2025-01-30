@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/silentFellow/cred-store/config"
-	"github.com/silentFellow/cred-store/internal/utils/paths"
+	"github.com/silentFellow/cred/config"
+	"github.com/silentFellow/cred/internal/utils/paths"
 )
 
 func RmLogic(

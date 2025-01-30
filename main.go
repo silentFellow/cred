@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/silentFellow/cred-store/cmd"
-	"github.com/silentFellow/cred-store/internal/utils"
+	"github.com/silentFellow/cred/cmd"
+	"github.com/silentFellow/cred/internal/utils"
 )
 
 func main() {

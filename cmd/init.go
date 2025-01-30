@@ -7,10 +7,10 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/silentFellow/cred-store/config"
-	gpgcrypt "github.com/silentFellow/cred-store/internal/gpg-crypt"
-	"github.com/silentFellow/cred-store/internal/utils/git"
-	"github.com/silentFellow/cred-store/internal/utils/paths"
+	"github.com/silentFellow/cred/config"
+	gpgcrypt "github.com/silentFellow/cred/internal/gpg-crypt"
+	"github.com/silentFellow/cred/internal/utils/git"
+	"github.com/silentFellow/cred/internal/utils/paths"
 )
 
 // initCmd represents the init command

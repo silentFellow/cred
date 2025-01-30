@@ -4,7 +4,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/silentFellow/cred-store/internal/utils"
+	"github.com/silentFellow/cred/internal/utils"
 )
 
 func CheckGitExists() bool {

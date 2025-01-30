@@ -3,7 +3,7 @@ package env
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/silentFellow/cred-store/internal/core"
+	"github.com/silentFellow/cred/internal/core"
 )
 
 // ShowCmd represents the {cred env show <path>} command

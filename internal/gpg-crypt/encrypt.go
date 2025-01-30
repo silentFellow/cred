@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"errors"
 
-	"github.com/silentFellow/cred-store/internal/utils"
+	"github.com/silentFellow/cred/internal/utils"
 )
 
 func Encrypt(v string, key string) (string, error) {

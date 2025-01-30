@@ -1,7 +1,7 @@
 package pass
 
 import (
-	"github.com/silentFellow/cred-store/internal/core"
+	"github.com/silentFellow/cred/internal/core"
 	"github.com/spf13/cobra"
 )
 

@@ -6,13 +6,13 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/silentFellow/cred-store/cmd/pass"
-	"github.com/silentFellow/cred-store/config"
-	"github.com/silentFellow/cred-store/internal/completions"
-	gpgcrypt "github.com/silentFellow/cred-store/internal/gpg-crypt"
-	"github.com/silentFellow/cred-store/internal/utils"
-	"github.com/silentFellow/cred-store/internal/utils/git"
-	"github.com/silentFellow/cred-store/internal/utils/paths"
+	"github.com/silentFellow/cred/cmd/pass"
+	"github.com/silentFellow/cred/config"
+	"github.com/silentFellow/cred/internal/completions"
+	gpgcrypt "github.com/silentFellow/cred/internal/gpg-crypt"
+	"github.com/silentFellow/cred/internal/utils"
+	"github.com/silentFellow/cred/internal/utils/git"
+	"github.com/silentFellow/cred/internal/utils/paths"
 )
 
 // passCmd represents the pass command

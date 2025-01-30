@@ -6,7 +6,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/silentFellow/cred-store/config"
+	"github.com/silentFellow/cred/config"
 )
 
 func AutoGit(cmd *cobra.Command) error {

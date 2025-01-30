@@ -4,7 +4,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/silentFellow/cred-store/internal/utils/paths"
+	"github.com/silentFellow/cred/internal/utils/paths"
 )
 
 type config struct {

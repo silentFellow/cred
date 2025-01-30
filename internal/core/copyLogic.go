@@ -3,10 +3,10 @@ package core
 import (
 	"fmt"
 
-	"github.com/silentFellow/cred-store/config"
-	gpgcrypt "github.com/silentFellow/cred-store/internal/gpg-crypt"
-	"github.com/silentFellow/cred-store/internal/utils"
-	"github.com/silentFellow/cred-store/internal/utils/paths"
+	"github.com/silentFellow/cred/config"
+	gpgcrypt "github.com/silentFellow/cred/internal/gpg-crypt"
+	"github.com/silentFellow/cred/internal/utils"
+	"github.com/silentFellow/cred/internal/utils/paths"
 )
 
 func CopyLogic(

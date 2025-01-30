@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"errors"
 
-	"github.com/silentFellow/cred-store/config"
-	"github.com/silentFellow/cred-store/internal/utils"
+	"github.com/silentFellow/cred/config"
+	"github.com/silentFellow/cred/internal/utils"
 )
 
 func Decrypt(filePath string) (string, error) {

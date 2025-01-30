@@ -11,7 +11,7 @@ import (
 
 	"github.com/atotto/clipboard"
 
-	"github.com/silentFellow/cred-store/config"
+	"github.com/silentFellow/cred/config"
 )
 
 func CopyToClipboard(text string, copyOnlyFirst bool) error {

@@ -1,4 +1,4 @@
-module github.com/silentFellow/cred-store
+module github.com/silentFellow/cred
 
 go 1.23.4
 

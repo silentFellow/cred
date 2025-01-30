@@ -1,9 +1,9 @@
 package gpgcrypt
 
 import (
-	"github.com/silentFellow/cred-store/config"
-	"github.com/silentFellow/cred-store/internal/utils"
-	"github.com/silentFellow/cred-store/internal/utils/paths"
+	"github.com/silentFellow/cred/config"
+	"github.com/silentFellow/cred/internal/utils"
+	"github.com/silentFellow/cred/internal/utils/paths"
 )
 
 func AddFile(path string, content string, copy bool) error {

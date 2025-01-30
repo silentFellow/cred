@@ -8,10 +8,10 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/silentFellow/cred-store/config"
-	gpgcrypt "github.com/silentFellow/cred-store/internal/gpg-crypt"
-	fscopy "github.com/silentFellow/cred-store/internal/utils/copy"
-	"github.com/silentFellow/cred-store/internal/utils/git"
+	"github.com/silentFellow/cred/config"
+	gpgcrypt "github.com/silentFellow/cred/internal/gpg-crypt"
+	fscopy "github.com/silentFellow/cred/internal/utils/copy"
+	"github.com/silentFellow/cred/internal/utils/git"
 )
 
 // migrateCmd represents the migrate command

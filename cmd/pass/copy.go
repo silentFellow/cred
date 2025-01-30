@@ -3,7 +3,7 @@ package pass
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/silentFellow/cred-store/internal/core"
+	"github.com/silentFellow/cred/internal/core"
 )
 
 // CopyCmd represents the {cred pass copy <filepath>} command

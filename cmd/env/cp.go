@@ -3,7 +3,7 @@ package env
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/silentFellow/cred-store/internal/core"
+	"github.com/silentFellow/cred/internal/core"
 )
 
 // CpCmd represents the {cred env cp <src> <dest>} command

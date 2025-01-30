@@ -7,10 +7,10 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/silentFellow/cred-store/config"
-	"github.com/silentFellow/cred-store/internal/completions"
-	"github.com/silentFellow/cred-store/internal/utils"
-	"github.com/silentFellow/cred-store/internal/utils/git"
+	"github.com/silentFellow/cred/config"
+	"github.com/silentFellow/cred/internal/completions"
+	"github.com/silentFellow/cred/internal/utils"
+	"github.com/silentFellow/cred/internal/utils/git"
 )
 
 // gitCmd represents the git command
