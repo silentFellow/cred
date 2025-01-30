@@ -33,6 +33,13 @@ func PrintTree(root string, prefix string, isLast bool) error {
 		return err
 	}
 
+	// if the path is a file
+	// can't be open with tree
+	if !info.IsDir() {
+		fmt.Println(prefix + info.Name())
+		return nil
+	}
+
 	// check if tree command present if so just execute it
 	treeCmd := SetCmd("", CmdIOConfig{IsStdout: true}, "tree", root)
 	if err := treeCmd.Run(); config.Constants.Os != "windows" && err == nil {
