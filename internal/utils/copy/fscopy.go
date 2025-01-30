@@ -56,6 +56,14 @@ func CopyFile(src, dest string) error {
 	}
 	defer srcFile.Close()
 
+	// Check if `dest` is a directory and adjust the destination path
+	destInfo, err := os.Stat(dest)
+	if err != nil {
+		return err
+	} else if destInfo.IsDir() {
+		dest = filepath.Join(dest, filepath.Base(src)) // Append filename
+	}
+
 	destFile, err := os.Create(dest)
 	if err != nil {
 		return err
