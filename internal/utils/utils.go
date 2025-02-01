@@ -41,9 +41,11 @@ func PrintTree(root string, prefix string, isLast bool) error {
 	}
 
 	// check if tree command present if so just execute it
-	treeCmd := SetCmd("", CmdIOConfig{IsStdout: true}, "tree", root)
-	if err := treeCmd.Run(); config.Constants.Os != "windows" && err == nil {
-		return nil
+	if config.Constants.Os != "windows" {
+		treeCmd := SetCmd("", CmdIOConfig{IsStdout: true}, "tree", root)
+		if err := treeCmd.Run(); config.Constants.Os != "windows" && err == nil {
+			return nil
+		}
 	}
 
 	// Determine connector for the current item
