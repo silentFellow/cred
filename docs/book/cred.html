@@ -166,7 +166,8 @@ It uses GPG encryption to securely store and manage sensitive information.</p>
 <li>List all stored credentials: cred {pass/env} list</li>
 </ul>
 <h3 id="options"><a class="header" href="#options">Options</a></h3>
-<pre><code>  -h, --help   help for cred
+<pre><code>      --generate-docs   Creates markdown documentation for the CLI
+  -h, --help            help for cred
 </code></pre>
 <h3 id="see-also"><a class="header" href="#see-also">SEE ALSO</a></h3>
 <ul>
@@ -207,22 +208,6 @@ It uses GPG encryption to securely store and manage sensitive information.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

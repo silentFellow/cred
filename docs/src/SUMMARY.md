@@ -1,12 +1,14 @@
 # Summary
 
 - [Introduction](intro.md)
+- [Installation](installation.md)
 - [Setup](cred_quick-setup.md)
   - [Quick Setup](cred_quick-setup.md)
   - [Manual Setup](cred_init.md)
   - [Migration](cred_migrate.md)
 - [Configuration](config.md)
 - [CLI Reference](cred.md)
+
   - [Environment Variables (`cred env`)](cred_env.md)
     - [Copy](cred_env_copy.md)
     - [Edit](cred_env_edit.md)

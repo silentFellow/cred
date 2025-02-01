@@ -168,6 +168,15 @@ It encrypts sensitive information using <strong>GPG keys</strong>, ensuring safe
 <h3 id="-initialize-with-a-gpg-key"><a class="header" href="#-initialize-with-a-gpg-key">🔑 <strong>Initialize with a GPG key</strong></a></h3>
 <pre><code class="language-sh">cred init &lt;gpg-key-id&gt;
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
+<p>You can install the tool with the following command:</p>
+<pre><code class="language-sh">go install github.com/silentFellow/cred-store@latest
+</code></pre>
+<p>For other installation methods, please refer to the <a href="https://github.com/silentFellow/cred-store/tags" target="_blank">tags section</a>.</p>
+<h2 id="for-windows"><a class="header" href="#for-windows">For Windows</a></h2>
+<p>Please note that the entire code uses GPG for encryption and decryption. Windows users need to have a GPG client installed, such as <a href="https://gpg4win.org/" target="_blank">Gpg4win</a>.</p>
+<h2 id="completions"><a class="header" href="#completions">Completions</a></h2>
+<p>For more information on completions, please refer to the <a href="cred_completion.html">completions.md</a> file.</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-quick-setup"><a class="header" href="#cred-quick-setup">cred quick-setup</a></h2>
 <p>Creates a GPG ID and initiates store usage credentials</p>
 <h3 id="synopsis"><a class="header" href="#synopsis">Synopsis</a></h3>
@@ -271,7 +280,8 @@ It uses GPG encryption to securely store and manage sensitive information.</p>
 <li>List all stored credentials: cred {pass/env} list</li>
 </ul>
 <h3 id="options-4"><a class="header" href="#options-4">Options</a></h3>
-<pre><code>  -h, --help   help for cred
+<pre><code>      --generate-docs   Creates markdown documentation for the CLI
+  -h, --help            help for cred
 </code></pre>
 <h3 id="see-also-4"><a class="header" href="#see-also-4">SEE ALSO</a></h3>
 <ul>
@@ -715,22 +725,6 @@ to your powershell profile.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

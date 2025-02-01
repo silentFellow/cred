@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Zsh - Cred: A Simple and Secure CLI Tool for Managing Passwords and Environment Variables</title>
+        <title>Installation - Cred: A Simple and Secure CLI Tool for Managing Passwords and Environment Variables</title>
 
 
         <!-- Custom HTML head -->
@@ -152,45 +152,25 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="cred-completion-zsh"><a class="header" href="#cred-completion-zsh">cred completion zsh</a></h2>
-<p>Generate the autocompletion script for zsh</p>
-<h3 id="synopsis"><a class="header" href="#synopsis">Synopsis</a></h3>
-<p>Generate the autocompletion script for the zsh shell.</p>
-<p>If shell completion is not already enabled in your environment you will need
-to enable it.  You can execute the following once:</p>
-<pre><code>echo "autoload -U compinit; compinit" &gt;&gt; ~/.zshrc
+                        <h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
+<p>You can install the tool with the following command:</p>
+<pre><code class="language-sh">go install github.com/silentFellow/cred-store@latest
 </code></pre>
-<p>To load completions in your current shell session:</p>
-<pre><code>source &lt;(cred completion zsh)
-</code></pre>
-<p>To load completions for every new session, execute once:</p>
-<h4 id="linux"><a class="header" href="#linux">Linux:</a></h4>
-<pre><code>cred completion zsh &gt; "${fpath[1]}/_cred"
-</code></pre>
-<h4 id="macos"><a class="header" href="#macos">macOS:</a></h4>
-<pre><code>cred completion zsh &gt; $(brew --prefix)/share/zsh/site-functions/_cred
-</code></pre>
-<p>You will need to start a new shell for this setup to take effect.</p>
-<pre><code>cred completion zsh [flags]
-</code></pre>
-<h3 id="options"><a class="header" href="#options">Options</a></h3>
-<pre><code>  -h, --help              help for zsh
-      --no-descriptions   disable completion descriptions
-</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">SEE ALSO</a></h3>
-<ul>
-<li><a href="cred_completion.html">cred completion</a>	 - Generate the autocompletion script for the specified shell</li>
-</ul>
+<p>For other installation methods, please refer to the <a href="https://github.com/silentFellow/cred-store/tags" target="_blank">tags section</a>.</p>
+<h2 id="for-windows"><a class="header" href="#for-windows">For Windows</a></h2>
+<p>Please note that the entire code uses GPG for encryption and decryption. Windows users need to have a GPG client installed, such as <a href="https://gpg4win.org/" target="_blank">Gpg4win</a>.</p>
+<h2 id="completions"><a class="header" href="#completions">Completions</a></h2>
+<p>For more information on completions, please refer to the <a href="cred_completion.html">completions.md</a> file.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="cred_completion_bash.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="intro.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="cred_completion_fish.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="cred_quick-setup.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -200,11 +180,11 @@ to enable it.  You can execute the following once:</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="cred_completion_bash.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="intro.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="cred_completion_fish.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="cred_quick-setup.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
