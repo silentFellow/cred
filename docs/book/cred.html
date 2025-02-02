@@ -173,6 +173,7 @@ It uses GPG encryption to securely store and manage sensitive information.</p>
 <ul>
 <li><a href="cred_completion.html">cred completion</a>	 - Generate the autocompletion script for the specified shell</li>
 <li><a href="cred_env.html">cred env</a>	 - A command to manage env-variables</li>
+<li><a href="cred_git.html">cred git</a>	 - Manage cred-store git repository and operations</li>
 <li><a href="cred_init.html">cred init</a>	 - Initialize the credential store</li>
 <li><a href="cred_migrate.html">cred migrate</a>	 - Migrate the credential store to a new GPG key</li>
 <li><a href="cred_pass.html">cred pass</a>	 - A command to manage passwords</li>
@@ -208,6 +209,22 @@ It uses GPG encryption to securely store and manage sensitive information.</p>
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

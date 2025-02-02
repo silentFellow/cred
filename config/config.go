@@ -9,7 +9,6 @@ import (
 
 type config struct {
 	AutoGit        bool
-	SuppressStdout bool
 	SuppressStderr bool
 	Editor         string
 }
@@ -24,7 +23,6 @@ func initConfig() config {
 
 	return config{
 		AutoGit:        checkTrue(getConfigVal(configMap, "auto_git", "false")),
-		SuppressStdout: checkTrue(getConfigVal(configMap, "suppress_stdout", "false")),
 		SuppressStderr: checkTrue(getConfigVal(configMap, "suppress_stderr", "false")),
 		Editor:         getConfigVal(configMap, "editor", getDefaultEditor()),
 	}

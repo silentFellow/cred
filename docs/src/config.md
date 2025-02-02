@@ -19,9 +19,6 @@
 # Automatically push all changes to Git (true/false)
 auto_git = false
 
-# Suppress stdout output (true/false)
-suppress_stdout = true
-
 # Suppress stderr output (true/false)
 suppress_stderr = false
 

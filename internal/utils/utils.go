@@ -128,7 +128,7 @@ func SetCmd(cfg CmdConfig, args ...string) *exec.Cmd {
 	if cfg.IsStdin {
 		cmd.Stdin = os.Stdin
 	}
-	if !config.Config.SuppressStdout && cfg.IsStdout {
+	if cfg.IsStdout {
 		cmd.Stdout = os.Stdout
 	}
 	if !config.Config.SuppressStderr && cfg.IsStderr {

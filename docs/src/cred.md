@@ -25,6 +25,7 @@ Examples and usage:
 
 * [cred completion](cred_completion.md)	 - Generate the autocompletion script for the specified shell
 * [cred env](cred_env.md)	 - A command to manage env-variables
+* [cred git](cred_git.md)	 - Manage cred-store git repository and operations
 * [cred init](cred_init.md)	 - Initialize the credential store
 * [cred migrate](cred_migrate.md)	 - Migrate the credential store to a new GPG key
 * [cred pass](cred_pass.md)	 - A command to manage passwords

@@ -256,9 +256,6 @@ This operation will create a backup of your current store and re-encrypt all fil
 <pre><code class="language-ini"># Automatically push all changes to Git (true/false)
 auto_git = false
 
-# Suppress stdout output (true/false)
-suppress_stdout = true
-
 # Suppress stderr output (true/false)
 suppress_stderr = false
 
@@ -287,6 +284,7 @@ It uses GPG encryption to securely store and manage sensitive information.</p>
 <ul>
 <li><a href="cred_completion.html">cred completion</a>	 - Generate the autocompletion script for the specified shell</li>
 <li><a href="cred_env.html">cred env</a>	 - A command to manage env-variables</li>
+<li><a href="cred_git.html">cred git</a>	 - Manage cred-store git repository and operations</li>
 <li><a href="cred_init.html">cred init</a>	 - Initialize the credential store</li>
 <li><a href="cred_migrate.html">cred migrate</a>	 - Migrate the credential store to a new GPG key</li>
 <li><a href="cred_pass.html">cred pass</a>	 - A command to manage passwords</li>
@@ -458,6 +456,7 @@ It provides functionalities to create, update, and delete passwords.</p>
 <li><a href="cred_pass_generate.html">cred pass generate</a>	 - Generate a new password and store it securely</li>
 <li><a href="cred_pass_insert.html">cred pass insert</a>	 - Insert a new password entry</li>
 <li><a href="cred_pass_ls.html">cred pass ls</a>	 - List files and directories</li>
+<li><a href="cred_pass_mkdir.html">cred pass mkdir</a>	 - Create directories</li>
 <li><a href="cred_pass_mv.html">cred pass mv</a>	 - Move files and directories</li>
 <li><a href="cred_pass_rm.html">cred pass rm</a>	 - Remove files and directories</li>
 <li><a href="cred_pass_show.html">cred pass show</a>	 - Displays the stored password</li>
@@ -725,6 +724,22 @@ to your powershell profile.</p>
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

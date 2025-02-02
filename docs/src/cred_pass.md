@@ -31,6 +31,7 @@ cred pass [flags]
 * [cred pass generate](cred_pass_generate.md)	 - Generate a new password and store it securely
 * [cred pass insert](cred_pass_insert.md)	 - Insert a new password entry
 * [cred pass ls](cred_pass_ls.md)	 - List files and directories
+* [cred pass mkdir](cred_pass_mkdir.md)	 - Create directories
 * [cred pass mv](cred_pass_mv.md)	 - Move files and directories
 * [cred pass rm](cred_pass_rm.md)	 - Remove files and directories
 * [cred pass show](cred_pass_show.md)	 - Displays the stored password

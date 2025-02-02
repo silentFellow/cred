@@ -168,9 +168,6 @@
 <pre><code class="language-ini"># Automatically push all changes to Git (true/false)
 auto_git = false
 
-# Suppress stdout output (true/false)
-suppress_stdout = true
-
 # Suppress stderr output (true/false)
 suppress_stderr = false
 
@@ -208,6 +205,22 @@ editor = vim
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 
