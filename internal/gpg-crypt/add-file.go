@@ -32,4 +32,3 @@ func AddFile(path string, content string, copy bool) error {
 
 	return nil
 }
-

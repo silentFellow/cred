@@ -1,8 +1,9 @@
 package env
 
 import (
-	"github.com/silentFellow/cred/internal/core"
 	"github.com/spf13/cobra"
+
+	"github.com/silentFellow/cred/internal/core"
 )
 
 // CopyCmd represents the {env copy filepath} command

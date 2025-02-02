@@ -20,7 +20,7 @@ func CheckKeyExists() bool {
 }
 
 func CheckKeyValidity(keyId string) bool {
-	cmd := utils.SetCmd("", utils.CmdIOConfig{}, "gpg", "--list-keys", keyId)
+	cmd := utils.SetCmd(utils.CmdConfig{}, "gpg", "--list-keys", keyId)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		return false

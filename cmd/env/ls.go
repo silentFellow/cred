@@ -15,6 +15,6 @@ It uses the 'ls' command to display the contents of the current directory.
 Examples:
   cred env ls <path>`,
 	Run: func(cmd *cobra.Command, args []string) {
-    core.LsLogic("env", args)
+		core.LsLogic("env", args)
 	},
 }

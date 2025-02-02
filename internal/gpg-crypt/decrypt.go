@@ -15,7 +15,7 @@ func Decrypt(filePath string) (string, error) {
 		return "", errors.New("Invalid GPG key")
 	}
 
-	cmd := utils.SetCmd("", utils.CmdIOConfig{}, "gpg", "--decrypt", filePath)
+	cmd := utils.SetCmd(utils.CmdConfig{}, "gpg", "--decrypt", filePath)
 
 	var outBuffer bytes.Buffer
 	cmd.Stdout = &outBuffer

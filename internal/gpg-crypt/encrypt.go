@@ -12,7 +12,7 @@ func Encrypt(v string, key string) (string, error) {
 		return "", errors.New("Invalid GPG key")
 	}
 
-	cmd := utils.SetCmd("", utils.CmdIOConfig{}, "gpg", "--armor", "--encrypt", "--recipient", key)
+	cmd := utils.SetCmd(utils.CmdConfig{}, "gpg", "--armor", "--encrypt", "--recipient", key)
 
 	// create a pipeline for input
 	inPipe, err := cmd.StdinPipe()
@@ -26,16 +26,16 @@ func Encrypt(v string, key string) (string, error) {
 
 	// start the encryption
 	if err := cmd.Start(); err != nil {
-    inPipe.Close()
+		inPipe.Close()
 		return "", err
 	}
 
 	// write the content to GPG stdin
 	if _, err := inPipe.Write([]byte(v)); err != nil {
-    inPipe.Close()
+		inPipe.Close()
 		return "", err
 	}
-  inPipe.Close()
+	inPipe.Close()
 
 	// wait for GPG to finish the process
 	if err := cmd.Wait(); err != nil {

@@ -16,8 +16,7 @@ func GenerateKey(uname, email string) error {
 	identity := fmt.Sprintf("%v <%v>", uname, email)
 
 	cmd := utils.SetCmd(
-		"",
-		utils.CmdIOConfig{},
+		utils.CmdConfig{},
 		"gpg",
 		"--quick-generate-key",
 		identity,
@@ -35,7 +34,7 @@ func GenerateKey(uname, email string) error {
 }
 
 func GetKeyFpr(uname string) (string, error) {
-	cmd := utils.SetCmd("", utils.CmdIOConfig{}, "gpg", "--list-keys", "--with-colons", uname)
+	cmd := utils.SetCmd(utils.CmdConfig{}, "gpg", "--list-keys", "--with-colons", uname)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		return "", err
@@ -56,8 +55,7 @@ func GetKeyFpr(uname string) (string, error) {
 
 func AddSubKey(keyId string) error {
 	cmd := utils.SetCmd(
-		"",
-		utils.CmdIOConfig{IsStdin: true},
+		utils.CmdConfig{IsStdin: true},
 		"gpg",
 		"--command-fd",
 		"0",
@@ -80,8 +78,7 @@ func AddSubKey(keyId string) error {
 
 func ModifyTrust(keyId string) error {
 	cmd := utils.SetCmd(
-		"",
-		utils.CmdIOConfig{IsStdin: true},
+		utils.CmdConfig{IsStdin: true},
 		"gpg",
 		"--command-fd",
 		"0",
@@ -111,8 +108,7 @@ func ExportKeys(uname string) error {
 
 	publicKeyPath := paths.BuildPath(tempDir, "public_key.asc")
 	publicKeyCmd := utils.SetCmd(
-		"",
-		utils.CmdIOConfig{IsStdout: true},
+		utils.CmdConfig{IsStdout: true},
 		"gpg",
 		"--armor",
 		"--export",
@@ -132,8 +128,7 @@ func ExportKeys(uname string) error {
 	privateKeyPath := paths.BuildPath(tempDir, "private_key.asc")
 
 	privateKeyCmd := utils.SetCmd(
-		"",
-		utils.CmdIOConfig{IsStdout: true},
+		utils.CmdConfig{IsStdout: true},
 		"gpg",
 		"--armor",
 		"--export",

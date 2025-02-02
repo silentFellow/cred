@@ -42,7 +42,7 @@ func PrintTree(root string, prefix string, isLast bool) error {
 
 	// check if tree command present if so just execute it
 	if config.Constants.Os != "windows" {
-		treeCmd := SetCmd("", CmdIOConfig{IsStdout: true}, "tree", root)
+		treeCmd := SetCmd(CmdConfig{IsStdout: true}, "tree", root)
 		if err := treeCmd.Run(); config.Constants.Os != "windows" && err == nil {
 			return nil
 		}
@@ -112,25 +112,26 @@ func GenerateRandom(n int, allowLower, allowUpper, allowDigit, allowSpecial bool
 	return random.String()
 }
 
-type CmdIOConfig struct {
+type CmdConfig struct {
 	IsStdin  bool
 	IsStdout bool
 	IsStderr bool
+	Dir      string
 }
 
-func SetCmd(filepath string, IOConfig CmdIOConfig, args ...string) *exec.Cmd {
+func SetCmd(cfg CmdConfig, args ...string) *exec.Cmd {
 	cmd := exec.Command(args[0], args[1:]...)
-	if strings.Trim(filepath, " ") != "" {
-		cmd.Dir = filepath
+	if strings.Trim(cfg.Dir, " ") != "" {
+		cmd.Dir = cfg.Dir
 	}
 
-	if IOConfig.IsStdin {
+	if cfg.IsStdin {
 		cmd.Stdin = os.Stdin
 	}
-	if !config.Config.SuppressStdout && IOConfig.IsStdout {
+	if !config.Config.SuppressStdout && cfg.IsStdout {
 		cmd.Stdout = os.Stdout
 	}
-	if !config.Config.SuppressStderr && IOConfig.IsStderr {
+	if !config.Config.SuppressStderr && cfg.IsStderr {
 		cmd.Stderr = os.Stderr
 	}
 	return cmd

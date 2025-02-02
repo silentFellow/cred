@@ -62,8 +62,12 @@ func init() {
 			Run: func(cmd *cobra.Command, args []string) {
 				cmdString := append([]string{"git", cmd.Use}, args...)
 				execCmd := utils.SetCmd(
-					config.Constants.StorePath,
-					utils.CmdIOConfig{IsStdin: true, IsStdout: true, IsStderr: true},
+					utils.CmdConfig{
+						IsStdin:  true,
+						IsStdout: true,
+						IsStderr: true,
+						Dir:      config.Constants.StorePath,
+					},
 					cmdString...,
 				)
 

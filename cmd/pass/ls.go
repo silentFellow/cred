@@ -1,8 +1,9 @@
 package pass
 
 import (
-	"github.com/silentFellow/cred/internal/core"
 	"github.com/spf13/cobra"
+
+	"github.com/silentFellow/cred/internal/core"
 )
 
 // LsCmd represents the {cred pass ls <path>} command
@@ -15,6 +16,6 @@ It uses the 'ls' command to display the contents of the current directory.
 Examples:
   cred pass ls <path>`,
 	Run: func(cmd *cobra.Command, args []string) {
-    core.LsLogic("pass", args)
+		core.LsLogic("pass", args)
 	},
 }

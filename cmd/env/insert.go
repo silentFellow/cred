@@ -54,8 +54,7 @@ Examples:
 		defer os.Remove(tempFile.Name())
 
 		editorCmd := utils.SetCmd(
-			"",
-			utils.CmdIOConfig{IsStdin: true, IsStdout: true, IsStderr: true},
+			utils.CmdConfig{IsStdin: true, IsStdout: true, IsStderr: true},
 			config.Config.Editor,
 			tempFile.Name(),
 		)

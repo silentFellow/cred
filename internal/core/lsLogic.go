@@ -22,7 +22,11 @@ func LsLogic(
 
 	if len(args) < 1 {
 		if err := utils.PrintTree(basePath, "", true); err != nil {
-			fmt.Printf("listing files and directories in %v failed: %v\n", filepath.Base(basePath), err)
+			fmt.Printf(
+				"listing files and directories in %v failed: %v\n",
+				filepath.Base(basePath),
+				err,
+			)
 		}
 		return
 	}
