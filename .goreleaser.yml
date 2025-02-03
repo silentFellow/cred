@@ -5,14 +5,12 @@ before:
     # You may remove this if you don't use go modules.
     - go mod tidy
 
-
 builds:
   - env:
       - CGO_ENABLED=0
     binary: cred
     goos:
       - linux
-      - windows
       - darwin
     goarch:
       - amd64
@@ -23,15 +21,26 @@ builds:
 release:
   prerelease: auto
 
-# universal_binaries:
-#   - replace: true
+universal_binaries:
+  - replace: true
 
 checksum:
   name_template: "checksum.txt"
 
-changelog:
-  sort: asc
-  filters:
-    exclude:
-      - "^docs:"
-      - "^test:"
+# linux packages
+nfpms:
+  - id: cred
+    package_name: cred
+    homepage: https://silentfellow.github.io/cred-store/book
+    maintainer: silentfellow gowtham.sri+github@zohomail.in
+    description: cred is a simple yet powerful CLI tool to manage passwords and environment variables by encrypting them with a GPG key.
+    license: MIT
+    formats:
+      - deb
+      - rpm
+      - archlinux
+    dependencies:
+      - gpg
+    suggests:
+      - git
+    bindir: /usr/bin
