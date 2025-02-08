@@ -13,7 +13,7 @@ You can find the latest releases and download the binaries from the [tags sectio
 Alternatively, you can install `cred` using the following command:
 
 ```sh
-go install github.com/silentFellow/cred-store@latest
+go install github.com/silentFellow/cred@latest
 ```
 
 ## Getting Started
