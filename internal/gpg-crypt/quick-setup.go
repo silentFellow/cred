@@ -131,7 +131,7 @@ func ExportKeys(uname string) error {
 		utils.CmdConfig{IsStdout: true},
 		"gpg",
 		"--armor",
-		"--export",
+		"--export-secret-key",
 		uname,
 	)
 	privateKeyFile, err := os.Create(privateKeyPath)
