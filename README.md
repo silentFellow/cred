@@ -2,7 +2,7 @@
 
 `cred` is a simple yet powerful CLI tool to manage passwords and environment variables by encrypting them with a GPG key.
 
-## [Documentation](https://silentfellow.github.io/cred-store/book)
+## [Documentation](https://silentfellow.github.io/cred/book)
 
 The documentation is generated using mdBook. For detailed documentation, visit: [cred-store documentation](https://silentfellow.github.io/cred-store/book)
 
