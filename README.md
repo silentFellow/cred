@@ -4,9 +4,9 @@
 
 ## [Documentation](https://silentfellow.github.io/cred/book)
 
-The documentation is generated using mdBook. For detailed documentation, visit: [cred-store documentation](https://silentfellow.github.io/cred-store/book)
+The documentation is generated using mdBook. For detailed documentation, visit: [cred documentation](https://silentfellow.github.io/cred/book)
 
-## [Downloads](https://github.com/silentFellow/cred-store/tags)
+## [Downloads](https://github.com/silentFellow/cred/tags)
 
 You can install `cred` using the following command:
 
