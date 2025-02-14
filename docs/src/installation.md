@@ -6,8 +6,6 @@ You can install the tool with the following command:
 go install github.com/silentFellow/cred-store@latest
 ```
 
-For other installation methods, please refer to the <a href="https://github.com/silentFellow/cred-store/tags" target="_blank">tags section</a>.
-
 ## For Windows
 
 Please note that the entire code uses GPG for encryption and decryption. Windows users need to have a GPG client installed, such as <a href="https://gpg4win.org/" target="_blank">Gpg4win</a>.

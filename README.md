@@ -8,9 +8,7 @@ The documentation is generated using mdBook. For detailed documentation, visit: 
 
 ## [Downloads](https://github.com/silentFellow/cred-store/tags)
 
-You can find the latest releases and download the binaries from the [tags section](https://github.com/silentFellow/cred-store/tags) on GitHub.
-
-Alternatively, you can install `cred` using the following command:
+You can install `cred` using the following command:
 
 ```sh
 go install github.com/silentFellow/cred@latest
