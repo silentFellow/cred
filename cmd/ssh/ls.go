@@ -6,7 +6,7 @@ import (
 	"github.com/silentFellow/cred/internal/core"
 )
 
-// LsCmd represents the {cred pass ls <path>} command
+// LsCmd represents the {cred ssh ls <path>} command
 var LsCmd = &cobra.Command{
 	Use:   "ls",
 	Short: "List files and directories",
@@ -14,7 +14,7 @@ var LsCmd = &cobra.Command{
 It uses the 'ls' command to display the contents of the current directory.
 
 Examples:
-  cred pass ls <path>`,
+  cred ssh ls <path>`,
 	Run: func(cmd *cobra.Command, args []string) {
 		core.LsLogic("ssh", args)
 	},

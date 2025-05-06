@@ -6,7 +6,7 @@ import (
 	"github.com/silentFellow/cred/internal/core"
 )
 
-// RmCmd represents the {cred pass rm <path>} command
+// RmCmd represents the {cred ssh rm <path>} command
 var MkdirCmd = &cobra.Command{
 	Use:   "mkdir",
 	Short: "Create directories",
@@ -14,7 +14,7 @@ var MkdirCmd = &cobra.Command{
 It uses the 'mkdir' command to create the specified path.
 
 Examples:
-  cred pass mkdir <path>`,
+  cred ssh mkdir <path>`,
 	Run: func(cmd *cobra.Command, args []string) {
 		core.MkdirLogic("ssh", args)
 	},

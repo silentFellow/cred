@@ -74,6 +74,7 @@ func init() {
 		ssh.InsertCmd,
 		ssh.LsCmd,
 		ssh.MkdirCmd,
+		ssh.CpCmd,
 	}
 
 	for _, cmd := range sshCmds {
