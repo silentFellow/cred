@@ -15,6 +15,7 @@ type constants struct {
 	StorePath string
 	PassPath  string
 	EnvPath   string
+	SshPath   string
 	Os        string
 }
 
@@ -37,6 +38,7 @@ func initConstants() constants {
 		StorePath: paths.BuildPath(home, ".cred-store"),
 		PassPath:  paths.BuildPath(home, ".cred-store", "pass"),
 		EnvPath:   paths.BuildPath(home, ".cred-store", "env"),
+		SshPath:   paths.BuildPath(home, ".cred-store", "ssh"),
 		Os:        runtime.GOOS,
 	}
 }

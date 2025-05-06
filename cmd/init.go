@@ -75,6 +75,7 @@ func initStore(gpgid string) error {
 		config.Constants.StorePath,
 		config.Constants.PassPath,
 		config.Constants.EnvPath,
+		config.Constants.SshPath,
 	}
 
 	for _, path := range storeDirectoriesPaths {
