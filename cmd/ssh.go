@@ -6,6 +6,7 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/silentFellow/cred/cmd/ssh"
 	"github.com/silentFellow/cred/config"
 	"github.com/silentFellow/cred/internal/completions"
 	gpgcrypt "github.com/silentFellow/cred/internal/gpg-crypt"
@@ -69,7 +70,9 @@ func init() {
 		return nil
 	}
 
-	sshCmds := []*cobra.Command{}
+	sshCmds := []*cobra.Command{
+		ssh.InsertCmd,
+	}
 
 	for _, cmd := range sshCmds {
 		cmd.ValidArgsFunction = func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
