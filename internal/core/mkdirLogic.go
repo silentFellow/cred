@@ -17,8 +17,10 @@ func MkdirLogic(
 	var basePath string
 	if cmdType == "pass" {
 		basePath = config.Constants.PassPath
-	} else {
+	} else if cmdType == "env" {
 		basePath = config.Constants.EnvPath
+	} else if cmdType == "ssh" {
+		basePath = config.Constants.SshPath
 	}
 
 	if len(args) < 1 {
