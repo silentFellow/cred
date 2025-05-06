@@ -72,6 +72,7 @@ func init() {
 
 	sshCmds := []*cobra.Command{
 		ssh.InsertCmd,
+		ssh.LsCmd,
 	}
 
 	for _, cmd := range sshCmds {
