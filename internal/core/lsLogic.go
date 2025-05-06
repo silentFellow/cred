@@ -18,7 +18,7 @@ func LsLogic(
 		basePath = config.Constants.PassPath
 	} else if cmdType == "env" {
 		basePath = config.Constants.EnvPath
-	} else {
+	} else if cmdType == "ssh" {
 		basePath = config.Constants.SshPath
 	}
 
