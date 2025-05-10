@@ -16,27 +16,27 @@ type FilePathSuggestionOptions struct {
 // GetFilePathSuggestions returns a sorted list of relative file or directory paths
 // from the given base path, based on the configuration.
 // If both AllowDirs and AllowFiles are false, the result will be empty.
-func GetFilePathSuggestions(config FilePathSuggestionOptions) []string {
+func GetFilePathSuggestions(options FilePathSuggestionOptions) []string {
 	var suggestions []string
 
 	// Walk through all files and directories under basePath
-	err := filepath.Walk(config.BasePath, func(path string, info os.FileInfo, err error) error {
+	err := filepath.Walk(options.BasePath, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return nil
 		}
 
 		// Skip the base path itself
-		if config.BasePath == path {
+		if options.BasePath == path {
 			return nil
 		}
 
 		// Apply filtering rules based on config
-		if (!config.AllowDirs && info.IsDir()) || (!config.AllowFiles && !info.IsDir()) {
+		if (!options.AllowDirs && info.IsDir()) || (!options.AllowFiles && !info.IsDir()) {
 			return nil
 		}
 
 		// Convert full path to relative path
-		relativePath, err := filepath.Rel(config.BasePath, path)
+		relativePath, err := filepath.Rel(options.BasePath, path)
 		if err != nil {
 			return nil
 		}
