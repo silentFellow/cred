@@ -85,6 +85,7 @@ func init() {
 		ssh.MkdirCmd,
 		ssh.CpCmd,
 		ssh.MvCmd,
+		ssh.RmCmd,
 	}
 
 	for _, cmd := range sshCmdsBoth {
