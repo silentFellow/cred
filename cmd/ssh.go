@@ -8,7 +8,6 @@ import (
 
 	"github.com/silentFellow/cred/cmd/ssh"
 	"github.com/silentFellow/cred/config"
-	"github.com/silentFellow/cred/internal/completions"
 	gpgcrypt "github.com/silentFellow/cred/internal/gpg-crypt"
 	"github.com/silentFellow/cred/internal/utils"
 	"github.com/silentFellow/cred/internal/utils/git"
@@ -70,6 +69,15 @@ func init() {
 		return nil
 	}
 
+	sshCmdsOnlyFiles := []*cobra.Command{
+		ssh.ShowCmd,
+	}
+
+	for _, cmd := range sshCmdsOnlyFiles {
+		cmd.ValidArgsFunction = fileCompletion(config.Constants.SshPath, false, true)
+		sshCmd.AddCommand(cmd)
+	}
+
 	sshCmdsBoth := []*cobra.Command{
 		ssh.InsertCmd,
 		ssh.LsCmd,
@@ -78,8 +86,8 @@ func init() {
 	}
 
 	for _, cmd := range sshCmdsBoth {
-		cmd.ValidArgsFunction = fileCompletion(config.Constants.EnvPath, true, true)
-		envCmd.AddCommand(cmd)
+		cmd.ValidArgsFunction = fileCompletion(config.Constants.SshPath, true, true)
+		sshCmd.AddCommand(cmd)
 	}
 
 	rootCmd.AddCommand(sshCmd)
