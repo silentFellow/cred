@@ -71,6 +71,7 @@ func init() {
 
 	sshCmdsOnlyFiles := []*cobra.Command{
 		ssh.ShowCmd,
+		ssh.CopyCmd,
 	}
 
 	for _, cmd := range sshCmdsOnlyFiles {
