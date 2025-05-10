@@ -6,6 +6,8 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/cobra/doc"
+
+	"github.com/silentFellow/cred/internal/completions"
 )
 
 var buildDocs bool
@@ -36,6 +38,29 @@ func Execute() {
 			log.Fatalln("failed to generate docs: ", err)
 		}
 		log.Println("Documentation generated at ./docs/src")
+	}
+}
+
+// helper to apply shell completions
+type cobraCompletion func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective)
+
+func fileCompletion(
+	basePath string, allowDirs, allowFiles bool,
+) cobraCompletion {
+	return func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+		suggestions := completions.GetFilePathSuggestions(
+			completions.FilePathSuggestionOptions{
+				BasePath:   basePath,
+				AllowDirs:  allowDirs,
+				AllowFiles: allowFiles,
+			},
+		)
+
+		if len(suggestions) == 0 {
+			return nil, cobra.ShellCompDirectiveNoFileComp
+		}
+
+		return suggestions, cobra.ShellCompDirectiveDefault
 	}
 }
 

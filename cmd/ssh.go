@@ -70,28 +70,16 @@ func init() {
 		return nil
 	}
 
-	sshCmds := []*cobra.Command{
+	sshCmdsBoth := []*cobra.Command{
 		ssh.InsertCmd,
 		ssh.LsCmd,
 		ssh.MkdirCmd,
 		ssh.CpCmd,
 	}
 
-	for _, cmd := range sshCmds {
-		cmd.ValidArgsFunction = func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
-			suggestions := completions.GetFilePathSuggestions(
-				config.Constants.SshPath,
-			)
-
-			// If no suggestions are found, return an empty slice
-			if len(suggestions) == 0 {
-				return []string{}, cobra.ShellCompDirectiveNoFileComp
-			}
-
-			return suggestions, cobra.ShellCompDirectiveDefault
-		}
-
-		sshCmd.AddCommand(cmd)
+	for _, cmd := range sshCmdsBoth {
+		cmd.ValidArgsFunction = fileCompletion(config.Constants.EnvPath, true, true)
+		envCmd.AddCommand(cmd)
 	}
 
 	rootCmd.AddCommand(sshCmd)

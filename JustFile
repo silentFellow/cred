@@ -6,6 +6,13 @@ build:
 	@echo "Building..."
 	@go build -o tmp/main main.go
 
+build-with-completion:
+  @echo "Building..."
+  @go build -o tmp/main main.go
+  @sudo tmp/main completion zsh > _cred
+  @sudo mv _cred /usr/share/zsh/site-functions/_cred
+  @sudo mv tmp/main /usr/bin/cred
+
 add $cmd:
   @echo "Adding..."
   @cobra-cli add ${cmd}

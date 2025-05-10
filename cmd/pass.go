@@ -8,7 +8,6 @@ import (
 
 	"github.com/silentFellow/cred/cmd/pass"
 	"github.com/silentFellow/cred/config"
-	"github.com/silentFellow/cred/internal/completions"
 	gpgcrypt "github.com/silentFellow/cred/internal/gpg-crypt"
 	"github.com/silentFellow/cred/internal/utils"
 	"github.com/silentFellow/cred/internal/utils/git"
@@ -69,12 +68,20 @@ func init() {
 		return nil
 	}
 
-	passCmds := []*cobra.Command{
-		pass.GenerateCmd,
-		pass.InsertCmd,
+	passCmdsOnlyFiles := []*cobra.Command{
 		pass.ShowCmd,
 		pass.CopyCmd,
 		pass.EditCmd,
+	}
+
+	for _, cmd := range passCmdsOnlyFiles {
+		cmd.ValidArgsFunction = fileCompletion(config.Constants.PassPath, false, true)
+		passCmd.AddCommand(cmd)
+	}
+
+	passCmdsBoth := []*cobra.Command{
+		pass.GenerateCmd,
+		pass.InsertCmd,
 		pass.MkdirCmd,
 		pass.LsCmd,
 		pass.RmCmd,
@@ -82,20 +89,8 @@ func init() {
 		pass.CpCmd,
 	}
 
-	for _, cmd := range passCmds {
-		cmd.ValidArgsFunction = func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
-			suggestions := completions.GetFilePathSuggestions(
-				config.Constants.PassPath,
-			)
-
-			// If no suggestions are found, return an empty slice
-			if len(suggestions) == 0 {
-				return []string{}, cobra.ShellCompDirectiveNoFileComp
-			}
-
-			return suggestions, cobra.ShellCompDirectiveDefault
-		}
-
+	for _, cmd := range passCmdsBoth {
+		cmd.ValidArgsFunction = fileCompletion(config.Constants.PassPath, true, true)
 		passCmd.AddCommand(cmd)
 	}
 
