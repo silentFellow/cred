@@ -81,6 +81,7 @@ func init() {
 
 	sshCmdsOnlyDirs := []*cobra.Command{
 		ssh.EditCmd,
+		ssh.DownloadCmd,
 	}
 
 	for _, cmd := range sshCmdsOnlyDirs {
