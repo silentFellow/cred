@@ -79,8 +79,16 @@ func init() {
 		sshCmd.AddCommand(cmd)
 	}
 
+	sshCmdsOnlyDirs := []*cobra.Command{
+		ssh.EditCmd,
+	}
+
+	for _, cmd := range sshCmdsOnlyDirs {
+		cmd.ValidArgsFunction = fileCompletion(config.Constants.SshPath, true, false)
+		sshCmd.AddCommand(cmd)
+	}
+
 	sshCmdsBoth := []*cobra.Command{
-		ssh.InsertCmd,
 		ssh.LsCmd,
 		ssh.MkdirCmd,
 		ssh.CpCmd,
