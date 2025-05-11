@@ -60,9 +60,14 @@ This will create:
 			return
 		}
 
-		filesToCopy := []string{"public.gpg", "private.gpg", "connection.gpg"}
-		for _, file := range filesToCopy {
-			originalFilePath := paths.BuildPath(keyFullPath, file)
+		filesToCopy := map[string]string{
+			"public.gpg":     path + ".pub",
+			"private.gpg":    path,
+			"connection.gpg": "connection",
+		}
+
+		for src, dest := range filesToCopy {
+			originalFilePath := paths.BuildPath(keyFullPath, src)
 			info, err := os.Stat(originalFilePath)
 			if err != nil || info.IsDir() {
 				continue
@@ -70,11 +75,11 @@ This will create:
 
 			content, err := gpgcrypt.Decrypt(originalFilePath)
 			if err != nil {
-				fmt.Printf("failed to decrypt %s: %v\n", file, err)
+				fmt.Printf("failed to decrypt %s: %v\n", src, err)
 				return
 			}
 
-			destPath := paths.BuildPath(downloadPath, file)
+			destPath := paths.BuildPath(downloadPath, dest)
 			destFile, err := os.Create(destPath)
 			if err != nil {
 				fmt.Printf("failed to create %s: %v\n", destPath, err)
