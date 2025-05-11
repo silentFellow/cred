@@ -90,6 +90,7 @@ func init() {
 	}
 
 	sshCmdsBoth := []*cobra.Command{
+		ssh.InsertCmd,
 		ssh.LsCmd,
 		ssh.MkdirCmd,
 		ssh.CpCmd,
