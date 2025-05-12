@@ -10,6 +10,7 @@ import (
 	gpgcrypt "github.com/silentFellow/cred/internal/gpg-crypt"
 	fscopy "github.com/silentFellow/cred/internal/utils/copy"
 	"github.com/silentFellow/cred/internal/utils/paths"
+	sshUtils "github.com/silentFellow/cred/internal/utils/ssh"
 )
 
 // EditCmd represents the {cred ssh edit <filepath>} command
@@ -91,44 +92,64 @@ ssh edit <key-name> --public-key <key-path> --private-key <key-path> --connectio
 		}
 
 		// create files based on it
-		files := make(map[string]string)
-		files["public.gpg"] = publicKeyPath
-		files["private.gpg"] = privateKeyPath
+		type keyFormat struct {
+			keyType  string
+			fileName string
+			path     string
+		}
+		keys := []keyFormat{
+			{
+				keyType:  "public",
+				fileName: "public.gpg",
+				path:     publicKeyPath,
+			},
+			{
+				keyType:  "private",
+				fileName: "private.gpg",
+				path:     privateKeyPath,
+			},
+		}
 
-		for name, path := range files {
-			if path == "" {
+		for _, key := range keys {
+			if key.path == "" {
 				continue
 			}
 
-			info, err := os.Stat(path)
+			info, err := os.Stat(key.path)
 			if err != nil {
 				if os.IsNotExist(err) {
-					fmt.Printf("file %s does not exist\n", path)
+					fmt.Printf("file %s does not exist\n", key.path)
 				} else {
-					fmt.Printf("failed to access file %s: %v\n", path, err)
+					fmt.Printf("failed to access file %s: %v\n", key.path, err)
 				}
 				restoreOnError()
 				return
 			}
 
 			if info.IsDir() {
-				fmt.Printf("path %s is a directory, not a file\n", path)
+				fmt.Printf("path %s is a directory, not a file\n", key.path)
 				restoreOnError()
 				return
 			}
 
-			fullPath := paths.BuildPath(keyFullPath, name)
+			fullPath := paths.BuildPath(keyFullPath, key.fileName)
 			content := ""
-			file, err := os.ReadFile(path)
+			file, err := os.ReadFile(key.path)
 			if err != nil {
-				fmt.Printf("failed to read file %s: %v\n", path, err)
+				fmt.Printf("failed to read file %s: %v\n", key.path, err)
 				restoreOnError()
 				return
 			}
 			content = string(file)
 
+			if !sshUtils.ValidateKey(content, key.keyType) {
+				fmt.Printf("invalid %v ssh key\n", key.keyType)
+				restoreOnError()
+				return
+			}
+
 			if err := gpgcrypt.AddFile(fullPath, content, false); err != nil {
-				fmt.Println("failed to edit ssh keys: ", err)
+				fmt.Println("failed to insert ssh keys: ", err)
 				restoreOnError()
 				return
 			}
