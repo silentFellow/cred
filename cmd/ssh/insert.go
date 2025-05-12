@@ -22,7 +22,7 @@ If the entry already exists, you will be asked whether you want to overwrite it.
 Examples:
 ssh insert <key-name> --public-key <key-path> --private-key <key-path> --connection <connection-string>`,
 	Run: func(cmd *cobra.Command, args []string) {
-		usage := "ssh insert <key-name> --public-key <key-path> --private-key <key-path> --connection <connection-string>`"
+		usage := "ssh insert <key-name> --public-key <key-path> --private-key <key-path> --connection <connection-string>"
 
 		sshStore := config.Constants.SshPath
 		if len(args) < 1 {
