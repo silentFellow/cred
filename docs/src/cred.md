@@ -30,4 +30,5 @@ Examples and usage:
 * [cred migrate](cred_migrate.md)	 - Migrate the credential store to a new GPG key
 * [cred pass](cred_pass.md)	 - A command to manage passwords
 * [cred quick-setup](cred_quick-setup.md)	 - Creates a GPG ID and initiates store usage credentials
+* [cred ssh](cred_ssh.md)	 - Manage SSH keys and connections
 
