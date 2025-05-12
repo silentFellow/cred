@@ -101,7 +101,7 @@ Example:
 		}
 		privateKeyPath := paths.BuildPath(keyFullPath, "private.gpg")
 
-		if err := gpgcrypt.AddFile(privateKeyPath, string(privateKeyConent), false); err != nil {
+		if err := gpgcrypt.AddFile(privateKeyPath, string(privateKeyConent), true); err != nil {
 			fmt.Println("failed to generate ssh keys: ", err)
 			removeCreated(keyFullPath)
 			return
@@ -124,7 +124,7 @@ Example:
 			}
 		}
 
-		fmt.Println("ssh generated successfully")
+		fmt.Println("SSH key generated successfully. Private key has been copied to the clipboard.")
 	},
 }
 

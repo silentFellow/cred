@@ -24,8 +24,7 @@ func AddFile(path string, content string, copy bool) error {
 	}
 
 	if copy {
-		// true since it only applicable for generate password
-		if err := utils.CopyToClipboard(content, true); err != nil {
+		if err := utils.CopyToClipboard(content, false); err != nil {
 			return err
 		}
 	}
