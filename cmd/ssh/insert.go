@@ -33,24 +33,7 @@ ssh insert <key-name> --public-key <key-path> --private-key <key-path> --connect
 		// create a folder for the key
 		path := args[0]
 		keyFullPath := paths.BuildPath(sshStore, path)
-
-		if paths.CheckPathExists(keyFullPath) {
-			var choice string
-			fmt.Print("The ssh key already exists. Do you want to overwrite it? (y/n): ")
-			fmt.Scanln(&choice)
-
-			if choice != "y" && choice != "Y" {
-				return
-			}
-
-			if err := os.RemoveAll(keyFullPath); err != nil {
-				fmt.Println("failed to remove the file: ", err)
-				return
-			}
-		}
-
-		if err := os.MkdirAll(keyFullPath, 0700); err != nil {
-			fmt.Println("failed to create ssh key folder: ", err)
+		if !prepareKeyFolder(keyFullPath) {
 			return
 		}
 
@@ -75,6 +58,7 @@ ssh insert <key-name> --public-key <key-path> --private-key <key-path> --connect
 
 		if publicKeyPath == "" && privateKeyPath == "" && connectionString == "" {
 			fmt.Println("no files provided")
+			removeCreated(keyFullPath)
 			return
 		}
 
@@ -141,11 +125,4 @@ func init() {
 	InsertCmd.Flags().String("public-key", "", "public key file path")
 	InsertCmd.Flags().String("private-key", "", "private key file path")
 	InsertCmd.Flags().String("connection-string", "", "connection string")
-}
-
-// function to remove created paths
-func removeCreated(path string) {
-	if err := os.RemoveAll(path); err != nil {
-		fmt.Println("failed to remove the created files: ", err)
-	}
 }
