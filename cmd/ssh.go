@@ -97,6 +97,7 @@ func init() {
 		ssh.CpCmd,
 		ssh.MvCmd,
 		ssh.RmCmd,
+		ssh.GenerateCmd,
 	}
 
 	for _, cmd := range sshCmdsBoth {
