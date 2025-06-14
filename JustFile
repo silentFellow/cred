@@ -28,8 +28,24 @@ test:
 
 # Clean the binary
 clean:
-	@echo "Cleaning..."
+	@echo "Cleaning..."\
 	@rm -rf main tmp
+
+# Create a new git tag and push it
+tag $version $message:
+  @echo "Creating tag v${version} with message: ${message}"
+  @git tag -a v${version} -m "${message}"
+  @echo "Push tag to remote with \"git push origin v${version}\""
+
+# Generate CLI documentation using cobra's --generate-docs
+docs:
+  # make sure docs/src folder exists, else create one
+  @echo "Building CLI binary for doc generation..."
+  @go build -o tmp/main main.go
+  @echo "Generating docs..."
+  @./tmp/main --generate-docs
+  @echo "Docs generated successfully."
+  # change docs/src/SUMMARY.md file and use mdbook build && mdbook server --open
 
 # Live Reload
 watch:
