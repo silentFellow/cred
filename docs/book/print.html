@@ -318,6 +318,7 @@ It provides functionalities to create, update, and delete env-variables.</p>
 <li><a href="cred_env_mkdir.html">cred env mkdir</a>	 - Create directories</li>
 <li><a href="cred_env_mv.html">cred env mv</a>	 - Move files and directories</li>
 <li><a href="cred_env_rm.html">cred env rm</a>	 - Remove files and directories</li>
+<li><a href="cred_env_set.html">cred env set</a>	 - Sets environment variables from the cred-store into a .env file</li>
 <li><a href="cred_env_show.html">cred env show</a>	 - Displays the stored env</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-env-insert"><a class="header" href="#cred-env-insert">cred env insert</a></h2>
@@ -480,9 +481,25 @@ Usage examples:</p>
 <ul>
 <li><a href="cred_env.html">cred env</a>	 - A command to manage env-variables</li>
 </ul>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="cred-env-set"><a class="header" href="#cred-env-set">cred env set</a></h2>
+<p>Sets environment variables from the cred-store into a .env file</p>
+<h3 id="synopsis-16"><a class="header" href="#synopsis-16">Synopsis</a></h3>
+<p>Retrieve environment variables for a specified file from the cred-store and write them to a local .env file.</p>
+<p>You provide the file name as an argument. The command fetches the environment variables associated with that file from the cred-store and writes them into a new or existing .env file in your current directory.</p>
+<pre><code>Example usage: cred env set &lt;filepath&gt;
+</code></pre>
+<pre><code>cred env set [flags]
+</code></pre>
+<h3 id="options-16"><a class="header" href="#options-16">Options</a></h3>
+<pre><code>  -h, --help   help for set
+</code></pre>
+<h3 id="see-also-16"><a class="header" href="#see-also-16">SEE ALSO</a></h3>
+<ul>
+<li><a href="cred_env.html">cred env</a>	 - A command to manage env-variables</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-pass"><a class="header" href="#cred-pass">cred pass</a></h2>
 <p>A command to manage passwords</p>
-<h3 id="synopsis-16"><a class="header" href="#synopsis-16">Synopsis</a></h3>
+<h3 id="synopsis-17"><a class="header" href="#synopsis-17">Synopsis</a></h3>
 <p>The pass command allows you to manage your passwords efficiently.
 It provides functionalities to create, update, and delete passwords.</p>
 <p>Examples:</p>
@@ -493,10 +510,10 @@ It provides functionalities to create, update, and delete passwords.</p>
 </ul>
 <pre><code>cred pass [flags]
 </code></pre>
-<h3 id="options-16"><a class="header" href="#options-16">Options</a></h3>
+<h3 id="options-17"><a class="header" href="#options-17">Options</a></h3>
 <pre><code>  -h, --help   help for pass
 </code></pre>
-<h3 id="see-also-16"><a class="header" href="#see-also-16">SEE ALSO</a></h3>
+<h3 id="see-also-17"><a class="header" href="#see-also-17">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred.html">cred</a>	 - A password and environment variables manager</li>
 <li><a href="cred_pass_copy.html">cred pass copy</a>	 - Copies the stored password to system clipboard</li>
@@ -512,7 +529,7 @@ It provides functionalities to create, update, and delete passwords.</p>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-pass-insert"><a class="header" href="#cred-pass-insert">cred pass insert</a></h2>
 <p>Insert a new password entry</p>
-<h3 id="synopsis-17"><a class="header" href="#synopsis-17">Synopsis</a></h3>
+<h3 id="synopsis-18"><a class="header" href="#synopsis-18">Synopsis</a></h3>
 <p>The insert command allows you to add a new password entry to the password store.
 You will be prompted to enter and confirm the password, which will be stored securely.
 If the entry already exists, you will be asked whether you want to overwrite it.</p>
@@ -520,16 +537,16 @@ If the entry already exists, you will be asked whether you want to overwrite it.
 pass insert <filepath></p>
 <pre><code>cred pass insert [flags]
 </code></pre>
-<h3 id="options-17"><a class="header" href="#options-17">Options</a></h3>
+<h3 id="options-18"><a class="header" href="#options-18">Options</a></h3>
 <pre><code>  -h, --help   help for insert
 </code></pre>
-<h3 id="see-also-17"><a class="header" href="#see-also-17">SEE ALSO</a></h3>
+<h3 id="see-also-18"><a class="header" href="#see-also-18">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_pass.html">cred pass</a>	 - A command to manage passwords</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-pass-generate"><a class="header" href="#cred-pass-generate">cred pass generate</a></h2>
 <p>Generate a new password and store it securely</p>
-<h3 id="synopsis-18"><a class="header" href="#synopsis-18">Synopsis</a></h3>
+<h3 id="synopsis-19"><a class="header" href="#synopsis-19">Synopsis</a></h3>
 <p>The generate command creates a new password of specified length and stores it securely in the password store.
 You can specify the length of the password using the -l flag. If the file already exists, you will be prompted to overwrite it.</p>
 <p>Examples:
@@ -537,7 +554,7 @@ pass generate mypassword -l 16
 pass generate anotherpassword -l 24</p>
 <pre><code>cred pass generate [flags]
 </code></pre>
-<h3 id="options-18"><a class="header" href="#options-18">Options</a></h3>
+<h3 id="options-19"><a class="header" href="#options-19">Options</a></h3>
 <pre><code>      --allow-digit     should allow digits in the password (default true)
       --allow-lower     should allow lower-case characters in the password (default true)
       --allow-special   should allow special characters in the password (default true)
@@ -545,139 +562,139 @@ pass generate anotherpassword -l 24</p>
   -h, --help            help for generate
   -l, --length int      length of the generated password (default 12)
 </code></pre>
-<h3 id="see-also-18"><a class="header" href="#see-also-18">SEE ALSO</a></h3>
+<h3 id="see-also-19"><a class="header" href="#see-also-19">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_pass.html">cred pass</a>	 - A command to manage passwords</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-pass-edit"><a class="header" href="#cred-pass-edit">cred pass edit</a></h2>
 <p>Edit a password entry</p>
-<h3 id="synopsis-19"><a class="header" href="#synopsis-19">Synopsis</a></h3>
+<h3 id="synopsis-20"><a class="header" href="#synopsis-20">Synopsis</a></h3>
 <p>Edit a password entry in the password store.</p>
 <p>This command allows you to edit an existing password entry in your password store.
 Usage:
 cred pass edit <filepath></p>
 <pre><code>cred pass edit [flags]
 </code></pre>
-<h3 id="options-19"><a class="header" href="#options-19">Options</a></h3>
+<h3 id="options-20"><a class="header" href="#options-20">Options</a></h3>
 <pre><code>  -h, --help   help for edit
 </code></pre>
-<h3 id="see-also-19"><a class="header" href="#see-also-19">SEE ALSO</a></h3>
+<h3 id="see-also-20"><a class="header" href="#see-also-20">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_pass.html">cred pass</a>	 - A command to manage passwords</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-pass-ls"><a class="header" href="#cred-pass-ls">cred pass ls</a></h2>
 <p>List files and directories</p>
-<h3 id="synopsis-20"><a class="header" href="#synopsis-20">Synopsis</a></h3>
+<h3 id="synopsis-21"><a class="header" href="#synopsis-21">Synopsis</a></h3>
 <p>The ls command allows you to list files and directories.
 It uses the 'ls' command to display the contents of the current directory.</p>
 <p>Examples:
 cred pass ls <path></p>
 <pre><code>cred pass ls [flags]
 </code></pre>
-<h3 id="options-20"><a class="header" href="#options-20">Options</a></h3>
+<h3 id="options-21"><a class="header" href="#options-21">Options</a></h3>
 <pre><code>  -h, --help   help for ls
 </code></pre>
-<h3 id="see-also-20"><a class="header" href="#see-also-20">SEE ALSO</a></h3>
+<h3 id="see-also-21"><a class="header" href="#see-also-21">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_pass.html">cred pass</a>	 - A command to manage passwords</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-pass-mv"><a class="header" href="#cred-pass-mv">cred pass mv</a></h2>
 <p>Move files and directories</p>
-<h3 id="synopsis-21"><a class="header" href="#synopsis-21">Synopsis</a></h3>
+<h3 id="synopsis-22"><a class="header" href="#synopsis-22">Synopsis</a></h3>
 <p>The mv command allows you to move files and directories.
 It uses the 'mv' command to move the specified file or directory to a new location.</p>
 <p>Examples:
 cred pass mv <source> <destination></p>
 <pre><code>cred pass mv [flags]
 </code></pre>
-<h3 id="options-21"><a class="header" href="#options-21">Options</a></h3>
+<h3 id="options-22"><a class="header" href="#options-22">Options</a></h3>
 <pre><code>  -h, --help   help for mv
 </code></pre>
-<h3 id="see-also-21"><a class="header" href="#see-also-21">SEE ALSO</a></h3>
+<h3 id="see-also-22"><a class="header" href="#see-also-22">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_pass.html">cred pass</a>	 - A command to manage passwords</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-pass-cp"><a class="header" href="#cred-pass-cp">cred pass cp</a></h2>
 <p>copies files and directories</p>
-<h3 id="synopsis-22"><a class="header" href="#synopsis-22">Synopsis</a></h3>
+<h3 id="synopsis-23"><a class="header" href="#synopsis-23">Synopsis</a></h3>
 <p>The cp command allows you to copies files and directories.
 It uses the 'cp' command to move the specified file or directory to a new location.</p>
 <p>Examples:
 cred pass cp <source> <destination></p>
 <pre><code>cred pass cp [flags]
 </code></pre>
-<h3 id="options-22"><a class="header" href="#options-22">Options</a></h3>
+<h3 id="options-23"><a class="header" href="#options-23">Options</a></h3>
 <pre><code>  -h, --help   help for cp
 </code></pre>
-<h3 id="see-also-22"><a class="header" href="#see-also-22">SEE ALSO</a></h3>
+<h3 id="see-also-23"><a class="header" href="#see-also-23">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_pass.html">cred pass</a>	 - A command to manage passwords</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-pass-mkdir"><a class="header" href="#cred-pass-mkdir">cred pass mkdir</a></h2>
 <p>Create directories</p>
-<h3 id="synopsis-23"><a class="header" href="#synopsis-23">Synopsis</a></h3>
+<h3 id="synopsis-24"><a class="header" href="#synopsis-24">Synopsis</a></h3>
 <p>The mkdir command allows you to create directories, including nested directories.
 It uses the 'mkdir' command to create the specified path.</p>
 <p>Examples:
 cred pass mkdir <path></p>
 <pre><code>cred pass mkdir [flags]
 </code></pre>
-<h3 id="options-23"><a class="header" href="#options-23">Options</a></h3>
+<h3 id="options-24"><a class="header" href="#options-24">Options</a></h3>
 <pre><code>  -h, --help   help for mkdir
 </code></pre>
-<h3 id="see-also-23"><a class="header" href="#see-also-23">SEE ALSO</a></h3>
+<h3 id="see-also-24"><a class="header" href="#see-also-24">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_pass.html">cred pass</a>	 - A command to manage passwords</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-pass-rm"><a class="header" href="#cred-pass-rm">cred pass rm</a></h2>
 <p>Remove files and directories</p>
-<h3 id="synopsis-24"><a class="header" href="#synopsis-24">Synopsis</a></h3>
+<h3 id="synopsis-25"><a class="header" href="#synopsis-25">Synopsis</a></h3>
 <p>The rm command allows you to remove files and directories recursively.
 It uses the 'rm' command to delete the specified path.</p>
 <p>Examples:
 cred pass rm <path></p>
 <pre><code>cred pass rm [flags]
 </code></pre>
-<h3 id="options-24"><a class="header" href="#options-24">Options</a></h3>
-<pre><code>  -h, --help   help for rm
-</code></pre>
-<h3 id="see-also-24"><a class="header" href="#see-also-24">SEE ALSO</a></h3>
-<ul>
-<li><a href="cred_pass.html">cred pass</a>	 - A command to manage passwords</li>
-</ul>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="cred-pass-show"><a class="header" href="#cred-pass-show">cred pass show</a></h2>
-<p>Displays the stored password</p>
-<h3 id="synopsis-25"><a class="header" href="#synopsis-25">Synopsis</a></h3>
-<p>The show command retrieves and displays the stored password for a given account.
-Usage examples:</p>
-<p>cred pass show &lt;account_path&gt;</p>
-<pre><code>cred pass show [flags]
-</code></pre>
 <h3 id="options-25"><a class="header" href="#options-25">Options</a></h3>
-<pre><code>  -h, --help   help for show
+<pre><code>  -h, --help   help for rm
 </code></pre>
 <h3 id="see-also-25"><a class="header" href="#see-also-25">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_pass.html">cred pass</a>	 - A command to manage passwords</li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="cred-pass-copy"><a class="header" href="#cred-pass-copy">cred pass copy</a></h2>
-<p>Copies the stored password to system clipboard</p>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="cred-pass-show"><a class="header" href="#cred-pass-show">cred pass show</a></h2>
+<p>Displays the stored password</p>
 <h3 id="synopsis-26"><a class="header" href="#synopsis-26">Synopsis</a></h3>
-<p>The show command retrieves and copies the stored password for a given account,
+<p>The show command retrieves and displays the stored password for a given account.
 Usage examples:</p>
-<p>cred pass show <filepath></p>
-<pre><code>cred pass copy [flags]
+<p>cred pass show &lt;account_path&gt;</p>
+<pre><code>cred pass show [flags]
 </code></pre>
 <h3 id="options-26"><a class="header" href="#options-26">Options</a></h3>
-<pre><code>  -h, --help   help for copy
+<pre><code>  -h, --help   help for show
 </code></pre>
 <h3 id="see-also-26"><a class="header" href="#see-also-26">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_pass.html">cred pass</a>	 - A command to manage passwords</li>
 </ul>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="cred-pass-copy"><a class="header" href="#cred-pass-copy">cred pass copy</a></h2>
+<p>Copies the stored password to system clipboard</p>
+<h3 id="synopsis-27"><a class="header" href="#synopsis-27">Synopsis</a></h3>
+<p>The show command retrieves and copies the stored password for a given account,
+Usage examples:</p>
+<p>cred pass show <filepath></p>
+<pre><code>cred pass copy [flags]
+</code></pre>
+<h3 id="options-27"><a class="header" href="#options-27">Options</a></h3>
+<pre><code>  -h, --help   help for copy
+</code></pre>
+<h3 id="see-also-27"><a class="header" href="#see-also-27">SEE ALSO</a></h3>
+<ul>
+<li><a href="cred_pass.html">cred pass</a>	 - A command to manage passwords</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-ssh"><a class="header" href="#cred-ssh">cred ssh</a></h2>
 <p>Manage SSH keys and connections</p>
-<h3 id="synopsis-27"><a class="header" href="#synopsis-27">Synopsis</a></h3>
+<h3 id="synopsis-28"><a class="header" href="#synopsis-28">Synopsis</a></h3>
 <p>The ssh command allows you to manage SSH keys and establish connections.
 It provides functionalities to add keys, list keys, and connect to servers.</p>
 <p>Examples:</p>
@@ -688,10 +705,10 @@ It provides functionalities to add keys, list keys, and connect to servers.</p>
 </ul>
 <pre><code>cred ssh [flags]
 </code></pre>
-<h3 id="options-27"><a class="header" href="#options-27">Options</a></h3>
+<h3 id="options-28"><a class="header" href="#options-28">Options</a></h3>
 <pre><code>  -h, --help   help for ssh
 </code></pre>
-<h3 id="see-also-27"><a class="header" href="#see-also-27">SEE ALSO</a></h3>
+<h3 id="see-also-28"><a class="header" href="#see-also-28">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred.html">cred</a>	 - A password and environment variables manager</li>
 <li><a href="cred_ssh_connect.html">cred ssh connect</a>	 - Establish SSH connection using stored connection string and private key</li>
@@ -709,7 +726,7 @@ It provides functionalities to add keys, list keys, and connect to servers.</p>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-ssh-insert"><a class="header" href="#cred-ssh-insert">cred ssh insert</a></h2>
 <p>Insert a new ssh entry</p>
-<h3 id="synopsis-28"><a class="header" href="#synopsis-28">Synopsis</a></h3>
+<h3 id="synopsis-29"><a class="header" href="#synopsis-29">Synopsis</a></h3>
 <p>The insert command allows you to add a new ssh entry to the ssh store.
 You will be prompted to enter and confirm the ssh, which will be stored securely.
 If the entry already exists, you will be asked whether you want to overwrite it.</p>
@@ -717,36 +734,36 @@ If the entry already exists, you will be asked whether you want to overwrite it.
 ssh insert <key-name> --public-key <key-path> --private-key <key-path> --connection <connection-string></p>
 <pre><code>cred ssh insert [flags]
 </code></pre>
-<h3 id="options-28"><a class="header" href="#options-28">Options</a></h3>
+<h3 id="options-29"><a class="header" href="#options-29">Options</a></h3>
 <pre><code>      --connection-string string   connection string
   -h, --help                       help for insert
       --private-key string         private key file path
       --public-key string          public key file path
 </code></pre>
-<h3 id="see-also-28"><a class="header" href="#see-also-28">SEE ALSO</a></h3>
+<h3 id="see-also-29"><a class="header" href="#see-also-29">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_ssh.html">cred ssh</a>	 - Manage SSH keys and connections</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-ssh-generate"><a class="header" href="#cred-ssh-generate">cred ssh generate</a></h2>
 <p>Generate a new SSH key pair and save it securely</p>
-<h3 id="synopsis-29"><a class="header" href="#synopsis-29">Synopsis</a></h3>
+<h3 id="synopsis-30"><a class="header" href="#synopsis-30">Synopsis</a></h3>
 <p>The generate command allows you to create a new SSH key pair and store it
 in the credential store. You can optionally add a connection string during generation.</p>
 <p>Example:
 cred ssh generate <key-name> --connection <connection-string></p>
 <pre><code>cred ssh generate [flags]
 </code></pre>
-<h3 id="options-29"><a class="header" href="#options-29">Options</a></h3>
+<h3 id="options-30"><a class="header" href="#options-30">Options</a></h3>
 <pre><code>      --connection-string string   connection string
   -h, --help                       help for generate
 </code></pre>
-<h3 id="see-also-29"><a class="header" href="#see-also-29">SEE ALSO</a></h3>
+<h3 id="see-also-30"><a class="header" href="#see-also-30">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_ssh.html">cred ssh</a>	 - Manage SSH keys and connections</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-ssh-edit"><a class="header" href="#cred-ssh-edit">cred ssh edit</a></h2>
 <p>edit a new ssh entry</p>
-<h3 id="synopsis-30"><a class="header" href="#synopsis-30">Synopsis</a></h3>
+<h3 id="synopsis-31"><a class="header" href="#synopsis-31">Synopsis</a></h3>
 <p>The edit command allows you to add a new ssh entry to the ssh store.
 You will be prompted to enter and confirm the ssh, which will be stored securely.
 If the entry already exists, you will be asked whether you want to overwrite it.</p>
@@ -754,19 +771,19 @@ If the entry already exists, you will be asked whether you want to overwrite it.
 ssh edit <key-name> --public-key <key-path> --private-key <key-path> --connection <connection-string></p>
 <pre><code>cred ssh edit [flags]
 </code></pre>
-<h3 id="options-30"><a class="header" href="#options-30">Options</a></h3>
+<h3 id="options-31"><a class="header" href="#options-31">Options</a></h3>
 <pre><code>      --connection-string string   connection string
   -h, --help                       help for edit
       --private-key string         private key file path
       --public-key string          public key file path
 </code></pre>
-<h3 id="see-also-30"><a class="header" href="#see-also-30">SEE ALSO</a></h3>
+<h3 id="see-also-31"><a class="header" href="#see-also-31">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_ssh.html">cred ssh</a>	 - Manage SSH keys and connections</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-ssh-connect"><a class="header" href="#cred-ssh-connect">cred ssh connect</a></h2>
 <p>Establish SSH connection using stored connection string and private key</p>
-<h3 id="synopsis-31"><a class="header" href="#synopsis-31">Synopsis</a></h3>
+<h3 id="synopsis-32"><a class="header" href="#synopsis-32">Synopsis</a></h3>
 <p>Looks for the 'connection.gpg' and 'private.gpg' files stored under the given <keyname>
 in the cred store. Decrypts these files and uses the connection string and private key
 to establish an SSH connection to the remote server.</p>
@@ -778,48 +795,48 @@ my-server/private.gpg
 and use the decrypted contents to connect.</p>
 <pre><code>cred ssh connect [flags]
 </code></pre>
-<h3 id="options-31"><a class="header" href="#options-31">Options</a></h3>
+<h3 id="options-32"><a class="header" href="#options-32">Options</a></h3>
 <pre><code>  -h, --help   help for connect
 </code></pre>
-<h3 id="see-also-31"><a class="header" href="#see-also-31">SEE ALSO</a></h3>
+<h3 id="see-also-32"><a class="header" href="#see-also-32">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_ssh.html">cred ssh</a>	 - Manage SSH keys and connections</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-ssh-cp"><a class="header" href="#cred-ssh-cp">cred ssh cp</a></h2>
 <p>copies files and directories</p>
-<h3 id="synopsis-32"><a class="header" href="#synopsis-32">Synopsis</a></h3>
+<h3 id="synopsis-33"><a class="header" href="#synopsis-33">Synopsis</a></h3>
 <p>The cp command allows you to copies files and directories.
 It uses the 'cp' command to move the specified file or directory to a new location.</p>
 <p>Examples:
 cred ssh cp <source> <destination></p>
 <pre><code>cred ssh cp [flags]
 </code></pre>
-<h3 id="options-32"><a class="header" href="#options-32">Options</a></h3>
+<h3 id="options-33"><a class="header" href="#options-33">Options</a></h3>
 <pre><code>  -h, --help   help for cp
 </code></pre>
-<h3 id="see-also-32"><a class="header" href="#see-also-32">SEE ALSO</a></h3>
+<h3 id="see-also-33"><a class="header" href="#see-also-33">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_ssh.html">cred ssh</a>	 - Manage SSH keys and connections</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-ssh-mv"><a class="header" href="#cred-ssh-mv">cred ssh mv</a></h2>
 <p>Move files and directories</p>
-<h3 id="synopsis-33"><a class="header" href="#synopsis-33">Synopsis</a></h3>
+<h3 id="synopsis-34"><a class="header" href="#synopsis-34">Synopsis</a></h3>
 <p>The mv command allows you to move files and directories.
 It uses the 'mv' command to move the specified file or directory to a new location.</p>
 <p>Examples:
 cred ssh mv <source> <destination></p>
 <pre><code>cred ssh mv [flags]
 </code></pre>
-<h3 id="options-33"><a class="header" href="#options-33">Options</a></h3>
+<h3 id="options-34"><a class="header" href="#options-34">Options</a></h3>
 <pre><code>  -h, --help   help for mv
 </code></pre>
-<h3 id="see-also-33"><a class="header" href="#see-also-33">SEE ALSO</a></h3>
+<h3 id="see-also-34"><a class="header" href="#see-also-34">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_ssh.html">cred ssh</a>	 - Manage SSH keys and connections</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-ssh-download"><a class="header" href="#cred-ssh-download">cred ssh download</a></h2>
 <p>Download SSH key files for the specified entry</p>
-<h3 id="synopsis-34"><a class="header" href="#synopsis-34">Synopsis</a></h3>
+<h3 id="synopsis-35"><a class="header" href="#synopsis-35">Synopsis</a></h3>
 <p>The download command retrieves SSH key files (public, private, and connection info)
 for a given SSH entry and saves them into a 'downloads' directory.</p>
 <p>Example:
@@ -830,100 +847,100 @@ downloads/my-key-name/private.key
 downloads/my-key-name/connection.txt</p>
 <pre><code>cred ssh download [flags]
 </code></pre>
-<h3 id="options-34"><a class="header" href="#options-34">Options</a></h3>
+<h3 id="options-35"><a class="header" href="#options-35">Options</a></h3>
 <pre><code>  -h, --help   help for download
 </code></pre>
-<h3 id="see-also-34"><a class="header" href="#see-also-34">SEE ALSO</a></h3>
+<h3 id="see-also-35"><a class="header" href="#see-also-35">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_ssh.html">cred ssh</a>	 - Manage SSH keys and connections</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-ssh-ls"><a class="header" href="#cred-ssh-ls">cred ssh ls</a></h2>
 <p>List files and directories</p>
-<h3 id="synopsis-35"><a class="header" href="#synopsis-35">Synopsis</a></h3>
+<h3 id="synopsis-36"><a class="header" href="#synopsis-36">Synopsis</a></h3>
 <p>The ls command allows you to list files and directories.
 It uses the 'ls' command to display the contents of the current directory.</p>
 <p>Examples:
 cred ssh ls <path></p>
 <pre><code>cred ssh ls [flags]
 </code></pre>
-<h3 id="options-35"><a class="header" href="#options-35">Options</a></h3>
+<h3 id="options-36"><a class="header" href="#options-36">Options</a></h3>
 <pre><code>  -h, --help   help for ls
 </code></pre>
-<h3 id="see-also-35"><a class="header" href="#see-also-35">SEE ALSO</a></h3>
+<h3 id="see-also-36"><a class="header" href="#see-also-36">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_ssh.html">cred ssh</a>	 - Manage SSH keys and connections</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-ssh-mkdir"><a class="header" href="#cred-ssh-mkdir">cred ssh mkdir</a></h2>
 <p>Create directories</p>
-<h3 id="synopsis-36"><a class="header" href="#synopsis-36">Synopsis</a></h3>
+<h3 id="synopsis-37"><a class="header" href="#synopsis-37">Synopsis</a></h3>
 <p>The mkdir command allows you to create directories, including nested directories.
 It uses the 'mkdir' command to create the specified path.</p>
 <p>Examples:
 cred ssh mkdir <path></p>
 <pre><code>cred ssh mkdir [flags]
 </code></pre>
-<h3 id="options-36"><a class="header" href="#options-36">Options</a></h3>
+<h3 id="options-37"><a class="header" href="#options-37">Options</a></h3>
 <pre><code>  -h, --help   help for mkdir
 </code></pre>
-<h3 id="see-also-36"><a class="header" href="#see-also-36">SEE ALSO</a></h3>
+<h3 id="see-also-37"><a class="header" href="#see-also-37">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_ssh.html">cred ssh</a>	 - Manage SSH keys and connections</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-ssh-rm"><a class="header" href="#cred-ssh-rm">cred ssh rm</a></h2>
 <p>Remove files and directories</p>
-<h3 id="synopsis-37"><a class="header" href="#synopsis-37">Synopsis</a></h3>
+<h3 id="synopsis-38"><a class="header" href="#synopsis-38">Synopsis</a></h3>
 <p>The rm command allows you to remove files and directories recursively.
 It uses the 'rm' command to delete the specified path.</p>
 <p>Examples:
 cred ssh rm <path></p>
 <pre><code>cred ssh rm [flags]
 </code></pre>
-<h3 id="options-37"><a class="header" href="#options-37">Options</a></h3>
-<pre><code>  -h, --help   help for rm
-</code></pre>
-<h3 id="see-also-37"><a class="header" href="#see-also-37">SEE ALSO</a></h3>
-<ul>
-<li><a href="cred_ssh.html">cred ssh</a>	 - Manage SSH keys and connections</li>
-</ul>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="cred-ssh-show"><a class="header" href="#cred-ssh-show">cred ssh show</a></h2>
-<p>Displays the stored ssh</p>
-<h3 id="synopsis-38"><a class="header" href="#synopsis-38">Synopsis</a></h3>
-<p>The show command retrieves and displays the stored ssh key for a given file.
-Usage examples:</p>
-<p>cred ssh show <filename></p>
-<pre><code>cred ssh show [flags]
-</code></pre>
 <h3 id="options-38"><a class="header" href="#options-38">Options</a></h3>
-<pre><code>  -h, --help   help for show
+<pre><code>  -h, --help   help for rm
 </code></pre>
 <h3 id="see-also-38"><a class="header" href="#see-also-38">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_ssh.html">cred ssh</a>	 - Manage SSH keys and connections</li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="cred-ssh-copy"><a class="header" href="#cred-ssh-copy">cred ssh copy</a></h2>
-<p>Copies the stored ssh to system clipboard</p>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="cred-ssh-show"><a class="header" href="#cred-ssh-show">cred ssh show</a></h2>
+<p>Displays the stored ssh</p>
 <h3 id="synopsis-39"><a class="header" href="#synopsis-39">Synopsis</a></h3>
-<p>The show command retrieves and copies the stored ssh key for a given file.
+<p>The show command retrieves and displays the stored ssh key for a given file.
 Usage examples:</p>
-<p>cred ssh copy <filepath></p>
-<pre><code>cred ssh copy [flags]
+<p>cred ssh show <filename></p>
+<pre><code>cred ssh show [flags]
 </code></pre>
 <h3 id="options-39"><a class="header" href="#options-39">Options</a></h3>
-<pre><code>  -h, --help   help for copy
+<pre><code>  -h, --help   help for show
 </code></pre>
 <h3 id="see-also-39"><a class="header" href="#see-also-39">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_ssh.html">cred ssh</a>	 - Manage SSH keys and connections</li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="cred-completion"><a class="header" href="#cred-completion">cred completion</a></h2>
-<p>Generate the autocompletion script for the specified shell</p>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="cred-ssh-copy"><a class="header" href="#cred-ssh-copy">cred ssh copy</a></h2>
+<p>Copies the stored ssh to system clipboard</p>
 <h3 id="synopsis-40"><a class="header" href="#synopsis-40">Synopsis</a></h3>
-<p>Generate the autocompletion script for cred for the specified shell.
-See each sub-command's help for details on how to use the generated script.</p>
+<p>The show command retrieves and copies the stored ssh key for a given file.
+Usage examples:</p>
+<p>cred ssh copy <filepath></p>
+<pre><code>cred ssh copy [flags]
+</code></pre>
 <h3 id="options-40"><a class="header" href="#options-40">Options</a></h3>
-<pre><code>  -h, --help   help for completion
+<pre><code>  -h, --help   help for copy
 </code></pre>
 <h3 id="see-also-40"><a class="header" href="#see-also-40">SEE ALSO</a></h3>
+<ul>
+<li><a href="cred_ssh.html">cred ssh</a>	 - Manage SSH keys and connections</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="cred-completion"><a class="header" href="#cred-completion">cred completion</a></h2>
+<p>Generate the autocompletion script for the specified shell</p>
+<h3 id="synopsis-41"><a class="header" href="#synopsis-41">Synopsis</a></h3>
+<p>Generate the autocompletion script for cred for the specified shell.
+See each sub-command's help for details on how to use the generated script.</p>
+<h3 id="options-41"><a class="header" href="#options-41">Options</a></h3>
+<pre><code>  -h, --help   help for completion
+</code></pre>
+<h3 id="see-also-41"><a class="header" href="#see-also-41">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred.html">cred</a>	 - A password and environment variables manager</li>
 <li><a href="cred_completion_bash.html">cred completion bash</a>	 - Generate the autocompletion script for bash</li>
@@ -933,7 +950,7 @@ See each sub-command's help for details on how to use the generated script.</p>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-completion-bash"><a class="header" href="#cred-completion-bash">cred completion bash</a></h2>
 <p>Generate the autocompletion script for bash</p>
-<h3 id="synopsis-41"><a class="header" href="#synopsis-41">Synopsis</a></h3>
+<h3 id="synopsis-42"><a class="header" href="#synopsis-42">Synopsis</a></h3>
 <p>Generate the autocompletion script for the bash shell.</p>
 <p>This script depends on the 'bash-completion' package.
 If it is not installed already, you can install it via your OS's package manager.</p>
@@ -950,17 +967,17 @@ If it is not installed already, you can install it via your OS's package manager
 <p>You will need to start a new shell for this setup to take effect.</p>
 <pre><code>cred completion bash
 </code></pre>
-<h3 id="options-41"><a class="header" href="#options-41">Options</a></h3>
+<h3 id="options-42"><a class="header" href="#options-42">Options</a></h3>
 <pre><code>  -h, --help              help for bash
       --no-descriptions   disable completion descriptions
 </code></pre>
-<h3 id="see-also-41"><a class="header" href="#see-also-41">SEE ALSO</a></h3>
+<h3 id="see-also-42"><a class="header" href="#see-also-42">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_completion.html">cred completion</a>	 - Generate the autocompletion script for the specified shell</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-completion-zsh"><a class="header" href="#cred-completion-zsh">cred completion zsh</a></h2>
 <p>Generate the autocompletion script for zsh</p>
-<h3 id="synopsis-42"><a class="header" href="#synopsis-42">Synopsis</a></h3>
+<h3 id="synopsis-43"><a class="header" href="#synopsis-43">Synopsis</a></h3>
 <p>Generate the autocompletion script for the zsh shell.</p>
 <p>If shell completion is not already enabled in your environment you will need
 to enable it.  You can execute the following once:</p>
@@ -979,17 +996,17 @@ to enable it.  You can execute the following once:</p>
 <p>You will need to start a new shell for this setup to take effect.</p>
 <pre><code>cred completion zsh [flags]
 </code></pre>
-<h3 id="options-42"><a class="header" href="#options-42">Options</a></h3>
+<h3 id="options-43"><a class="header" href="#options-43">Options</a></h3>
 <pre><code>  -h, --help              help for zsh
       --no-descriptions   disable completion descriptions
 </code></pre>
-<h3 id="see-also-42"><a class="header" href="#see-also-42">SEE ALSO</a></h3>
+<h3 id="see-also-43"><a class="header" href="#see-also-43">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_completion.html">cred completion</a>	 - Generate the autocompletion script for the specified shell</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-completion-fish"><a class="header" href="#cred-completion-fish">cred completion fish</a></h2>
 <p>Generate the autocompletion script for fish</p>
-<h3 id="synopsis-43"><a class="header" href="#synopsis-43">Synopsis</a></h3>
+<h3 id="synopsis-44"><a class="header" href="#synopsis-44">Synopsis</a></h3>
 <p>Generate the autocompletion script for the fish shell.</p>
 <p>To load completions in your current shell session:</p>
 <pre><code>cred completion fish | source
@@ -1000,17 +1017,17 @@ to enable it.  You can execute the following once:</p>
 <p>You will need to start a new shell for this setup to take effect.</p>
 <pre><code>cred completion fish [flags]
 </code></pre>
-<h3 id="options-43"><a class="header" href="#options-43">Options</a></h3>
+<h3 id="options-44"><a class="header" href="#options-44">Options</a></h3>
 <pre><code>  -h, --help              help for fish
       --no-descriptions   disable completion descriptions
 </code></pre>
-<h3 id="see-also-43"><a class="header" href="#see-also-43">SEE ALSO</a></h3>
+<h3 id="see-also-44"><a class="header" href="#see-also-44">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_completion.html">cred completion</a>	 - Generate the autocompletion script for the specified shell</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="cred-completion-powershell"><a class="header" href="#cred-completion-powershell">cred completion powershell</a></h2>
 <p>Generate the autocompletion script for powershell</p>
-<h3 id="synopsis-44"><a class="header" href="#synopsis-44">Synopsis</a></h3>
+<h3 id="synopsis-45"><a class="header" href="#synopsis-45">Synopsis</a></h3>
 <p>Generate the autocompletion script for powershell.</p>
 <p>To load completions in your current shell session:</p>
 <pre><code>cred completion powershell | Out-String | Invoke-Expression
@@ -1019,11 +1036,11 @@ to enable it.  You can execute the following once:</p>
 to your powershell profile.</p>
 <pre><code>cred completion powershell [flags]
 </code></pre>
-<h3 id="options-44"><a class="header" href="#options-44">Options</a></h3>
+<h3 id="options-45"><a class="header" href="#options-45">Options</a></h3>
 <pre><code>  -h, --help              help for powershell
       --no-descriptions   disable completion descriptions
 </code></pre>
-<h3 id="see-also-44"><a class="header" href="#see-also-44">SEE ALSO</a></h3>
+<h3 id="see-also-45"><a class="header" href="#see-also-45">SEE ALSO</a></h3>
 <ul>
 <li><a href="cred_completion.html">cred completion</a>	 - Generate the autocompletion script for the specified shell</li>
 </ul>

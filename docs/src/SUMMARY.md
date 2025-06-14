@@ -20,6 +20,7 @@
     - [Show](cred_env_show.md)
     - [Copy Env](cred_env_copy.md)
     - [Get](cred_env_get.md)
+    - [Set](cred_env_set.md)
   - [Passwords (`cred pass`)](cred_pass.md)
     - [Insert](cred_pass_insert.md)
     - [Generate](cred_pass_generate.md)

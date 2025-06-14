@@ -72,6 +72,7 @@ func init() {
 		env.CopyCmd,
 		env.ShowCmd,
 		env.EditCmd,
+		env.SetCmd,
 	}
 
 	for _, cmd := range envCmdsOnlyFiles {

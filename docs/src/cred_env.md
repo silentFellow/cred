@@ -34,5 +34,6 @@ cred env [flags]
 * [cred env mkdir](cred_env_mkdir.md)	 - Create directories
 * [cred env mv](cred_env_mv.md)	 - Move files and directories
 * [cred env rm](cred_env_rm.md)	 - Remove files and directories
+* [cred env set](cred_env_set.md)	 - Sets environment variables from the cred-store into a .env file
 * [cred env show](cred_env_show.md)	 - Displays the stored env
 

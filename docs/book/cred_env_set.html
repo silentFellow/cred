@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Get - Cred: A Simple and Secure CLI Tool for Managing Passwords and Environment Variables</title>
+        <title>Set - Cred: A Simple and Secure CLI Tool for Managing Passwords and Environment Variables</title>
 
 
         <!-- Custom HTML head -->
@@ -152,18 +152,17 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="cred-env-get"><a class="header" href="#cred-env-get">cred env get</a></h2>
-<p>Retrieve and store environment variables</p>
+                        <h2 id="cred-env-set"><a class="header" href="#cred-env-set">cred env set</a></h2>
+<p>Sets environment variables from the cred-store into a .env file</p>
 <h3 id="synopsis"><a class="header" href="#synopsis">Synopsis</a></h3>
-<p>Retrieve environment variables from a specified file or default .env files and store them securely.</p>
-<p>You can specify the file containing the environment variables using the -f flag. If the -f flag is not provided, the command will look for the following files in order: .env, .env.local, .env.development, .env.production, .env.test.</p>
-<pre><code>Example usage: cred env get [flags: -f (filepath)]
+<p>Retrieve environment variables for a specified file from the cred-store and write them to a local .env file.</p>
+<p>You provide the file name as an argument. The command fetches the environment variables associated with that file from the cred-store and writes them into a new or existing .env file in your current directory.</p>
+<pre><code>Example usage: cred env set &lt;filepath&gt;
 </code></pre>
-<pre><code>cred env get [flags]
+<pre><code>cred env set [flags]
 </code></pre>
 <h3 id="options"><a class="header" href="#options">Options</a></h3>
-<pre><code>  -f, --file string   path to the file containing env
-  -h, --help          help for get
+<pre><code>  -h, --help   help for set
 </code></pre>
 <h3 id="see-also"><a class="header" href="#see-also">SEE ALSO</a></h3>
 <ul>
@@ -174,11 +173,11 @@
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="cred_env_copy.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="cred_env_get.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="cred_env_set.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="cred_pass.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -188,11 +187,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="cred_env_copy.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="cred_env_get.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="cred_env_set.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="cred_pass.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
