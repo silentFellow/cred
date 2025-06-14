@@ -40,15 +40,15 @@ func ShowLogic(
 		return
 	}
 
-	decryped, err := gpgcrypt.Decrypt(fullPath)
+	decrypted, err := gpgcrypt.Decrypt(fullPath)
 	if err != nil {
 		fmt.Println("failed to decrypt file: ", err)
 		return
 	}
 
 	if cmdType == "pass" {
-		fmt.Printf("%v\n", decryped)
+		fmt.Printf("%v\n", decrypted)
 	} else {
-		fmt.Print(decryped)
+		fmt.Print(decrypted)
 	}
 }

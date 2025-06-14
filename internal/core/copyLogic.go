@@ -42,7 +42,7 @@ func CopyLogic(
 		return
 	}
 
-	decryped, err := gpgcrypt.Decrypt(fullPath)
+	decrypted, err := gpgcrypt.Decrypt(fullPath)
 	if err != nil {
 		fmt.Printf("decrypting file %v failed: %v\n", path, err)
 		return
@@ -52,7 +52,7 @@ func CopyLogic(
 	if cmdType == "pass" {
 		copyOnlyFirst = true
 	}
-	if err := utils.CopyToClipboard(decryped, copyOnlyFirst); err != nil {
+	if err := utils.CopyToClipboard(decrypted, copyOnlyFirst); err != nil {
 		fmt.Println("copying to clipboard failed: ", err)
 		return
 	}
