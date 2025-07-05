@@ -33,9 +33,9 @@ clean:
 
 # Create a new git tag and push it
 tag $version $message:
-  @echo "Creating tag v${version} with message: ${message}"
-  @git tag -a v${version} -m "${message}"
-  @echo "Push tag to remote with \"git push origin v${version}\""
+  @echo "Creating tag ${version} with message: ${message}"
+  @git tag -a ${version} -m "${message}"
+  @echo "Push tag to remote with \"git push origin ${version}\""
 
 # Generate CLI documentation using cobra's --generate-docs
 docs:
