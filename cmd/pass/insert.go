@@ -9,6 +9,7 @@ import (
 	"golang.org/x/term"
 
 	"github.com/silentFellow/cred/config"
+	"github.com/silentFellow/cred/internal/core"
 	gpgcrypt "github.com/silentFellow/cred/internal/gpg-crypt"
 	"github.com/silentFellow/cred/internal/utils/paths"
 )
@@ -31,8 +32,8 @@ Examples:
 			fmt.Println("invalid usage, expected: ", usage)
 			return
 		}
-		path := args[0] + ".gpg"
-		fullPath := paths.BuildPath(passStore, path)
+		filePath := args[0] + ".gpg"
+		fullPath := paths.BuildPath(passStore, filePath)
 
 		if paths.CheckPathExists(fullPath) {
 			var choice string
@@ -77,5 +78,15 @@ Examples:
 			return
 		}
 		fmt.Println("password inserted successfully")
+
+		isEditor, _ := cmd.Flags().GetBool("editor")
+		if isEditor {
+			core.EditLogic("pass", append([]string{filePath}, args[1:]...))
+		}
 	},
+}
+
+func init() {
+	InsertCmd.Flags().
+		BoolP("editor", "e", false, "open password in editor for editing extra details after insertion")
 }

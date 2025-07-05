@@ -8,6 +8,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/silentFellow/cred/config"
+	"github.com/silentFellow/cred/internal/core"
 	gpgcrypt "github.com/silentFellow/cred/internal/gpg-crypt"
 	"github.com/silentFellow/cred/internal/utils"
 	"github.com/silentFellow/cred/internal/utils/paths"
@@ -35,16 +36,23 @@ Examples:
 		fullPath := paths.BuildPath(passStore, filePath)
 
 		length, _ := cmd.Flags().GetInt("length")
-		allowLower, _ := cmd.Flags().GetBool("allow-lower")
-		allowUpper, _ := cmd.Flags().GetBool("allow-upper")
+		allowLowerCase, _ := cmd.Flags().GetBool("allow-lowercase")
+		allowUpperCase, _ := cmd.Flags().GetBool("allow-uppercase")
 		allowDigit, _ := cmd.Flags().GetBool("allow-digit")
 		allowSpecial, _ := cmd.Flags().GetBool("allow-special")
+		allowedSpecial, _ := cmd.Flags().GetString("allowed-special")
+		if !allowLowerCase && !allowUpperCase && !allowDigit && !allowSpecial {
+			fmt.Println("failed to generate password: no character sets enabled")
+			return
+		}
+
 		generatedPassword := utils.GenerateRandom(
 			length,
-			allowLower,
-			allowUpper,
+			allowLowerCase,
+			allowUpperCase,
 			allowDigit,
 			allowSpecial,
+			allowedSpecial,
 		)
 
 		if paths.CheckPathExists(fullPath) {
@@ -65,17 +73,26 @@ Examples:
 			fmt.Println("failed to insert password: ", err)
 			return
 		}
-		fmt.Println("password inserted successfully and copied to clipboard")
+		fmt.Println("password generated successfully and copied to clipboard")
+
+		isEditor, _ := cmd.Flags().GetBool("editor")
+		if isEditor {
+			core.EditLogic("pass", append([]string{filePath}, args[1:]...))
+		}
 	},
 }
 
 func init() {
 	GenerateCmd.Flags().IntP("length", "l", 12, "length of the generated password")
 	GenerateCmd.Flags().
-		BoolP("allow-lower", "", true, "should allow lower-case characters in the password")
+		BoolP("allow-lowercase", "", true, "should allow lower-case characters in the password")
 	GenerateCmd.Flags().
-		BoolP("allow-upper", "", true, "should allow upper-case characters in the password")
+		BoolP("allow-uppercase", "", true, "should allow upper-case characters in the password")
 	GenerateCmd.Flags().BoolP("allow-digit", "", true, "should allow digits in the password")
 	GenerateCmd.Flags().
 		BoolP("allow-special", "", true, "should allow special characters in the password")
+	GenerateCmd.Flags().
+		String("allowed-special", "!@#$%^&*()-_=+[]{}|;:,.<>?/`~", "allowed special characters in the password")
+	GenerateCmd.Flags().
+		BoolP("editor", "e", false, "open password in editor for editing extra details after insertion")
 }
