@@ -86,20 +86,47 @@ func PrintTree(root string, prefix string, isLast bool) error {
 	return nil
 }
 
-func GenerateRandom(n int, allowLower, allowUpper, allowDigit, allowSpecial bool) string {
+func GenerateRandom(
+	n int,
+	allowLower, allowUpper, allowDigit, allowSpecial bool,
+	allowedSpecial string,
+) string {
+	getStringWithMinLen := func(s string, minLen int) string {
+		var sBuilder strings.Builder
+		sBuilder.Grow(minLen)
+		sBuilder.WriteString(s)
+
+		if sBuilder.Len() < minLen {
+			sBuilder.WriteString(strings.Repeat(s, (minLen-sBuilder.Len())/len(s)+1))
+		}
+
+		return sBuilder.String()[:minLen]
+	}
+
 	var charsetBuilder strings.Builder
 
+	lowerAllowed := "abcdefghijklmnopqrstuvwxyz"
+	upperAllowed := "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	digitAllowed := "0123456789"
+
+	minLen := max(
+		len(lowerAllowed),
+		len(upperAllowed),
+		len(digitAllowed),
+		len(allowedSpecial),
+	)
+
 	if allowLower {
-		charsetBuilder.WriteString("abcdefghijklmnopqrstuvwxyz")
+		charsetBuilder.WriteString(getStringWithMinLen(lowerAllowed, minLen))
 	}
 	if allowUpper {
-		charsetBuilder.WriteString("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+		charsetBuilder.WriteString(getStringWithMinLen(upperAllowed, minLen))
 	}
 	if allowDigit {
-		charsetBuilder.WriteString("0123456789")
+		charsetBuilder.WriteString(getStringWithMinLen(digitAllowed, minLen))
 	}
-	if allowSpecial {
-		charsetBuilder.WriteString("!@#$%^&*()-_=+[]{}|;:,.<>?/`~")
+	if allowSpecial && len(allowedSpecial) > 0 {
+		charsetBuilder.WriteString(getStringWithMinLen(allowedSpecial, minLen))
 	}
 
 	charset := charsetBuilder.String()
