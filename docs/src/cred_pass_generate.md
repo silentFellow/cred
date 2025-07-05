@@ -18,12 +18,14 @@ cred pass generate [flags]
 ### Options
 
 ```
-      --allow-digit     should allow digits in the password (default true)
-      --allow-lower     should allow lower-case characters in the password (default true)
-      --allow-special   should allow special characters in the password (default true)
-      --allow-upper     should allow upper-case characters in the password (default true)
-  -h, --help            help for generate
-  -l, --length int      length of the generated password (default 12)
+      --allow-digit              should allow digits in the password (default true)
+      --allow-lowercase          should allow lower-case characters in the password (default true)
+      --allow-special            should allow special characters in the password (default true)
+      --allow-uppercase          should allow upper-case characters in the password (default true)
+      --allowed-special string   allowed special characters in the password (default "!@#$%^&*()-_=+[]{}|;:,.<>?/`~")
+  -e, --editor                   open password in editor for editing extra details after insertion
+  -h, --help                     help for generate
+  -l, --length int               length of the generated password (default 12)
 ```
 
 ### SEE ALSO

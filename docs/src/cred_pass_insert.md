@@ -18,7 +18,8 @@ cred pass insert [flags]
 ### Options
 
 ```
-  -h, --help   help for insert
+  -e, --editor   open password in editor for editing extra details after insertion
+  -h, --help     help for insert
 ```
 
 ### SEE ALSO

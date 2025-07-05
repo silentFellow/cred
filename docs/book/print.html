@@ -538,7 +538,8 @@ pass insert <filepath></p>
 <pre><code>cred pass insert [flags]
 </code></pre>
 <h3 id="options-18"><a class="header" href="#options-18">Options</a></h3>
-<pre><code>  -h, --help   help for insert
+<pre><code>  -e, --editor   open password in editor for editing extra details after insertion
+  -h, --help     help for insert
 </code></pre>
 <h3 id="see-also-18"><a class="header" href="#see-also-18">SEE ALSO</a></h3>
 <ul>
@@ -555,12 +556,14 @@ pass generate anotherpassword -l 24</p>
 <pre><code>cred pass generate [flags]
 </code></pre>
 <h3 id="options-19"><a class="header" href="#options-19">Options</a></h3>
-<pre><code>      --allow-digit     should allow digits in the password (default true)
-      --allow-lower     should allow lower-case characters in the password (default true)
-      --allow-special   should allow special characters in the password (default true)
-      --allow-upper     should allow upper-case characters in the password (default true)
-  -h, --help            help for generate
-  -l, --length int      length of the generated password (default 12)
+<pre><code>      --allow-digit              should allow digits in the password (default true)
+      --allow-lowercase          should allow lower-case characters in the password (default true)
+      --allow-special            should allow special characters in the password (default true)
+      --allow-uppercase          should allow upper-case characters in the password (default true)
+      --allowed-special string   allowed special characters in the password (default "!@#$%^&amp;*()-_=+[]{}|;:,.&lt;&gt;?/`~")
+  -e, --editor                   open password in editor for editing extra details after insertion
+  -h, --help                     help for generate
+  -l, --length int               length of the generated password (default 12)
 </code></pre>
 <h3 id="see-also-19"><a class="header" href="#see-also-19">SEE ALSO</a></h3>
 <ul>
