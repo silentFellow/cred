@@ -17,9 +17,10 @@ func EditLogic(
 	usage := fmt.Sprintf("cred %v edit <filename>", cmdType)
 
 	var basePath string
-	if cmdType == "pass" {
+	switch cmdType {
+	case "pass":
 		basePath = config.Constants.PassPath
-	} else {
+	case "env":
 		basePath = config.Constants.EnvPath
 	}
 
@@ -43,7 +44,11 @@ func EditLogic(
 
 	originalContent, err := gpgcrypt.Decrypt(fullPath)
 	if err != nil {
-		fmt.Println("invalid file format, only files are allowed")
+		if err.Error() == "wrong passphrase" {
+			fmt.Println("Invalid passphrase, please try again")
+		} else {
+			fmt.Println("invalid file format, only files are allowed")
+		}
 		return
 	}
 

@@ -15,11 +15,12 @@ func CpLogic(
 	usage := fmt.Sprintf("cred %v cp <src> <dest>", cmdType)
 
 	var basePath string
-	if cmdType == "pass" {
+	switch cmdType {
+	case "pass":
 		basePath = config.Constants.PassPath
-	} else if cmdType == "env" {
+	case "env":
 		basePath = config.Constants.EnvPath
-	} else if cmdType == "ssh" {
+	case "ssh":
 		basePath = config.Constants.SshPath
 	}
 
