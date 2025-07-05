@@ -15,11 +15,12 @@ func ShowLogic(
 	usage := fmt.Sprintf("cred %v show <filename>", cmdType)
 
 	var basePath string
-	if cmdType == "pass" {
+	switch cmdType {
+	case "pass":
 		basePath = config.Constants.PassPath
-	} else if cmdType == "env" {
+	case "env":
 		basePath = config.Constants.EnvPath
-	} else if cmdType == "ssh" {
+	case "ssh":
 		basePath = config.Constants.SshPath
 	}
 
@@ -46,7 +47,8 @@ func ShowLogic(
 		return
 	}
 
-	if cmdType == "pass" {
+	// add new line, if the decrypted content does not end with a new line
+	if decrypted[len(decrypted)-1] != '\n' {
 		fmt.Printf("%v\n", decrypted)
 	} else {
 		fmt.Print(decrypted)
